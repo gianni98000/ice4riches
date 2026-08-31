@@ -1,5 +1,5 @@
 import { JsonLd } from "@/components/json-ld";
-import { BUSINESS_ADDRESS, ORDER_URL, SEO_PAGES, SITE_URL } from "@/lib/site";
+import { BRAND_LOCATION, ORDER_URL, SEO_PAGES, SITE_URL } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -60,10 +60,7 @@ export function SeoLandingPage({
         provider: {
           "@id": `${SITE_URL}/#organization`,
         },
-        areaServed: {
-          "@type": "City",
-          name: "Paris",
-        },
+        areaServed: "Worldwide",
       },
       {
         "@type": "BreadcrumbList",
@@ -325,8 +322,8 @@ export function SeoLandingPage({
               ICE4RICHES
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-[#f5f3ef]/40">
-              Glace cristalline premium pour cocktails, professionnels et
-              événements à Paris.
+              Glace cristalline premium née sur la Côte d’Azur et livrée dans
+              le monde entier.
             </p>
           </div>
           <div>
@@ -348,16 +345,13 @@ export function SeoLandingPage({
           </div>
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-[#c9a962]">
-              Adresse
+              Origine & livraison
             </h2>
-            <address className="mt-4 space-y-1 text-sm not-italic text-[#f5f3ef]/50">
-              <p>{BUSINESS_ADDRESS.name}</p>
-              <p>{BUSINESS_ADDRESS.street}</p>
-              <p>
-                {BUSINESS_ADDRESS.postalCode} {BUSINESS_ADDRESS.city},{" "}
-                {BUSINESS_ADDRESS.country}
-              </p>
-            </address>
+            <div className="mt-4 space-y-1 text-sm text-[#f5f3ef]/50">
+              <p>Ice4Riches</p>
+              <p>Née sur la {BRAND_LOCATION.origin}</p>
+              <p>{BRAND_LOCATION.delivery}</p>
+            </div>
           </div>
         </div>
         <p className="mx-auto mt-12 max-w-7xl border-t border-[#f5f3ef]/5 pt-7 text-center text-xs text-[#f5f3ef]/30">

@@ -2,23 +2,12 @@ export const SITE_URL = "https://ice4riches.com";
 
 export const ORDER_URL = "/order#Ice";
 
-export const BUSINESS_ADDRESS = {
-  name: "BUSINESS SOURCING SOLUTION",
-  street: "18-26 Rue Goubet",
-  postalCode: "75019",
-  city: "Paris",
-  country: "France",
+export const BRAND_LOCATION = {
+  origin: "Côte d’Azur, France",
+  delivery: "Livraison dans le monde entier",
 };
 
 export const SEO_PAGES = [
-  {
-    href: "/livraison-glacons-paris",
-    label: "Livraison à Paris",
-  },
-  {
-    href: "/glace-cristalline-paris",
-    label: "Glace à Paris",
-  },
   {
     href: "/glacons-pour-cocktails",
     label: "Guide des formats",

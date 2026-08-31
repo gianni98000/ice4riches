@@ -33,9 +33,9 @@ const faq = [
       "Un grand format présente moins de surface par rapport à son volume que plusieurs petits glaçons. Il permet ainsi de maîtriser plus progressivement la dilution, tandis que la transparence valorise visuellement le verre.",
   },
   {
-    question: "Où se trouve Ice4Riches à Paris ?",
+    question: "Ice4Riches livre-t-il à Paris ?",
     answer:
-      "L’adresse professionnelle indiquée par Ice4Riches est 18-26 rue Goubet, 75019 Paris. Les modalités de commande se traitent directement via le catalogue en ligne et WhatsApp.",
+      "Oui. Née sur la Côte d’Azur, la marque étudie les demandes de livraison à Paris comme dans le monde entier. Les disponibilités et modalités sont confirmées après l’envoi de la demande.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function GlaceCristallineParisPage() {
       intro="Ice4Riches propose des glaçons de grand format conçus pour mettre en valeur cocktails et spiritueux. Une collection premium accessible aux établissements et aux événements parisiens."
       highlights={[
         { value: "4 formats", label: "Collins, Old Fashioned, cube et sphère" },
-        { value: "Paris 19e", label: "Adresse professionnelle rue Goubet" },
+        { value: "Côte d’Azur", label: "Le berceau de la marque Ice4Riches" },
         {
           value: "Commande directe",
           label: "Catalogue en ligne puis confirmation WhatsApp",

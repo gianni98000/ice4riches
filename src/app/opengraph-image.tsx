@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Ice4Riches, glace cristalline premium à Paris";
+export const alt = "Ice4Riches, glace cristalline née sur la Côte d’Azur";
 export const size = {
   width: 1200,
   height: 630,
@@ -53,7 +53,7 @@ export default function OpenGraphImage() {
           marginTop: 42,
         }}
       >
-        Bars · Restaurants · Hôtels · Événements
+        Côte d&apos;Azur · Livraison mondiale
       </div>
     </div>,
     size,

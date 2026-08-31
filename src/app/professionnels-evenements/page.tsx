@@ -5,10 +5,10 @@ export const metadata = createPageMetadata({
   path: "/professionnels-evenements",
   title: "Glaçons premium pour professionnels et événements",
   description:
-    "Glaçons cristallins pour bars, restaurants, hôtels, traiteurs et événements à Paris. Choisissez le format adapté à vos cocktails et à votre service.",
-  socialTitle: "Glaçons premium pour professionnels et événements à Paris",
+    "Nés sur la Côte d’Azur et livrés dans le monde entier, les glaçons cristallins Ice4Riches subliment bars, hôtels, restaurants et événements.",
+  socialTitle: "Glaçons premium pour professionnels et événements",
   socialDescription:
-    "Une collection de glace cristalline pour harmoniser cocktails, spiritueux et réceptions.",
+    "Une collection née sur la Côte d’Azur, livrée dans le monde entier pour sublimer cocktails, spiritueux et réceptions.",
 });
 
 const faq = [
@@ -46,7 +46,7 @@ export default function ProfessionnelsEvenementsPage() {
       serviceName="Glaçons premium pour professionnels et événements"
       eyebrow="Offre professionnelle"
       title="Glaçons premium pour bars, hôtels et événements"
-      intro="Ice4Riches aide les professionnels à construire un service visuel cohérent grâce à quatre formats de glace cristalline, du highball au verre Old Fashioned."
+      intro="Née sur la Côte d’Azur et livrée dans le monde entier, la collection Ice4Riches aide les professionnels à construire un service visuel cohérent, du highball au verre Old Fashioned."
       highlights={[
         {
           value: "25 à 60 pièces",
@@ -106,10 +106,10 @@ export default function ProfessionnelsEvenementsPage() {
             "Associez Collins, cube, Old Fashioned et sphère aux bons cocktails.",
         },
         {
-          href: "/glace-cristalline-paris",
-          title: "Glace cristalline à Paris",
+          href: "/#contact",
+          title: "Livraison dans le monde entier",
           description:
-            "Retrouvez la collection et le parcours de commande Ice4Riches à Paris.",
+            "Présentez votre destination et votre besoin à l’équipe Ice4Riches.",
         },
       ]}
     />

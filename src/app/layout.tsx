@@ -4,9 +4,9 @@ import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 
 const siteUrl = SITE_URL;
-const siteTitle = "Ice4Riches | Glace cristalline premium à Paris";
+const siteTitle = "Ice4Riches | Glace cristalline de la Côte d’Azur";
 const siteDescription =
-  "Glace cristalline premium pour bars, restaurants, hôtels et événements à Paris. Cubes, Collins et sphères pour sublimer chaque cocktail.";
+  "Née sur la Côte d’Azur, la glace cristalline premium Ice4Riches est livrée dans le monde entier aux bars, restaurants, hôtels et événements.";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Ice4Riches, glace cristalline premium à Paris",
+        alt: "Ice4Riches, glace cristalline née sur la Côte d’Azur",
       },
     ],
   },
@@ -82,17 +82,11 @@ const structuredData = {
       url: siteUrl,
       logo: `${siteUrl}/logo.svg`,
       description: siteDescription,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "18-26 Rue Goubet",
-        postalCode: "75019",
-        addressLocality: "Paris",
-        addressCountry: "FR",
+      foundingLocation: {
+        "@type": "Place",
+        name: "Côte d’Azur, France",
       },
-      areaServed: {
-        "@type": "City",
-        name: "Paris",
-      },
+      areaServed: "Worldwide",
       knowsAbout: [
         "Glace cristalline",
         "Glaçons transparents",

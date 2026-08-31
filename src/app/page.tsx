@@ -197,8 +197,9 @@ export default function Home() {
             className="text-lg md:text-xl text-[#f5f3ef]/60 max-w-2xl mx-auto mb-12 animate-fade-up font-light"
             style={{ animationDelay: "0.6s" }}
           >
-            Des glaçons transparents premium à Paris, conçus pour sublimer les
-            cocktails des bars, hôtels, restaurants et événements.
+            Née sur la Côte d’Azur, notre glace cristalline premium est livrée
+            dans le monde entier pour sublimer les cocktails des bars, hôtels,
+            restaurants et événements.
           </p>
 
           <div
@@ -256,7 +257,9 @@ export default function Home() {
             </span>
             <h2 className="text-4xl md:text-6xl font-light mb-4">
               Glaçons transparents{" "}
-              <span className="text-gradient-gold italic">Premium à Paris</span>
+              <span className="text-gradient-gold italic">
+                nés sur la Côte d’Azur
+              </span>
             </h2>
             <p className="text-[#f5f3ef]/50 max-w-xl mx-auto">
               Chaque glaçon est fabriqué selon un processus de congélation
@@ -327,7 +330,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-block border border-[#c9a962]/30 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-[#c9a962]">
-              Glace cristalline à Paris
+              De la Côte d’Azur au monde
             </span>
             <h2 className="mt-6 text-4xl font-light md:text-6xl">
               Le bon format pour chaque{" "}
@@ -342,35 +345,37 @@ export default function Home() {
 
           <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             <a
-              href="/livraison-glacons-paris"
+              href="#produits"
               className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
-                Livraison
+                Origine
               </p>
-              <h3 className="mt-4 text-2xl">Livraison de glaçons à Paris</h3>
+              <h3 className="mt-4 text-2xl">Nés sur la Côte d’Azur</h3>
               <p className="mt-4 leading-7 text-[#f5f3ef]/50">
-                Préparez votre panier, renseignez l’adresse et transmettez la
-                demande directement sur WhatsApp.
+                Une glace d’exception inspirée par l’exigence, l’élégance et
+                l’art de recevoir de la Riviera.
               </p>
               <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Voir les modalités →
+                Découvrir la collection →
               </span>
             </a>
             <a
-              href="/glace-cristalline-paris"
+              href={ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
-                Paris
+                International
               </p>
-              <h3 className="mt-4 text-2xl">Glace cristalline à Paris</h3>
+              <h3 className="mt-4 text-2xl">Livraison dans le monde entier</h3>
               <p className="mt-4 leading-7 text-[#f5f3ef]/50">
-                Découvrez l’offre locale, les quatre formes disponibles et le
-                parcours de commande Ice4Riches.
+                Indiquez votre destination et vos besoins : notre équipe étudie
+                chaque demande de livraison internationale.
               </p>
               <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Découvrir →
+                Demander une livraison →
               </span>
             </a>
             <a
@@ -560,8 +565,8 @@ export default function Home() {
                 </span>
               </div>
               <p className="text-sm text-[#f5f3ef]/40 leading-relaxed">
-                Premium Clear Ice Solutions pour bars, restaurants, hôtels et
-                événements d'exception.
+                Née sur la Côte d’Azur, notre glace cristalline premium est
+                livrée dans le monde entier.
               </p>
             </div>
 
@@ -611,15 +616,15 @@ export default function Home() {
 
             <div>
               <h4 className="text-[#c9a962] font-semibold tracking-wider uppercase text-sm mb-4">
-                Contact
+                Origine & livraison
               </h4>
-              <address className="not-italic text-sm text-[#f5f3ef]/50 space-y-2">
+              <div className="text-sm text-[#f5f3ef]/50 space-y-2">
                 <p className="font-medium text-[#f5f3ef]/70">
-                  BUSINESS SOURCING SOLUTION
+                  ICE4RICHES
                 </p>
-                <p>18-26 Rue Goubet</p>
-                <p>75019 Paris, France</p>
-              </address>
+                <p>Née sur la Côte d’Azur, France</p>
+                <p>Livraison dans le monde entier</p>
+              </div>
 
               <div className="mt-6">
                 <a

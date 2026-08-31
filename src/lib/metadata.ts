@@ -33,7 +33,7 @@ export function createPageMetadata({
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "Ice4Riches, glace cristalline premium à Paris",
+          alt: "Ice4Riches, glace cristalline née sur la Côte d’Azur",
         },
       ],
     },

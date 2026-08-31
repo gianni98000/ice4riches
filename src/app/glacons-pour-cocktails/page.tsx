@@ -91,10 +91,10 @@ export default function GlaconsPourCocktailsPage() {
       faq={faq}
       relatedLinks={[
         {
-          href: "/glace-cristalline-paris",
-          title: "Glace cristalline à Paris",
+          href: "/#contact",
+          title: "De la Côte d’Azur au monde",
           description:
-            "Découvrez l’offre locale Ice4Riches et le fonctionnement de la commande.",
+            "Découvrez l’origine Ice4Riches et notre service de livraison internationale.",
         },
         {
           href: "/professionnels-evenements",
