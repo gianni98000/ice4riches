@@ -1,6 +1,7 @@
 "use client";
 
 import { JsonLd } from "@/components/json-ld";
+import { ClientMarquee } from "@/components/client-marquee";
 import { ORDER_URL, SEO_PAGES } from "@/lib/site";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -318,6 +319,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ClientMarquee />
 
       {/* SEO discovery section */}
       <section className="relative border-y border-[#f5f3ef]/10 bg-[#151515] py-28">
