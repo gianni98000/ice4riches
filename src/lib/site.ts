@@ -1,7 +1,6 @@
 export const SITE_URL = "https://ice4riches.com";
 
-export const ORDER_URL =
-  "https://whatsorder.com/2PACX-1vQazKHWzdH1rVYddC1c5v36h7Te7M4GTdXX_CGg8_roSYt7ZS9uF0WbtnU4gBn4AviUtfdS6QZ6tHZi#Ice";
+export const ORDER_URL = "/order#Ice";
 
 export const BUSINESS_ADDRESS = {
   name: "BUSINESS SOURCING SOLUTION",

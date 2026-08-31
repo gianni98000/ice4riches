@@ -28,7 +28,7 @@ const products = [
     name: "DELUXE CUBE",
     dimensions: "5x5x5 Cm",
     pieces: "60 pièces",
-    price: "45.00",
+    price: "48.00",
     description: "Le cube parfait pour une dilution lente",
     image:
       "https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80",
