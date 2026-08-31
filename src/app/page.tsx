@@ -78,7 +78,7 @@ const homeFaq = [
   {
     question: "Comment commander chez Ice4Riches ?",
     answer:
-      "Le bouton Commander ouvre le catalogue en ligne. Après avoir choisi les références et renseigné les coordonnées demandées, le récapitulatif est envoyé directement à Ice4Riches par WhatsApp.",
+      "Le bouton Commander ouvre le catalogue en ligne. Après avoir choisi les références pour un minimum de 100 € TTC et renseigné les coordonnées de livraison, le récapitulatif est envoyé directement à Ice4Riches par WhatsApp.",
   },
 ];
 
@@ -337,7 +337,23 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <a
+              href="/livraison-glacons-paris"
+              className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
+            >
+              <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
+                Livraison
+              </p>
+              <h3 className="mt-4 text-2xl">Livraison de glaçons à Paris</h3>
+              <p className="mt-4 leading-7 text-[#f5f3ef]/50">
+                Préparez votre panier, renseignez l’adresse et transmettez la
+                demande directement sur WhatsApp.
+              </p>
+              <span className="mt-6 inline-block text-sm text-[#c9a962]">
+                Voir les modalités →
+              </span>
+            </a>
             <a
               href="/glace-cristalline-paris"
               className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"

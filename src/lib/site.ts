@@ -12,6 +12,10 @@ export const BUSINESS_ADDRESS = {
 
 export const SEO_PAGES = [
   {
+    href: "/livraison-glacons-paris",
+    label: "Livraison à Paris",
+  },
+  {
     href: "/glace-cristalline-paris",
     label: "Glace à Paris",
   },
