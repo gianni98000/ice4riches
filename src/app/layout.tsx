@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 
+const siteUrl = "https://ice4riches.com";
+const siteTitle = "Ice4Riches | Glace cristalline premium à Paris";
+const siteDescription =
+  "Glace cristalline premium pour bars, restaurants, hôtels et événements à Paris. Cubes, Collins et sphères pour sublimer chaque cocktail.";
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -17,11 +22,86 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Ice4Riches - Premium Clear Ice Solutions",
-  description: "Glace cristalline premium pour bars, restaurants, hôtels et événements à Paris. Sublimez vos cocktails avec notre glace parfaitement pure.",
-  icons: {
-    icon: "/favicon.ico",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: "%s | Ice4Riches",
   },
+  description: siteDescription,
+  applicationName: "Ice4Riches",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "/",
+    siteName: "Ice4Riches",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Ice4Riches, glace cristalline premium à Paris",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Ice4Riches",
+      alternateName: "ICE4RICHES",
+      url: siteUrl,
+      logo: `${siteUrl}/logo.svg`,
+      description: siteDescription,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "18-26 Rue Goubet",
+        postalCode: "75019",
+        addressLocality: "Paris",
+        addressCountry: "FR",
+      },
+      sameAs: ["https://www.instagram.com/ice4riches/"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Ice4Riches",
+      description: siteDescription,
+      inLanguage: "fr-FR",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -32,6 +112,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${cormorant.variable} ${outfit.variable}`}>
       <body className="min-h-screen bg-[#0f0f0f] text-[#f5f3ef]">
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: this serializes static JSON-LD data controlled by the site.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
       </body>
     </html>

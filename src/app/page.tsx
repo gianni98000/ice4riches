@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ORDER_URL = "https://whatsorder.com/2PACX-1vQazKHWzdH1rVYddC1c5v36h7Te7M4GTdXX_CGg8_roSYt7ZS9uF0WbtnU4gBn4AviUtfdS6QZ6tHZi#Ice";
 
@@ -57,16 +57,12 @@ const tools = [
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  if (!mounted) return null;
 
   return (
     <div className="min-h-screen overflow-hidden">
