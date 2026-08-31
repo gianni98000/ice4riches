@@ -1,8 +1,9 @@
+import { SITE_URL } from "@/lib/site";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 
-const siteUrl = "https://ice4riches.com";
+const siteUrl = SITE_URL;
 const siteTitle = "Ice4Riches | Glace cristalline premium à Paris";
 const siteDescription =
   "Glace cristalline premium pour bars, restaurants, hôtels et événements à Paris. Cubes, Collins et sphères pour sublimer chaque cocktail.";
@@ -88,6 +89,16 @@ const structuredData = {
         addressLocality: "Paris",
         addressCountry: "FR",
       },
+      areaServed: {
+        "@type": "City",
+        name: "Paris",
+      },
+      knowsAbout: [
+        "Glace cristalline",
+        "Glaçons transparents",
+        "Glaçons pour cocktails",
+        "Clear ice",
+      ],
       sameAs: ["https://www.instagram.com/ice4riches/"],
     },
     {

@@ -1,12 +1,18 @@
+import { SITE_URL } from "@/lib/site";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date("2026-08-31T00:00:00.000Z");
+
   return [
-    {
-      url: "https://ice4riches.com",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-  ];
+    { path: "", priority: 1 },
+    { path: "/glace-cristalline-paris", priority: 0.9 },
+    { path: "/glacons-pour-cocktails", priority: 0.8 },
+    { path: "/professionnels-evenements", priority: 0.8 },
+  ].map(({ path, priority }) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority,
+  }));
 }
