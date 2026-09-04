@@ -1,64 +1,36 @@
-"use client";
-
 import { JsonLd } from "@/components/json-ld";
 import { ClientMarquee } from "@/components/client-marquee";
-import { ORDER_URL, SEO_PAGES } from "@/lib/site";
+import { SiteHeader } from "@/components/site-header";
+import { getOrderProducts } from "@/lib/order-catalog";
+import { ORDER_ACCESSORIES_URL, ORDER_URL, SEO_PAGES } from "@/lib/site";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
-const products = [
-  {
-    name: "COLLINS",
-    dimensions: "4x4x12 Cm",
-    pieces: "54 pièces",
-    price: "56.40",
-    description: "Parfait pour les highballs et cocktails allongés",
-    image:
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
-  },
-  {
-    name: "OLD FASHIONED",
-    dimensions: "5x5x7 Cm",
-    pieces: "60 pièces",
-    price: "49.90",
-    description: "Idéal pour les cocktails classiques et whisky",
-    image:
-      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&q=80",
-  },
-  {
-    name: "DELUXE CUBE",
-    dimensions: "5x5x5 Cm",
-    pieces: "60 pièces",
-    price: "48.00",
-    description: "Le cube parfait pour une dilution lente",
-    image:
-      "https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800&q=80",
-  },
-  {
-    name: "SPHERES",
-    dimensions: "5.5 Cm",
-    pieces: "25 pièces",
-    price: "50.07",
-    description: "L'élégance ultime pour vos spiritueux",
-    image:
-      "https://thumbs.dreamstime.com/b/close-up-drink-photography-single-clear-ice-sphere-lowball-glass-dark-cocktail-bar-background-soft-dramatic-lighting-minimalist-435990867.jpg",
-  },
-];
+const featuredIceOrder = ["COLLINS", "OLD FASHIONED", "DELUXE CUBE", "SPHERES"];
 
-const tools = [
-  {
-    name: "Pic à Glace Deluxe",
-    spec: "3 Griffes 18cm",
-    price: "30.00",
-    description: "Pour sculpter vos glaçons avec précision",
-  },
-  {
-    name: "Couteau à Glace",
-    spec: "Lame Martelée 12cm",
-    price: "81.00",
-    description: "Lame artisanale pour une coupe nette",
-  },
-];
+const productDescriptions: Record<string, string> = {
+  COLLINS: "Parfait pour les highballs et cocktails allongés",
+  "OLD FASHIONED": "Idéal pour les cocktails classiques et whisky",
+  "DELUXE CUBE": "Le cube parfait pour une dilution lente",
+  SPHERES: "L’élégance ultime pour vos spiritueux",
+};
+
+const toolDescriptions: Record<string, string> = {
+  "PIC À GLACE": "Pour sculpter vos glaçons avec précision",
+  COUTEAU: "Lame artisanale pour une coupe nette",
+};
+
+const priceFormatter = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+});
+
+function descriptionFor(name: string, descriptions: Record<string, string>) {
+  const key = Object.keys(descriptions).find((candidate) =>
+    name.toLocaleUpperCase("fr-FR").startsWith(candidate),
+  );
+
+  return key ? descriptions[key] : "Produit premium Ice4Riches";
+}
 
 const homeFaq = [
   {
@@ -96,78 +68,34 @@ const homeFaqStructuredData = {
   })),
 };
 
-export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+export default async function Home() {
+  const catalog = await getOrderProducts();
+  const products = featuredIceOrder
+    .map((featuredName) =>
+      catalog.find(
+        (product) =>
+          product.category === "Ice" && product.name.startsWith(featuredName),
+      ),
+    )
+    .filter((product) => product !== undefined);
+  const tools = catalog
+    .filter((product) => product.category === "Dérivée")
+    .slice(0, 2);
 
   return (
     <div className="min-h-screen overflow-hidden">
       <JsonLd data={homeFaqStructuredData} />
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 relative">
-              <Image
-                src="/logo.svg"
-                alt="Ice4Riches"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="text-xl font-semibold tracking-wider text-gradient-gold">
-              ICE4RICHES
-            </span>
-          </div>
-
-          <nav
-            aria-label="Navigation principale"
-            className="hidden lg:flex items-center gap-6"
-          >
-            <a
-              href="#produits"
-              className="text-sm tracking-widest uppercase text-[#f5f3ef]/70 hover:text-[#c9a962] transition-colors"
-            >
-              Produits
-            </a>
-            {SEO_PAGES.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm tracking-widest uppercase text-[#f5f3ef]/70 hover:text-[#c9a962] transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <a
-            href={ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] text-[#0f0f0f] text-sm font-semibold tracking-wider uppercase rounded-none hover:shadow-[0_0_30px_rgba(201,169,98,0.4)] transition-all duration-300"
-          >
-            Commander
-          </a>
-        </div>
-      </header>
+      <SiteHeader productsHref="#produits" />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{ transform: `translateY(${scrollY * 0.3}px)` }}
-        >
+        <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1920&q=90"
             alt="Premium Cocktail"
             fill
+            sizes="100vw"
             className="object-cover opacity-40"
             priority
           />
@@ -208,8 +136,6 @@ export default function Home() {
           >
             <a
               href={ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="group px-8 py-4 bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] text-[#0f0f0f] font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,169,98,0.5)] hover:scale-105"
             >
               <span className="flex items-center justify-center gap-2">
@@ -261,9 +187,10 @@ export default function Home() {
                 nés sur la Côte d’Azur
               </span>
             </h2>
-            <p className="text-[#f5f3ef]/50 max-w-xl mx-auto">
+            <p className="text-[#f5f3ef]/65 max-w-xl mx-auto">
               Chaque glaçon est fabriqué selon un processus de congélation
-              directionnelle pour une transparence cristalline parfaite.
+              directionnelle pour une transparence cristalline parfaite. Tarifs
+              TTC · Minimum de commande 100 € TTC.
             </p>
           </div>
 
@@ -272,8 +199,6 @@ export default function Home() {
               <a
                 key={product.name}
                 href={ORDER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="group relative overflow-hidden animate-scale-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -282,6 +207,7 @@ export default function Home() {
                     src={product.image}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1023px) 50vw, 25vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-[#0f0f0f]/20 to-transparent" />
@@ -296,22 +222,19 @@ export default function Home() {
                       <h3 className="text-2xl font-semibold text-gradient-gold mb-1">
                         {product.name}
                       </h3>
-                      <p className="text-sm text-[#f5f3ef]/50">
-                        {product.dimensions}
-                      </p>
-                      <p className="text-xs text-[#f5f3ef]/40 mt-1">
-                        {product.pieces}
+                      <p className="mt-1 text-sm text-[#f5f3ef]/75">
+                        {product.caption}
                       </p>
                     </div>
                     <div className="text-right">
                       <span className="text-2xl font-light text-[#c9a962]">
-                        €{product.price}
+                        {priceFormatter.format(product.price)} TTC
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-[#f5f3ef]/40 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {product.description}
+                  <p className="mt-3 text-xs leading-5 text-[#f5f3ef]/75 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
+                    {descriptionFor(product.name, productDescriptions)}
                   </p>
                 </div>
 
@@ -362,8 +285,6 @@ export default function Home() {
             </a>
             <a
               href={ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
@@ -423,6 +344,7 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1920&q=80"
             alt="Bar Ambiance"
             fill
+            sizes="100vw"
             className="object-cover opacity-20"
           />
           <div className="absolute inset-0 bg-[#0f0f0f]/90" />
@@ -447,9 +369,7 @@ export default function Home() {
             {tools.map((tool, index) => (
               <a
                 key={tool.name}
-                href={ORDER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={ORDER_ACCESSORIES_URL}
                 className="group p-8 glass-effect hover:gold-border transition-all duration-500"
               >
                 <div className="flex items-start justify-between mb-4">
@@ -457,13 +377,15 @@ export default function Home() {
                     <h3 className="text-2xl font-semibold text-gradient-gold mb-1">
                       {tool.name}
                     </h3>
-                    <p className="text-sm text-[#f5f3ef]/50">{tool.spec}</p>
+                    <p className="text-sm text-[#f5f3ef]/75">{tool.caption}</p>
                   </div>
                   <span className="text-3xl font-light text-[#c9a962]">
-                    €{tool.price}
+                    {priceFormatter.format(tool.price)} TTC
                   </span>
                 </div>
-                <p className="text-[#f5f3ef]/40">{tool.description}</p>
+                <p className="text-[#f5f3ef]/70">
+                  {descriptionFor(tool.name, toolDescriptions)}
+                </p>
 
                 <div className="mt-6 flex items-center gap-2 text-[#c9a962] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-sm tracking-wider uppercase">
@@ -537,8 +459,6 @@ export default function Home() {
 
           <a
             href={ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-block px-12 py-5 bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] text-[#0f0f0f] text-lg font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_50px_rgba(201,169,98,0.5)] hover:scale-105"
           >
             Passer Commande
@@ -557,6 +477,7 @@ export default function Home() {
                     src="/logo.svg"
                     alt="Ice4Riches"
                     fill
+                    sizes="40px"
                     className="object-contain"
                   />
                 </div>
@@ -604,8 +525,6 @@ export default function Home() {
                 <li>
                   <a
                     href={ORDER_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-sm text-[#f5f3ef]/50 hover:text-[#c9a962] transition-colors"
                   >
                     Commander
@@ -619,11 +538,25 @@ export default function Home() {
                 Origine & livraison
               </h4>
               <div className="text-sm text-[#f5f3ef]/50 space-y-2">
-                <p className="font-medium text-[#f5f3ef]/70">
-                  ICE4RICHES
-                </p>
+                <p className="font-medium text-[#f5f3ef]/70">ICE4RICHES</p>
                 <p>Née sur la Côte d’Azur, France</p>
                 <p>Livraison dans le monde entier</p>
+                <p>
+                  <a
+                    href="mailto:hello@ice4riches.com"
+                    className="hover:text-[#c9a962]"
+                  >
+                    hello@ice4riches.com
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href="https://wa.me/377640622956"
+                    className="hover:text-[#c9a962]"
+                  >
+                    WhatsApp
+                  </a>
+                </p>
               </div>
 
               <div className="mt-6">

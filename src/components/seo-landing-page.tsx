@@ -1,6 +1,6 @@
 import { JsonLd } from "@/components/json-ld";
+import { SiteHeader } from "@/components/site-header";
 import { BRAND_LOCATION, ORDER_URL, SEO_PAGES, SITE_URL } from "@/lib/site";
-import Image from "next/image";
 import Link from "next/link";
 
 type Highlight = {
@@ -97,46 +97,7 @@ export function SeoLandingPage({
     <div className="min-h-screen overflow-hidden bg-[#0f0f0f]">
       <JsonLd data={structuredData} />
 
-      <header className="fixed inset-x-0 top-0 z-50 glass-effect">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link
-            href="/"
-            className="flex items-center gap-3"
-            aria-label="Ice4Riches - accueil"
-          >
-            <span className="relative h-11 w-11">
-              <Image src="/logo.svg" alt="" fill className="object-contain" />
-            </span>
-            <span className="text-lg font-semibold tracking-wider text-gradient-gold">
-              ICE4RICHES
-            </span>
-          </Link>
-
-          <nav
-            aria-label="Navigation principale"
-            className="hidden items-center gap-6 lg:flex"
-          >
-            {SEO_PAGES.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-xs uppercase tracking-widest text-[#f5f3ef]/70 transition-colors hover:text-[#c9a962]"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <a
-            href={ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#0f0f0f] transition-shadow hover:shadow-[0_0_30px_rgba(201,169,98,0.4)]"
-          >
-            Commander
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main>
         <section className="relative overflow-hidden px-6 pb-24 pt-36 md:pb-32 md:pt-44">
@@ -167,8 +128,6 @@ export function SeoLandingPage({
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <a
                 href={ORDER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f]"
               >
                 Voir le catalogue
@@ -302,8 +261,6 @@ export function SeoLandingPage({
             </p>
             <a
               href={ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="mt-9 inline-block bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-10 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f]"
             >
               Commander
@@ -322,8 +279,8 @@ export function SeoLandingPage({
               ICE4RICHES
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-[#f5f3ef]/40">
-              Glace cristalline premium née sur la Côte d’Azur et livrée dans
-              le monde entier.
+              Glace cristalline premium née sur la Côte d’Azur et livrée dans le
+              monde entier.
             </p>
           </div>
           <div>

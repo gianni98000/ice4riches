@@ -6,9 +6,11 @@ import Link from "next/link";
 import type { FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-const MINIMUM_ORDER = 100;
+const MINIMUM_ORDER_CENTS = 10_000;
 const WHATSAPP_PHONE = "377640622956";
-const STORAGE_KEY = "ice4riches-order-customer";
+const CUSTOMER_STORAGE_KEY = "ice4riches-order-customer";
+const CART_STORAGE_KEY = "ice4riches-order-cart";
+const MAX_QUANTITY = 99;
 
 const categoryLabels: Record<string, string> = {
   Ice: "Glace",
@@ -20,6 +22,14 @@ const priceFormatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
   currency: "EUR",
 });
+
+function formatCents(cents: number) {
+  return priceFormatter.format(cents / 100);
+}
+
+function priceInCents(price: number) {
+  return Math.round(price * 100);
+}
 
 type Customer = {
   name: string;
@@ -37,6 +47,65 @@ const emptyCustomer: Customer = {
   note: "",
 };
 
+const rememberedCustomerFields = [
+  "name",
+  "phone",
+  "address",
+  "landmark",
+] as const;
+
+function readStoredCustomer(raw: string): Customer | null {
+  const parsed: unknown = JSON.parse(raw);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    return null;
+  }
+
+  const record = parsed as Record<string, unknown>;
+  if (
+    rememberedCustomerFields.some(
+      (field) => field in record && typeof record[field] !== "string",
+    )
+  ) {
+    return null;
+  }
+
+  return {
+    name: typeof record.name === "string" ? record.name.slice(0, 100) : "",
+    phone: typeof record.phone === "string" ? record.phone.slice(0, 30) : "",
+    address:
+      typeof record.address === "string" ? record.address.slice(0, 180) : "",
+    landmark:
+      typeof record.landmark === "string" ? record.landmark.slice(0, 180) : "",
+    note: "",
+  };
+}
+
+function readStoredQuantities(
+  raw: string,
+  products: OrderProduct[],
+): Record<string, number> {
+  const parsed: unknown = JSON.parse(raw);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    return {};
+  }
+
+  const availableNames = new Set(
+    products
+      .filter((product) => product.available)
+      .map((product) => product.name),
+  );
+
+  return Object.fromEntries(
+    Object.entries(parsed as Record<string, unknown>).filter(
+      ([name, quantity]) =>
+        availableNames.has(name) &&
+        Number.isInteger(quantity) &&
+        Number(quantity) > 0 &&
+        Number(quantity) <= MAX_QUANTITY,
+    ),
+  ) as Record<string, number>;
+}
+
 type OrderCatalogProps = {
   products: OrderProduct[];
 };
@@ -48,30 +117,72 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
   );
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? "Ice");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const [cartLoaded, setCartLoaded] = useState(false);
   const [customer, setCustomer] = useState<Customer>(emptyCustomer);
+  const [rememberCustomer, setRememberCustomer] = useState(false);
   const [customerLoaded, setCustomerLoaded] = useState(false);
 
   useEffect(() => {
-    const categoryFromHash = decodeURIComponent(window.location.hash.slice(1));
-    if (categories.includes(categoryFromHash)) {
-      setActiveCategory(categoryFromHash);
+    function syncCategoryFromHash() {
+      try {
+        const hash = window.location.hash.slice(1);
+        const categoryFromHash = hash ? decodeURIComponent(hash) : "";
+        if (categories.includes(categoryFromHash)) {
+          setActiveCategory(categoryFromHash);
+        }
+      } catch {
+        // Ignore malformed URL fragments and keep the current category.
+      }
+    }
+
+    syncCategoryFromHash();
+    window.addEventListener("hashchange", syncCategoryFromHash);
+
+    try {
+      const storedCart = window.sessionStorage.getItem(CART_STORAGE_KEY);
+      if (storedCart) {
+        setQuantities(readStoredQuantities(storedCart, products));
+      }
+    } catch {
+      // Session storage is optional; ordering still works without it.
+    } finally {
+      setCartLoaded(true);
     }
 
     try {
-      const storedCustomer = window.localStorage.getItem(STORAGE_KEY);
+      const storedCustomer = window.localStorage.getItem(CUSTOMER_STORAGE_KEY);
       if (storedCustomer) {
-        setCustomer({
-          ...emptyCustomer,
-          ...(JSON.parse(storedCustomer) as Partial<Customer>),
-          note: "",
-        });
+        const validCustomer = readStoredCustomer(storedCustomer);
+        if (validCustomer) {
+          setCustomer(validCustomer);
+          setRememberCustomer(true);
+        } else {
+          window.localStorage.removeItem(CUSTOMER_STORAGE_KEY);
+        }
       }
     } catch {
       // Local storage is optional; the form still works without it.
     } finally {
       setCustomerLoaded(true);
     }
-  }, [categories]);
+
+    return () => window.removeEventListener("hashchange", syncCategoryFromHash);
+  }, [categories, products]);
+
+  useEffect(() => {
+    if (!cartLoaded) {
+      return;
+    }
+
+    try {
+      window.sessionStorage.setItem(
+        CART_STORAGE_KEY,
+        JSON.stringify(quantities),
+      );
+    } catch {
+      // Ignore storage restrictions in private browsing.
+    }
+  }, [cartLoaded, quantities]);
 
   useEffect(() => {
     if (!customerLoaded) {
@@ -79,19 +190,23 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
     }
 
     try {
-      window.localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({
-          name: customer.name,
-          phone: customer.phone,
-          address: customer.address,
-          landmark: customer.landmark,
-        }),
-      );
+      if (rememberCustomer) {
+        window.localStorage.setItem(
+          CUSTOMER_STORAGE_KEY,
+          JSON.stringify({
+            name: customer.name,
+            phone: customer.phone,
+            address: customer.address,
+            landmark: customer.landmark,
+          }),
+        );
+      } else {
+        window.localStorage.removeItem(CUSTOMER_STORAGE_KEY);
+      }
     } catch {
       // Ignore storage restrictions in private browsing.
     }
-  }, [customer, customerLoaded]);
+  }, [customer, customerLoaded, rememberCustomer]);
 
   const visibleProducts = products.filter(
     (product) => product.category === activeCategory,
@@ -103,16 +218,17 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
     }))
     .filter((item) => item.quantity > 0);
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-  const subtotal = cart.reduce(
-    (total, item) => total + item.product.price * item.quantity,
+  const subtotalCents = cart.reduce(
+    (total, item) => total + priceInCents(item.product.price) * item.quantity,
     0,
   );
-  const missingAmount = Math.max(0, MINIMUM_ORDER - subtotal);
+  const missingAmountCents = Math.max(0, MINIMUM_ORDER_CENTS - subtotalCents);
   const customerComplete =
     customer.name.trim() !== "" &&
     customer.phone.trim() !== "" &&
     customer.address.trim() !== "";
-  const canSubmit = itemCount > 0 && missingAmount === 0 && customerComplete;
+  const canSubmit =
+    itemCount > 0 && missingAmountCents === 0 && customerComplete;
 
   function changeQuantity(product: OrderProduct, change: number) {
     if (!product.available) {
@@ -121,8 +237,19 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
 
     setQuantities((current) => ({
       ...current,
-      [product.name]: Math.max(0, (current[product.name] ?? 0) + change),
+      [product.name]: Math.min(
+        MAX_QUANTITY,
+        Math.max(0, (current[product.name] ?? 0) + change),
+      ),
     }));
+  }
+
+  function removeFromCart(productName: string) {
+    setQuantities((current) => {
+      const next = { ...current };
+      delete next[productName];
+      return next;
+    });
   }
 
   function updateCustomer(field: keyof Customer, value: string) {
@@ -130,6 +257,16 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
       ...current,
       [field]: value,
     }));
+  }
+
+  function clearRememberedCustomer() {
+    setCustomer(emptyCustomer);
+    setRememberCustomer(false);
+    try {
+      window.localStorage.removeItem(CUSTOMER_STORAGE_KEY);
+    } catch {
+      // The fields are still cleared when storage is unavailable.
+    }
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -158,7 +295,7 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
       "",
       cartLines,
       "",
-      `*Payable: EUR TTC ${subtotal.toFixed(2)}*`,
+      `*Payable: EUR TTC ${(subtotalCents / 100).toFixed(2)}*`,
       "",
       "*Détails du client*",
       customerDetails,
@@ -220,16 +357,16 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
               Composez votre panier, puis envoyez-le sur WhatsApp
             </h1>
             <p className="mt-5 max-w-2xl leading-7 text-[#f5f3ef]/55">
-              Le catalogue et le panier s’ouvrent maintenant directement sur
-              Ice4Riches. Vos coordonnées sont conservées uniquement dans votre
-              navigateur.
+              Le catalogue et le panier s’ouvrent directement sur Ice4Riches.
+              Vous choisissez si vos coordonnées doivent être mémorisées dans
+              votre navigateur.
             </p>
             <div className="mt-7 flex flex-wrap gap-3 text-sm text-[#f5f3ef]/60">
               <span className="border border-[#f5f3ef]/10 px-4 py-2">
                 Livraison
               </span>
               <span className="border border-[#f5f3ef]/10 px-4 py-2">
-                Minimum {priceFormatter.format(MINIMUM_ORDER)}
+                Minimum {formatCents(MINIMUM_ORDER_CENTS)} TTC
               </span>
               <span className="border border-[#f5f3ef]/10 px-4 py-2">
                 Prix TTC
@@ -295,7 +432,6 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
                         fill
                         sizes="96px"
                         className="object-cover"
-                        unoptimized
                       />
                     </div>
 
@@ -381,12 +517,21 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
                       key={item.product.name}
                       className="flex items-start justify-between gap-4 text-sm"
                     >
-                      <p className="leading-6 text-[#f5f3ef]/70">
-                        {item.quantity} × {item.product.name}
-                      </p>
+                      <div className="min-w-0">
+                        <p className="leading-6 text-[#f5f3ef]/75">
+                          {item.quantity} × {item.product.name}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => removeFromCart(item.product.name)}
+                          className="mt-1 text-xs text-[#f5f3ef]/55 underline decoration-[#c9a962]/50 underline-offset-4 hover:text-[#c9a962]"
+                        >
+                          Supprimer
+                        </button>
+                      </div>
                       <p className="whitespace-nowrap text-[#c9a962]">
-                        {priceFormatter.format(
-                          item.quantity * item.product.price,
+                        {formatCents(
+                          item.quantity * priceInCents(item.product.price),
                         )}
                       </p>
                     </div>
@@ -397,13 +542,13 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
               <div className="flex items-center justify-between py-5 text-lg">
                 <span>Total TTC</span>
                 <strong className="font-medium text-[#c9a962]">
-                  {priceFormatter.format(subtotal)}
+                  {formatCents(subtotalCents)}
                 </strong>
               </div>
 
-              {missingAmount > 0 && itemCount > 0 && (
+              {missingAmountCents > 0 && itemCount > 0 && (
                 <p className="mb-5 border border-[#c9a962]/25 bg-[#c9a962]/5 p-3 text-sm leading-6 text-[#c9a962]">
-                  Ajoutez encore {priceFormatter.format(missingAmount)} pour
+                  Ajoutez encore {formatCents(missingAmountCents)} pour
                   atteindre le minimum de livraison.
                 </p>
               )}
@@ -483,23 +628,46 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
                 </label>
               </div>
 
+              <div className="mt-5 border-t border-[#f5f3ef]/10 pt-5">
+                <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-[#f5f3ef]/70">
+                  <input
+                    type="checkbox"
+                    checked={rememberCustomer}
+                    onChange={(event) =>
+                      setRememberCustomer(event.target.checked)
+                    }
+                    className="mt-1 h-4 w-4 accent-[#c9a962]"
+                  />
+                  Mémoriser mes coordonnées sur cet appareil
+                </label>
+                <button
+                  type="button"
+                  onClick={clearRememberedCustomer}
+                  className="mt-3 text-xs text-[#f5f3ef]/55 underline decoration-[#c9a962]/50 underline-offset-4 hover:text-[#c9a962]"
+                >
+                  Effacer mes coordonnées mémorisées
+                </button>
+              </div>
+
               <button
                 type="submit"
                 disabled={!canSubmit}
                 className="mt-6 w-full bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-5 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f] transition-opacity disabled:cursor-not-allowed disabled:opacity-35"
               >
-                Envoyer sur WhatsApp
+                Continuer sur WhatsApp
               </button>
 
-              {!customerComplete && itemCount > 0 && missingAmount === 0 && (
-                <p className="mt-3 text-center text-xs leading-5 text-[#f5f3ef]/40">
-                  Complétez le nom, le téléphone et l’adresse pour continuer.
-                </p>
-              )}
+              {!customerComplete &&
+                itemCount > 0 &&
+                missingAmountCents === 0 && (
+                  <p className="mt-3 text-center text-xs leading-5 text-[#f5f3ef]/40">
+                    Complétez le nom, le téléphone et l’adresse pour continuer.
+                  </p>
+                )}
 
               <p className="mt-4 text-center text-xs leading-5 text-[#f5f3ef]/35">
-                Une fenêtre WhatsApp s’ouvrira avec votre commande préremplie.
-                Vous pourrez la relire avant de l’envoyer.
+                WhatsApp s’ouvrira avec votre commande préremplie. Vérifiez-la,
+                puis appuyez sur Envoyer dans WhatsApp pour nous la transmettre.
               </p>
             </form>
           </aside>

@@ -18,6 +18,10 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply antialiased;
     font-family: var(--font-outfit), 'Outfit', sans-serif;
@@ -28,6 +32,15 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
     letter-spacing: 0.02em;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 3px;
   }
 }
 
@@ -226,6 +239,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .client-marquee {
     overflow-x: auto;
     -webkit-mask-image: none;

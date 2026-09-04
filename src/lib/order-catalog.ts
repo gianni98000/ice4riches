@@ -313,7 +313,8 @@ function decodeCatalog(html: string): OrderProduct[] {
         price: Number.parseFloat(effectivePrice.replace(",", ".")),
         available: item.Available.trim().toLowerCase() === "yes",
       };
-    });
+    })
+    .filter((product) => Number.isFinite(product.price) && product.price > 0);
 }
 
 export async function getOrderProducts(): Promise<OrderProduct[]> {
