@@ -2,7 +2,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ClientMarquee } from "@/components/client-marquee";
 import { SiteHeader } from "@/components/site-header";
 import { getOrderProducts } from "@/lib/order-catalog";
-import { ORDER_ACCESSORIES_URL, ORDER_URL, SEO_PAGES } from "@/lib/site";
+import { ORDER_ACCESSORIES_URL, ORDER_URL, SEO_PAGES, SITE_URL } from "@/lib/site";
 import Image from "next/image";
 
 const featuredIceOrder = ["COLLINS", "OLD FASHIONED", "DELUXE CUBE", "SPHERES"];
@@ -81,10 +81,44 @@ export default async function Home() {
   const tools = catalog
     .filter((product) => product.category === "Dérivée")
     .slice(0, 2);
+  const catalogStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Collection de glace cristalline Ice4Riches",
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Product",
+        name: product.name,
+        description: `${product.caption} · ${descriptionFor(product.name, productDescriptions)}`,
+        image: product.image,
+        brand: {
+          "@type": "Brand",
+          name: "Ice4Riches",
+        },
+        offers: {
+          "@type": "Offer",
+          url: `${SITE_URL}${ORDER_URL}`,
+          price: product.price.toFixed(2),
+          priceCurrency: "EUR",
+          availability: product.available
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: product.price.toFixed(2),
+            priceCurrency: "EUR",
+            valueAddedTaxIncluded: true,
+          },
+        },
+      },
+    })),
+  };
 
   return (
     <div className="min-h-screen overflow-hidden">
-      <JsonLd data={homeFaqStructuredData} />
+      <JsonLd data={[homeFaqStructuredData, catalogStructuredData]} />
       <SiteHeader productsHref="#produits" />
 
       {/* Hero Section */}
@@ -268,7 +302,7 @@ export default async function Home() {
 
           <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             <a
-              href="#produits"
+              href="/livraison-glacons-cote-d-azur"
               className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
@@ -280,7 +314,7 @@ export default async function Home() {
                 l’art de recevoir de la Riviera.
               </p>
               <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Découvrir la collection →
+                Découvrir le service régional →
               </span>
             </a>
             <a

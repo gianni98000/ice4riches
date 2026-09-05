@@ -44,6 +44,7 @@ export default function GlaceCristallineParisPage() {
     <SeoLandingPage
       path="/glace-cristalline-paris"
       serviceName="Glace cristalline premium à Paris"
+      areaServed={["Paris"]}
       eyebrow="Glace à Paris"
       title="Glace cristalline et glaçons transparents à Paris"
       intro="Ice4Riches propose des glaçons de grand format conçus pour mettre en valeur cocktails et spiritueux. Une collection premium accessible aux établissements et aux événements parisiens."

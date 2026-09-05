@@ -82,6 +82,14 @@ const structuredData = {
       url: siteUrl,
       logo: `${siteUrl}/logo.svg`,
       description: siteDescription,
+      email: "hello@ice4riches.com",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        telephone: "+377640622956",
+        email: "hello@ice4riches.com",
+        areaServed: "Worldwide",
+      },
       foundingLocation: {
         "@type": "Place",
         name: "Côte d’Azur, France",

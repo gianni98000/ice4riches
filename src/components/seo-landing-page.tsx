@@ -35,6 +35,7 @@ type SeoLandingPageProps = {
   sections: ContentSection[];
   faq: FaqItem[];
   relatedLinks: RelatedLink[];
+  areaServed?: string[];
 };
 
 export function SeoLandingPage({
@@ -47,6 +48,7 @@ export function SeoLandingPage({
   sections,
   faq,
   relatedLinks,
+  areaServed,
 }: SeoLandingPageProps) {
   const pageUrl = `${SITE_URL}${path}`;
   const structuredData = {
@@ -60,7 +62,10 @@ export function SeoLandingPage({
         provider: {
           "@id": `${SITE_URL}/#organization`,
         },
-        areaServed: "Worldwide",
+        areaServed: areaServed?.map((name) => ({
+          "@type": "City",
+          name,
+        })) ?? "Worldwide",
       },
       {
         "@type": "BreadcrumbList",

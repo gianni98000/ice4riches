@@ -44,6 +44,7 @@ export default function LivraisonGlaconsParisPage() {
     <SeoLandingPage
       path="/livraison-glacons-paris"
       serviceName="Livraison de glaçons transparents à Paris"
+      areaServed={["Paris"]}
       eyebrow="Livraison à Paris"
       title="Livraison de glaçons transparents premium à Paris"
       intro="Ice4Riches simplifie la commande de glace cristalline à Paris : sélectionnez le format adapté à vos verres, composez un panier d’au moins 100 € TTC et transmettez votre demande directement sur WhatsApp."
