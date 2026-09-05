@@ -97,6 +97,36 @@ export default function LivraisonGlaconsCoteDAzurPage() {
       faq={faq}
       relatedLinks={[
         {
+          href: "/livraison-clear-ice/monaco",
+          title: "Clear Ice à Monaco",
+          description:
+            "Glaçons transparents pour hôtels, bars, restaurants, yachts et événements à Monaco et Monte-Carlo.",
+        },
+        {
+          href: "/livraison-clear-ice/nice",
+          title: "Clear Ice à Nice",
+          description:
+            "Service destiné aux bars, hôtels, restaurants, plages et réceptions à Nice et aux environs.",
+        },
+        {
+          href: "/livraison-clear-ice/cannes",
+          title: "Clear Ice à Cannes",
+          description:
+            "Une collection premium pour la Croisette, les hôtels, plages, yachts, villas et grands événements.",
+        },
+        {
+          href: "/livraison-clear-ice/antibes",
+          title: "Clear Ice à Antibes",
+          description:
+            "Glaçons grand format pour Antibes, Juan-les-Pins, le Cap d’Antibes, les villas et les yachts.",
+        },
+        {
+          href: "/livraison-clear-ice/saint-tropez",
+          title: "Clear Ice à Saint-Tropez",
+          description:
+            "Livraison étudiée pour Saint-Tropez, Ramatuelle, Gassin, Grimaud et l’ensemble du golfe.",
+        },
+        {
           href: "/glacons-pour-cocktails",
           title: "Choisir le format adapté au cocktail",
           description:

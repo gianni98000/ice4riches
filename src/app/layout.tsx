@@ -4,9 +4,9 @@ import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 
 const siteUrl = SITE_URL;
-const siteTitle = "Ice4Riches | Glace cristalline de la Côte d’Azur";
+const siteTitle = "Ice4Riches | Clear Ice premium sur la Côte d’Azur";
 const siteDescription =
-  "Née sur la Côte d’Azur, la glace cristalline premium Ice4Riches est livrée dans le monde entier aux bars, restaurants, hôtels et événements.";
+  "Clear Ice et glaçons transparents premium pour bars, restaurants, hôtels, yachts et événements de Monaco à Saint-Tropez sur la Côte d’Azur.";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -94,7 +94,14 @@ const structuredData = {
         "@type": "Place",
         name: "Côte d’Azur, France",
       },
-      areaServed: "Worldwide",
+      areaServed: [
+        "Côte d’Azur",
+        "Monaco",
+        "Nice",
+        "Cannes",
+        "Antibes",
+        "Saint-Tropez",
+      ],
       knowsAbout: [
         "Glace cristalline",
         "Glaçons transparents",

@@ -149,9 +149,9 @@ export default async function Home() {
             className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight mb-6 animate-fade-up text-shadow-gold"
             style={{ animationDelay: "0.4s" }}
           >
-            L'Art de la
+            L'Art du Clear Ice
             <span className="block text-gradient-gold font-semibold italic">
-              Glace Cristalline
+              sur la Côte d’Azur
             </span>
           </h1>
 
@@ -159,9 +159,8 @@ export default async function Home() {
             className="text-lg md:text-xl text-[#f5f3ef]/60 max-w-2xl mx-auto mb-12 animate-fade-up font-light"
             style={{ animationDelay: "0.6s" }}
           >
-            Née sur la Côte d’Azur, notre glace cristalline premium est livrée
-            dans le monde entier pour sublimer les cocktails des bars, hôtels,
-            restaurants et événements.
+            De Monaco à Saint-Tropez, notre glace cristalline premium sublime
+            les cocktails des bars, hôtels, restaurants, yachts et événements.
           </p>
 
           <div
