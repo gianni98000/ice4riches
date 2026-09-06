@@ -1,0 +1,7 @@
+interface:
+  display_name: "ICE4riches Instagram Publisher"
+  short_description: "Publier les contenus Instagram ICE4riches"
+  default_prompt: "Utilise $ice4riches-instagram-publisher pour préparer et contrôler une publication Instagram ICE4riches avant validation."
+
+policy:
+  allow_implicit_invocation: true
