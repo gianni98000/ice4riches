@@ -117,6 +117,12 @@ const container = {
 };
 
 try {
+  const account = await graphRequest(`${igUserId}?fields=id,username`, config);
+  if (account.username?.toLowerCase() !== "ice4riches") {
+    throw new Error(
+      `Compte refusé: le jeton cible @${account.username || "inconnu"}, pas @ice4riches.`,
+    );
+  }
   const created = await graphRequest(`${igUserId}/media`, {
     ...config,
     method: "POST",
@@ -132,4 +138,3 @@ try {
 } catch (error) {
   fail(error.message);
 }
-
