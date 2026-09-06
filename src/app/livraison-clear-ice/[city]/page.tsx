@@ -37,7 +37,7 @@ export default async function LocalClearIcePage({ params }: PageProps) {
     notFound();
   }
 
-  const otherCities = LOCAL_PAGES.filter((item) => item.slug !== page.slug).slice(0, 2);
+  const otherCities = LOCAL_PAGES.filter((item) => item.slug !== page.slug);
 
   return (
     <SeoLandingPage
