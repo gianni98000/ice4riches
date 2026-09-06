@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: "Ice4Riches",
+  verification: {
+    google: "g5SJFAsOa8zXb1vBSQu1230rljLDba658THOk3a49Rk",
+  },
   alternates: {
     canonical: "/",
   },
