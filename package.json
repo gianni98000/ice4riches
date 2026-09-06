@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit && eslint src",
-    "format": "bunx biome format --write"
+    "format": "bunx biome format --write",
+    "instagram:check": "node scripts/meta-instagram-publish.mjs",
+    "instagram:publish": "node scripts/meta-instagram-publish.mjs --publish"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
