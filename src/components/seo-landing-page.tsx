@@ -234,7 +234,7 @@ export function SeoLandingPage({
             <h2 className="text-center text-3xl font-light md:text-4xl">
               À découvrir aussi
             </h2>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {relatedLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -313,6 +313,22 @@ export function SeoLandingPage({
               <p>Ice4Riches</p>
               <p>Née sur la {BRAND_LOCATION.origin}</p>
               <p>{BRAND_LOCATION.delivery}</p>
+              <p className="pt-3">
+                <a
+                  href="tel:+377640622956"
+                  className="transition-colors hover:text-[#c9a962]"
+                >
+                  +377 6 40 62 29 56
+                </a>
+              </p>
+              <p>
+                <a
+                  href="mailto:hello@ice4riches.com"
+                  className="transition-colors hover:text-[#c9a962]"
+                >
+                  hello@ice4riches.com
+                </a>
+              </p>
             </div>
           </div>
         </div>
