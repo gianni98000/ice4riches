@@ -159,8 +159,8 @@ export default async function Home() {
             className="text-lg md:text-xl text-[#f5f3ef]/60 max-w-2xl mx-auto mb-12 animate-fade-up font-light"
             style={{ animationDelay: "0.6s" }}
           >
-            De Monaco à Saint-Tropez, notre glace cristalline premium sublime
-            les cocktails des bars, hôtels, restaurants, yachts et événements.
+            De Monaco à Cannes et Saint-Tropez, notre glace cristalline premium
+            sublime les cocktails des bars, hôtels, restaurants, yachts et événements.
           </p>
 
           <div
