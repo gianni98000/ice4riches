@@ -281,6 +281,38 @@ export default async function Home() {
 
       <ClientMarquee />
 
+      <section aria-labelledby="livraison-villes" className="border-y border-[#f5f3ef]/10 bg-[#151515] py-16">
+        <div className="mx-auto max-w-7xl px-6">
+          <h2 id="livraison-villes" className="text-3xl font-light md:text-4xl">
+            Livraison de Clear Ice sur la Côte d’Azur
+          </h2>
+          <p className="mt-5 max-w-3xl leading-7 text-[#f5f3ef]/70">
+            Préparez votre commande de glaçons transparents pour un bar, un hôtel,
+            un yacht ou une réception. Retrouvez les informations de votre secteur :
+            les disponibilités et modalités de livraison sont confirmées avec notre équipe.
+          </p>
+          <nav aria-label="Villes de livraison Clear Ice" className="mt-8 flex flex-wrap gap-4">
+            {[
+              { slug: "monaco", city: "Monaco" },
+              { slug: "cannes", city: "Cannes" },
+              { slug: "saint-tropez", city: "Saint-Tropez" },
+              { slug: "nice", city: "Nice" },
+              { slug: "antibes", city: "Antibes" },
+            ].map(({ slug, city }) => (
+              <a key={slug} href={`/livraison-clear-ice/${slug}`}
+                className="border border-[#c9a962]/50 px-5 py-3 text-[#c9a962] hover:bg-[#c9a962]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+                Clear Ice à {city}
+              </a>
+            ))}
+          </nav>
+          <p className="mt-6 text-sm leading-6 text-[#f5f3ef]/70">
+            Pour préparer votre demande : formats, quantités, date, adresse de réception
+            et contraintes d’accès. Minimum de commande : 100 € TTC.
+          </p>
+        </div>
+      </section>
+
+
       {/* SEO discovery section */}
       <section className="relative border-y border-[#f5f3ef]/10 bg-[#151515] py-28">
         <div className="mx-auto max-w-7xl px-6">
