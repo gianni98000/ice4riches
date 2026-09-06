@@ -15,6 +15,10 @@ export const SEO_PAGES = [
     label: "Côte d’Azur",
   },
   {
+    href: "/livraison-clear-ice/cannes",
+    label: "Clear Ice Cannes",
+  },
+  {
     href: "/glacons-pour-cocktails",
     label: "Guide des formats",
   },
