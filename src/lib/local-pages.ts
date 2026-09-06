@@ -28,6 +28,7 @@ export const LOCAL_PAGES: LocalPage[] = [
     localContext: [
       "À Monaco, la régularité du service et la présentation du verre font partie intégrante de l’expérience. Les formats Collins, Old Fashioned, Deluxe Cube et sphère permettent d’associer une pièce de glace précise à chaque famille de cocktails.",
       "Notre implantation à Monaco et notre dépôt à Saint-Laurent-du-Var facilitent l’étude des besoins récurrents comme des événements ponctuels à Monte-Carlo, Fontvieille, Larvotto et dans les communes limitrophes.",
+      "Pour un yacht à Monaco, préparez le nom du bateau, le port, le quai et le contact de réception. Pour un hôtel ou un restaurant, précisez l’accès de service et le créneau souhaité. Ces éléments permettent de vérifier la faisabilité de la livraison avant confirmation, sans présumer d’un accès au quai ou à l’établissement.",
     ],
   },
   {
@@ -68,6 +69,7 @@ export const LOCAL_PAGES: LocalPage[] = [
     localContext: [
       "À Cannes, un même événement peut mobiliser plusieurs bars et plusieurs types de verres. Le Collins structure les long drinks, tandis que le Deluxe Cube, l’Old Fashioned et la sphère donnent une présence nette aux cocktails courts.",
       "Pour les congrès, festivals, lancements et réceptions privées, transmettez la date, le lieu, le nombre de boissons et les contraintes d’accès. Ice4Riches confirme ensuite les disponibilités et les modalités logistiques.",
+      "Pour une réception sur la Croisette ou un événement à Cannes, répartissez les besoins par bar et par service : cocktails longs en Collins, cocktails courts en cubes ou Old Fashioned, dégustations sur sphère. Indiquez les quantités par format et prévoyez un espace de stockage adapté sur place ; l’équipe confirme les disponibilités avant la commande.",
     ],
   },
   {
@@ -108,6 +110,7 @@ export const LOCAL_PAGES: LocalPage[] = [
     localContext: [
       "À Saint-Tropez, Ramatuelle, Gassin, Grimaud et Cogolin, la saison impose d’anticiper les volumes, les accès et les horaires. Les formats Ice4Riches sont conditionnés par pièces pour planifier précisément le nombre de cocktails servis.",
       "Pour une plage, un yacht, une villa ou une réception, indiquez la date, le lieu exact, les contraintes d’accès et la quantité souhaitée. Les modalités de livraison sont confirmées directement avec l’équipe avant le service.",
+      "Pour un beach club à Ramatuelle ou une villa dans le golfe de Saint-Tropez, précisez le point de réception, la personne à joindre et les possibilités de stockage sur place. Si plusieurs services sont prévus, répartissez les quantités par jour et par format pour soumettre une demande complète ; aucun créneau n’est garanti avant confirmation par l’équipe.",
     ],
   },
 ];
