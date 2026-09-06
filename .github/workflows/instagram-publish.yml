@@ -1,0 +1,43 @@
+name: Publier sur Instagram
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_path:
+        description: Chemin du manifeste JSON validé
+        required: true
+        default: social/queue/example-post.json
+        type: string
+      confirmation:
+        description: Saisir exactement ice4riches
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: instagram-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: instagram-production
+    env:
+      META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+      META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+      META_API_VERSION: v26.0
+      MANIFEST_PATH: ${{ inputs.manifest_path }}
+      CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Vérifier la confirmation
+        run: test "$CONFIRMATION" = "ice4riches"
+      - name: Valider le manifeste
+        run: node scripts/meta-instagram-publish.mjs --manifest "$MANIFEST_PATH"
+      - name: Publier sur Instagram
+        run: node scripts/meta-instagram-publish.mjs --manifest "$MANIFEST_PATH" --publish --confirm "$CONFIRMATION"
+
