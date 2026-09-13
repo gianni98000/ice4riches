@@ -83,6 +83,7 @@ const structuredData = {
       logo: `${siteUrl}/logo.svg`,
       description: siteDescription,
       email: "hello@ice4riches.com",
+      founder: { "@id": `${siteUrl}/fondateur/#gianni-angelini` },
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "sales",
@@ -102,6 +103,16 @@ const structuredData = {
         "Clear ice",
       ],
       sameAs: ["https://www.instagram.com/ice4riches/"],
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/fondateur/#gianni-angelini`,
+      name: "Gianni Angelini",
+      url: `${siteUrl}/fondateur`,
+      jobTitle: "Fondateur d’Ice4Riches",
+      homeLocation: { "@type": "Place", name: "Monaco" },
+      worksFor: { "@id": `${siteUrl}/#organization` },
+      sameAs: ["https://www.linkedin.com/in/gianni-angelini-69855610"],
     },
     {
       "@type": "WebSite",

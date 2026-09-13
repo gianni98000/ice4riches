@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/glace-cristalline-paris", priority: 0.9 },
     { path: "/glacons-pour-cocktails", priority: 0.8 },
     { path: "/professionnels-evenements", priority: 0.8 },
+    { path: "/fondateur", priority: 0.7 },
   ].map(({ path, priority }) => ({
     url: `${SITE_URL}${path}`,
     lastModified,
