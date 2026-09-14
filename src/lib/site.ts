@@ -11,6 +11,10 @@ export const BRAND_LOCATION = {
 
 export const SEO_PAGES = [
   {
+    href: "/fondateur",
+    label: "Fondateur",
+  },
+  {
     href: "/livraison-glacons-cote-d-azur",
     label: "Côte d’Azur",
   },

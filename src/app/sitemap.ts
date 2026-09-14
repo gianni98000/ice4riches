@@ -3,7 +3,7 @@ import { LOCAL_PAGES } from "@/lib/local-pages";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-09-06T00:00:00.000Z");
+  const lastModified = new Date("2026-09-14T00:00:00.000Z");
 
   const pages = [
     { path: "", priority: 1 },
@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/glace-cristalline-paris", priority: 0.9 },
     { path: "/glacons-pour-cocktails", priority: 0.8 },
     { path: "/professionnels-evenements", priority: 0.8 },
+    { path: "/fondateur", priority: 0.7 },
     ...LOCAL_PAGES.map((page) => ({
       path: `/livraison-clear-ice/${page.slug}`,
       priority: ["monaco", "cannes", "saint-tropez"].includes(page.slug) ? 0.95 : 0.9,
