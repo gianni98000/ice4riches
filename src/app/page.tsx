@@ -34,6 +34,11 @@ function descriptionFor(name: string, descriptions: Record<string, string>) {
 
 const homeFaq = [
   {
+    question: "Peut-on personnaliser ou faire graver sa Clear Ice ?",
+    answer:
+      "Oui. Ice4Riches propose la gravure et la personnalisation de Clear Ice avec un logo, des initiales ou un motif pour les bars, hôtels, marques et événements privés. Envoyez votre visuel, les quantités, la date et le lieu par WhatsApp ou par e-mail pour un devis. Le format, la faisabilité, le tarif et le délai sont confirmés selon le projet. Cette prestation se demande directement auprès de notre équipe.",
+  },
+  {
     question: "Qu’est-ce que la glace cristalline ?",
     answer:
       "La glace cristalline est une glace transparente ou presque transparente, produite en contrôlant le sens de congélation afin de limiter les bulles d’air et les zones troubles visibles.",
@@ -280,6 +285,33 @@ export default async function Home() {
       </section>
 
       <ClientMarquee />
+
+      <section id="personnalisation" aria-labelledby="personnalisation-title" className="relative py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="border border-[#c9a962]/30 bg-[#151515] p-8 md:p-14">
+            <p className="text-xs tracking-[0.3em] uppercase text-[#c9a962] mb-5">Gravure & personnalisation</p>
+            <h2 id="personnalisation-title" className="text-3xl md:text-5xl font-light mb-6">Votre signature, <span className="text-gradient-gold italic">gravée dans la glace</span></h2>
+            <p className="text-[#f5f3ef]/70 text-lg max-w-3xl leading-relaxed">Un logo, des initiales ou un motif : Ice4Riches personnalise votre Clear Ice pour donner une signature à vos cocktails. Une attention sur mesure pour les bars d’hôtels, les lancements de marque, les mariages, les yachts et les réceptions privées.</p>
+            <div className="grid gap-6 md:grid-cols-3 my-10">
+              {[
+                ["Logos & marques", "Prolongez votre identité dans le verre avec une gravure de votre logo."],
+                ["Initiales & motifs", "Personnalisez la glace pour un mariage, une réception ou un événement privé."],
+                ["Projet sur mesure", "Le motif, le format de glace et l’emplacement de la gravure sont étudiés avec notre équipe."],
+              ].map(([title, text]) => (
+                <div key={title} className="border-t border-[#c9a962]/30 pt-5">
+                  <h3 className="text-xl mb-3">{title}</h3>
+                  <p className="text-[#f5f3ef]/60 leading-relaxed">{text}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-[#f5f3ef]/60 max-w-3xl mb-6 leading-relaxed">Pour votre devis, transmettez votre visuel, les quantités souhaitées, la date et le lieu de livraison — Monaco, Nice, Cannes, Antibes, Saint-Tropez ou une autre destination. Faisabilité, format, tarif et délai sont confirmés selon votre projet.</p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href={`https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour la gravure et la personnalisation de Clear Ice. Mon projet : ")}`} className="inline-flex justify-center items-center bg-[#c9a962] text-[#0f0f0f] px-7 py-4 text-sm tracking-wider uppercase hover:bg-[#dfc486] transition-colors">Demander un devis sur WhatsApp</a>
+              <a href="mailto:hello@ice4riches.com?subject=Devis%20gravure%20et%20personnalisation%20Clear%20Ice" className="inline-flex justify-center items-center border border-[#c9a962]/50 text-[#c9a962] px-7 py-4 text-sm tracking-wider uppercase hover:bg-[#c9a962]/10 transition-colors">Nous écrire</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section aria-labelledby="livraison-villes" className="border-y border-[#f5f3ef]/10 bg-[#151515] py-16">
         <div className="mx-auto max-w-7xl px-6">
