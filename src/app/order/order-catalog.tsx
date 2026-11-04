@@ -115,6 +115,7 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
     () => Array.from(new Set(products.map((product) => product.category))),
     [products],
   );
+  const [highlightedProduct, setHighlightedProduct] = useState("");
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? "Ice");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [cartLoaded, setCartLoaded] = useState(false);
@@ -136,6 +137,8 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
     }
 
     syncCategoryFromHash();
+    const selected = new URLSearchParams(window.location.search).get("product");
+    if (selected && products.some((p) => p.name === selected)) { setHighlightedProduct(selected); setActiveCategory("Ice"); }
     window.addEventListener("hashchange", syncCategoryFromHash);
 
     try {
@@ -423,6 +426,7 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
                 return (
                   <article
                     key={product.name}
+                    data-selected={highlightedProduct === product.name || undefined}
                     className="flex min-h-44 gap-4 border border-[#f5f3ef]/10 bg-[#151515] p-4 transition-colors hover:border-[#c9a962]/35"
                   >
                     <div className="relative h-24 w-24 shrink-0 overflow-hidden bg-white/5">
@@ -442,6 +446,7 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
                         </p>
                         <h3 className="mt-2 text-base leading-6 text-[#f5f3ef]/90">
                           {product.name}
+                          {highlightedProduct === product.name && <span className="block text-xs tracking-wide text-[#c9a962] mt-2">VOTRE SÉLECTION ICE LAB</span>}
                         </h3>
                         <p className="mt-2 text-lg text-[#c9a962]">
                           {priceFormatter.format(product.price)}

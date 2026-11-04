@@ -1,37 +1,25 @@
 import { JsonLd } from "@/components/json-ld";
 import { ClientMarquee } from "@/components/client-marquee";
 import { SiteHeader } from "@/components/site-header";
+import { CinematicMotion, HeroFilm } from "@/components/cinematic-motion";
+import { IceLab } from "@/components/ice-lab";
 import { getOrderProducts } from "@/lib/order-catalog";
-import { ORDER_ACCESSORIES_URL, ORDER_URL, SEO_PAGES, SITE_URL } from "@/lib/site";
+import { ICE_FORMATS, orderLink } from "@/lib/ice-fit";
+import {
+  ORDER_ACCESSORIES_URL,
+  ORDER_URL,
+  SEO_PAGES,
+  SITE_URL,
+} from "@/lib/site";
 import Image from "next/image";
+import Link from "next/link";
+import "./cinematic.css";
 
-const featuredIceOrder = ["COLLINS", "OLD FASHIONED", "DELUXE CUBE", "SPHERES"];
-
-const productDescriptions: Record<string, string> = {
-  COLLINS: "Parfait pour les highballs et cocktails allongés",
-  "OLD FASHIONED": "Idéal pour les cocktails classiques et whisky",
-  "DELUXE CUBE": "Le cube parfait pour une dilution lente",
-  SPHERES: "L’élégance ultime pour vos spiritueux",
-};
-
-const toolDescriptions: Record<string, string> = {
-  "PIC À GLACE": "Pour sculpter vos glaçons avec précision",
-  COUTEAU: "Lame artisanale pour une coupe nette",
-};
-
-const priceFormatter = new Intl.NumberFormat("fr-FR", {
+export const revalidate = 300;
+const money = new Intl.NumberFormat("fr-FR", {
   style: "currency",
   currency: "EUR",
 });
-
-function descriptionFor(name: string, descriptions: Record<string, string>) {
-  const key = Object.keys(descriptions).find((candidate) =>
-    name.toLocaleUpperCase("fr-FR").startsWith(candidate),
-  );
-
-  return key ? descriptions[key] : "Produit premium Ice4Riches";
-}
-
 const homeFaq = [
   {
     question: "Peut-on personnaliser ou faire graver sa Clear Ice ?",
@@ -75,613 +63,386 @@ const homeFaqStructuredData = {
 
 export default async function Home() {
   const catalog = await getOrderProducts();
-  const products = featuredIceOrder
-    .map((featuredName) =>
-      catalog.find(
-        (product) =>
-          product.category === "Ice" && product.name.startsWith(featuredName),
-      ),
-    )
-    .filter((product) => product !== undefined);
-  const tools = catalog
-    .filter((product) => product.category === "Dérivée")
-    .slice(0, 2);
-  const catalogStructuredData = {
+  const products = ICE_FORMATS.flatMap((format) => {
+    const product = catalog.find(
+      (p) => p.category === "Ice" && p.name.startsWith(format.match),
+    );
+    return product ? [{ ...product, format }] : [];
+  });
+  const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Collection de glace cristalline Ice4Riches",
-    itemListElement: products.map((product, index) => ({
+    name: "La collection Ice4Riches",
+    itemListElement: products.map((p, i) => ({
       "@type": "ListItem",
-      position: index + 1,
+      position: i + 1,
       item: {
         "@type": "Product",
-        name: product.name,
-        description: `${product.caption} · ${descriptionFor(product.name, productDescriptions)}`,
-        image: product.image,
-        brand: {
-          "@type": "Brand",
-          name: "Ice4Riches",
-        },
+        name: p.name,
+        image: p.image,
+        brand: { "@type": "Brand", name: "Ice4Riches" },
         offers: {
           "@type": "Offer",
-          url: `${SITE_URL}${ORDER_URL}`,
-          price: product.price.toFixed(2),
+          url: SITE_URL + orderLink(p.name),
+          price: p.price.toFixed(2),
           priceCurrency: "EUR",
-          availability: product.available
+          availability: p.available
             ? "https://schema.org/InStock"
             : "https://schema.org/OutOfStock",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: product.price.toFixed(2),
-            priceCurrency: "EUR",
-            valueAddedTaxIncluded: true,
-          },
         },
       },
     })),
   };
-
   return (
-    <div className="min-h-screen overflow-hidden">
-      <JsonLd data={[homeFaqStructuredData, catalogStructuredData]} />
-      <SiteHeader productsHref="#produits" />
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+    <div className="cinematic-site">
+      <CinematicMotion />
+      <JsonLd data={schema} />
+      <JsonLd data={homeFaqStructuredData} />
+      <SiteHeader cinematic />
+      <a href="#ice-lab" className="skip-link">
+        Aller au sélecteur de glace
+      </a>
+      <main>
+        <section className="cinema-hero" aria-labelledby="hero-title">
+          <HeroFilm />
+          <div className="hero-content">
+            <p className="eyebrow">
+              <span className="tiny-star">✳</span> CLEAR ICE · CÔTE D’AZUR
+            </p>
+            <h1 id="hero-title">
+              Le détail
+              <br />
+              qui change
+              <br />
+              <em>tout.</em>
+            </h1>
+            <p className="hero-description">
+              Avant la première gorgée, il y a le regard.
+              <br />
+              Une glace cristalline. Un cocktail qui se distingue.
+            </p>
+            <div className="hero-actions">
+              <a href="#ice-lab" className="button button-gold">
+                Trouvez votre glace <span>↗</span>
+              </a>
+              <a className="hero-collection-link" href="#produits">
+                Explorer la collection <span>↗</span>
+              </a>
+            </div>
+          </div>
+          <div className="hero-bottom">
+            <a href="#matiere" className="scroll-cue">
+              <span>↓</span> L’ART DU CLEAR ICE
+            </a>
+            <p>
+              NÉE SUR LA RIVIERA.
+              <br />
+              <span>PENSÉE POUR L’EXCEPTION.</span>
+            </p>
+            <span className="hero-counter">01 — 04</span>
+          </div>
+        </section>
+        <div
+          className="location-ribbon"
+          aria-label="Nos destinations sur la Côte d’Azur"
+        >
+          <span>MONACO</span>
+          <i>✳</i>
+          <span>CANNES</span>
+          <i>✳</i>
+          <span>SAINT-TROPEZ</span>
+          <i>✳</i>
+          <span>NICE</span>
+          <i>✳</i>
+          <span>ANTIBES</span>
+        </div>
+        <section id="matiere" className="ice-section manifesto">
+          <p className="eyebrow" data-reveal>
+            <span>01 /</span> LA BEAUTÉ DE L’ESSENTIEL
+          </p>
+          <div className="manifesto-body" data-reveal>
+            <h2>
+              Vous composez le cocktail.
+              <br />
+              Nous sculptons <em>son écrin.</em>
+            </h2>
+            <div>
+              <p>
+                La transparence révèle les couleurs. La forme dessine le
+                service. Le grand format accompagne la dégustation.
+              </p>
+              <p>
+                Par congélation directionnelle, Ice4Riches donne à la glace une
+                clarté qui se remarque. Pour les bars, hôtels, restaurants et
+                instants qui méritent mieux que l’ordinaire.
+              </p>
+              <a href="/fondateur" className="text-link">
+                L’histoire d’Ice4Riches <span>↗</span>
+              </a>
+            </div>
+          </div>
+          <div className="editorial-detail">
+            <span>TRANSPARENCE</span>
+            <span>PRÉCISION</span>
+            <span>PRÉSENCE</span>
+            <span className="detail-sign">I4R.</span>
+          </div>
+        </section>
+        <IceLab products={catalog.filter((p) => p.category === "Ice")} />
+        <section id="produits" className="ice-section collection-section">
+          <div className="section-heading" data-reveal>
+            <div>
+              <p className="eyebrow">
+                <span>03 /</span> LA COLLECTION
+              </p>
+              <h2>
+                Quatre formes.
+                <br />
+                <em>Une signature.</em>
+              </h2>
+            </div>
+            <div>
+              <p>
+                Le format juste, du premier regard
+                <br />à la dernière gorgée.
+              </p>
+              <a className="text-link" href={ORDER_URL}>
+                Tout le catalogue <span>↗</span>
+              </a>
+            </div>
+          </div>
+          <div className="ice-collection">
+            {products.map((p, i) => (
+              <article key={p.name} className="ice-product" data-reveal>
+                <a
+                  href={orderLink(p.name)}
+                  className="product-picture"
+                  aria-label={`Découvrir ${p.format.title}`}
+                >
+                  <span className="product-number">0{i + 1}</span>
+                  <Image
+                    src={p.format.image}
+                    alt={p.name}
+                    fill
+                    sizes="(max-width: 600px) 85vw, (max-width: 1000px) 45vw, 23vw"
+                  />
+                  <span className="product-arrow">↗</span>
+                </a>
+                <div className="product-heading">
+                  <h3>{p.format.title}</h3>
+                  <span>{p.format.dimensions}</span>
+                </div>
+                <p>{p.format.use}</p>
+                <div className="product-price">
+                  <span>{p.caption}</span>
+                  <span>
+                    {money.format(p.price)} <small>TTC</small>
+                  </span>
+                </div>
+                {!p.available && <p>Actuellement indisponible</p>}
+              </article>
+            ))}
+          </div>
+          <div className="collection-foot">
+            <span>Tarifs TTC · Minimum de commande : 100 € TTC</span>
+            <a href="#ice-lab">Un doute sur le format ? Essayez l’Ice Lab ↗</a>
+          </div>
+        </section>
+        <section className="ritual-section" aria-labelledby="ritual-title">
           <Image
-            src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1920&q=90"
-            alt="Premium Cocktail"
+            src="/cinematic/cocktail.jpg"
+            alt="Un cocktail ambré dans la lumière d’un bar"
             fill
             sizes="100vw"
-            className="object-cover opacity-40"
-            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f0f0f] via-transparent to-[#0f0f0f]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0f0f0f]/80 via-transparent to-[#0f0f0f]/80" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
-          <div className="animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <span className="inline-block px-4 py-1.5 text-xs tracking-[0.3em] uppercase text-[#c9a962] border border-[#c9a962]/30 mb-8">
-              Premium Clear Ice
-            </span>
-          </div>
-
-          <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight mb-6 animate-fade-up text-shadow-gold"
-            style={{ animationDelay: "0.4s" }}
-          >
-            L'Art du Clear Ice
-            <span className="block text-gradient-gold font-semibold italic">
-              sur la Côte d’Azur
-            </span>
-          </h1>
-
-          <p
-            className="text-lg md:text-xl text-[#f5f3ef]/60 max-w-2xl mx-auto mb-12 animate-fade-up font-light"
-            style={{ animationDelay: "0.6s" }}
-          >
-            De Monaco à Cannes et Saint-Tropez, notre glace cristalline premium
-            sublime les cocktails des bars, hôtels, restaurants, yachts et événements.
-          </p>
-
-          <div
-            className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up"
-            style={{ animationDelay: "0.8s" }}
-          >
-            <a
-              href={ORDER_URL}
-              className="group px-8 py-4 bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] text-[#0f0f0f] font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,169,98,0.5)] hover:scale-105"
-            >
-              <span className="flex items-center justify-center gap-2">
-                Découvrir nos produits
-                <svg
-                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </span>
-            </a>
-            <a
-              href="#produits"
-              className="px-8 py-4 border border-[#c9a962]/50 text-[#c9a962] font-semibold tracking-wider uppercase hover:bg-[#c9a962]/10 transition-all duration-300"
-            >
-              En savoir plus
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 border-2 border-[#c9a962]/30 rounded-full flex justify-center pt-2">
-            <div className="w-1.5 h-3 bg-[#c9a962] rounded-full animate-bounce" />
-          </div>
-        </div>
-      </section>
-
-      {/* Products Section */}
-      <section id="produits" className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f]" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <span className="inline-block px-4 py-1.5 text-xs tracking-[0.3em] uppercase text-[#c9a962] border border-[#c9a962]/30 mb-6">
-              Notre Collection
-            </span>
-            <h2 className="text-4xl md:text-6xl font-light mb-4">
-              Glaçons transparents{" "}
-              <span className="text-gradient-gold italic">
-                nés sur la Côte d’Azur
-              </span>
+          <div className="ritual-shade" />
+          <div className="ritual-copy" data-reveal>
+            <p className="eyebrow">L’ART DE RECEVOIR</p>
+            <h2 id="ritual-title">
+              Certains détails
+              <br />
+              ne passent jamais
+              <br />
+              <em>inaperçus.</em>
             </h2>
-            <p className="text-[#f5f3ef]/65 max-w-xl mx-auto">
-              Chaque glaçon est fabriqué selon un processus de congélation
-              directionnelle pour une transparence cristalline parfaite. Tarifs
-              TTC · Minimum de commande 100 € TTC.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, index) => (
-              <a
-                key={product.name}
-                href={ORDER_URL}
-                className="group relative overflow-hidden animate-scale-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="aspect-square relative overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1023px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-[#0f0f0f]/20 to-transparent" />
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-[#c9a962]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-gradient-gold mb-1">
-                        {product.name}
-                      </h3>
-                      <p className="mt-1 text-sm text-[#f5f3ef]/75">
-                        {product.caption}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-2xl font-light text-[#c9a962]">
-                        {priceFormatter.format(product.price)} TTC
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="mt-3 text-xs leading-5 text-[#f5f3ef]/75 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
-                    {descriptionFor(product.name, productDescriptions)}
-                  </p>
-                </div>
-
-                {/* Border Animation */}
-                <div className="absolute inset-0 border border-transparent group-hover:border-[#c9a962]/30 transition-colors duration-300" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ClientMarquee />
-
-      <section id="personnalisation" aria-labelledby="personnalisation-title" className="relative py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="border border-[#c9a962]/30 bg-[#151515] p-8 md:p-14">
-            <p className="text-xs tracking-[0.3em] uppercase text-[#c9a962] mb-5">Gravure & personnalisation</p>
-            <h2 id="personnalisation-title" className="text-3xl md:text-5xl font-light mb-6">Votre signature, <span className="text-gradient-gold italic">gravée dans la glace</span></h2>
-            <p className="text-[#f5f3ef]/70 text-lg max-w-3xl leading-relaxed">Un logo, des initiales ou un motif : Ice4Riches personnalise votre Clear Ice pour donner une signature à vos cocktails. Une attention sur mesure pour les bars d’hôtels, les lancements de marque, les mariages, les yachts et les réceptions privées.</p>
-            <div className="grid gap-6 md:grid-cols-3 my-10">
-              {[
-                ["Logos & marques", "Prolongez votre identité dans le verre avec une gravure de votre logo."],
-                ["Initiales & motifs", "Personnalisez la glace pour un mariage, une réception ou un événement privé."],
-                ["Projet sur mesure", "Le motif, le format de glace et l’emplacement de la gravure sont étudiés avec notre équipe."],
-              ].map(([title, text]) => (
-                <div key={title} className="border-t border-[#c9a962]/30 pt-5">
-                  <h3 className="text-xl mb-3">{title}</h3>
-                  <p className="text-[#f5f3ef]/60 leading-relaxed">{text}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-[#f5f3ef]/60 max-w-3xl mb-6 leading-relaxed">Pour votre devis, transmettez votre visuel, les quantités souhaitées, la date et le lieu de livraison — Monaco, Nice, Cannes, Antibes, Saint-Tropez ou une autre destination. Faisabilité, format, tarif et délai sont confirmés selon votre projet.</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href={`https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour la gravure et la personnalisation de Clear Ice. Mon projet : ")}`} className="inline-flex justify-center items-center bg-[#c9a962] text-[#0f0f0f] px-7 py-4 text-sm tracking-wider uppercase hover:bg-[#dfc486] transition-colors">Demander un devis sur WhatsApp</a>
-              <a href="mailto:hello@ice4riches.com?subject=Devis%20gravure%20et%20personnalisation%20Clear%20Ice" className="inline-flex justify-center items-center border border-[#c9a962]/50 text-[#c9a962] px-7 py-4 text-sm tracking-wider uppercase hover:bg-[#c9a962]/10 transition-colors">Nous écrire</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="livraison-villes" className="border-y border-[#f5f3ef]/10 bg-[#151515] py-16">
-        <div className="mx-auto max-w-7xl px-6">
-          <h2 id="livraison-villes" className="text-3xl font-light md:text-4xl">
-            Livraison de Clear Ice sur la Côte d’Azur
-          </h2>
-          <p className="mt-5 max-w-3xl leading-7 text-[#f5f3ef]/70">
-            Préparez votre commande de glaçons transparents pour un bar, un hôtel,
-            un yacht ou une réception. Retrouvez les informations de votre secteur :
-            les disponibilités et modalités de livraison sont confirmées avec notre équipe.
-          </p>
-          <nav aria-label="Villes de livraison Clear Ice" className="mt-8 flex flex-wrap gap-4">
-            {[
-              { slug: "monaco", city: "Monaco" },
-              { slug: "cannes", city: "Cannes" },
-              { slug: "saint-tropez", city: "Saint-Tropez" },
-              { slug: "nice", city: "Nice" },
-              { slug: "antibes", city: "Antibes" },
-            ].map(({ slug, city }) => (
-              <a key={slug} href={`/livraison-clear-ice/${slug}`}
-                className="border border-[#c9a962]/50 px-5 py-3 text-[#c9a962] hover:bg-[#c9a962]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
-                Clear Ice à {city}
-              </a>
-            ))}
-          </nav>
-          <p className="mt-6 text-sm leading-6 text-[#f5f3ef]/70">
-            Pour préparer votre demande : formats, quantités, date, adresse de réception
-            et contraintes d’accès. Minimum de commande : 100 € TTC.
-          </p>
-        </div>
-      </section>
-
-
-      {/* SEO discovery section */}
-      <section className="relative border-y border-[#f5f3ef]/10 bg-[#151515] py-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block border border-[#c9a962]/30 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-[#c9a962]">
-              De la Côte d’Azur au monde
-            </span>
-            <h2 className="mt-6 text-4xl font-light md:text-6xl">
-              Le bon format pour chaque{" "}
-              <span className="text-gradient-gold italic">service</span>
-            </h2>
-            <p className="mt-6 leading-8 text-[#f5f3ef]/55">
-              Ice4Riches accompagne les cocktails courts, les highballs, les
-              dégustations de spiritueux et les réceptions avec des formats
-              pensés pour le verre et la présentation.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            <a
-              href="/livraison-glacons-cote-d-azur"
-              className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
-            >
-              <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
-                Origine
-              </p>
-              <h3 className="mt-4 text-2xl">Nés sur la Côte d’Azur</h3>
-              <p className="mt-4 leading-7 text-[#f5f3ef]/50">
-                Une glace d’exception inspirée par l’exigence, l’élégance et
-                l’art de recevoir de la Riviera.
-              </p>
-              <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Découvrir le service régional →
-              </span>
-            </a>
-            <a
-              href={ORDER_URL}
-              className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
-            >
-              <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
-                International
-              </p>
-              <h3 className="mt-4 text-2xl">Livraison dans le monde entier</h3>
-              <p className="mt-4 leading-7 text-[#f5f3ef]/50">
-                Indiquez votre destination et vos besoins : notre équipe étudie
-                chaque demande de livraison internationale.
-              </p>
-              <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Demander une livraison →
-              </span>
-            </a>
-            <a
-              href="/glacons-pour-cocktails"
-              className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
-            >
-              <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
-                Guide
-              </p>
-              <h3 className="mt-4 text-2xl">
-                Choisir son glaçon pour cocktail
-              </h3>
-              <p className="mt-4 leading-7 text-[#f5f3ef]/50">
-                Comparez Collins, cube, Old Fashioned et sphère selon le verre
-                et la recette.
-              </p>
-              <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Comparer →
-              </span>
-            </a>
             <a
               href="/professionnels-evenements"
-              className="group border border-[#f5f3ef]/10 p-8 transition-colors hover:border-[#c9a962]/50"
+              className="button button-outline"
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-[#c9a962]">
-                Professionnels
-              </p>
-              <h3 className="mt-4 text-2xl">Bars, hôtels et événements</h3>
-              <p className="mt-4 leading-7 text-[#f5f3ef]/50">
-                Préparez des formats et quantités cohérents pour un
-                établissement ou une réception.
-              </p>
-              <span className="mt-6 inline-block text-sm text-[#c9a962]">
-                Préparer le service →
-              </span>
+              Pensé pour votre établissement <span>↗</span>
             </a>
           </div>
+          <span className="ritual-caption">
+            BARS · HÔTELS · YACHTS · ÉVÉNEMENTS
+          </span>
+        </section>
+        <div className="cinema-clients">
+          <ClientMarquee />
         </div>
-      </section>
-
-      {/* Tools Section */}
-      <section id="outils" className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1920&q=80"
-            alt="Bar Ambiance"
-            fill
-            sizes="100vw"
-            className="object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-[#0f0f0f]/90" />
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 text-xs tracking-[0.3em] uppercase text-[#c9a962] border border-[#c9a962]/30 mb-6">
-              Accessoires
-            </span>
-            <h2 className="text-4xl md:text-6xl font-light mb-4">
-              Outils de{" "}
-              <span className="text-gradient-gold italic">Précision</span>
-            </h2>
-            <p className="text-[#f5f3ef]/50 max-w-xl mx-auto">
-              Des outils professionnels pour sculpter et servir votre glace avec
-              excellence.
+        <section
+          id="personnalisation"
+          className="ice-section signature-section"
+        >
+          <div className="signature-visual" data-reveal>
+            <Image
+              src="/cinematic/clear-ice-poster.webp"
+              alt="La lumière traverse un bloc de clear ice"
+              fill
+              sizes="(max-width: 760px) 100vw, 45vw"
+            />
+            <div className="signature-visual-copy">
+              <span>VOTRE EMPREINTE.</span>
+              <strong>
+                Votre
+                <br />
+                <em>signature.</em>
+              </strong>
+              <small>GRAVURE & PERSONNALISATION</small>
+            </div>
+          </div>
+          <div className="signature-copy" data-reveal>
+            <p className="eyebrow">
+              <span>04 /</span> L’ATTENTION SUR MESURE
             </p>
+            <h2>
+              Votre identité.
+              <br />
+              <em>Dans chaque verre.</em>
+            </h2>
+            <p>
+              Un logo. Des initiales. Un motif. Prolongez l’univers de votre
+              maison jusque dans la glace.
+            </p>
+            <p>
+              Pour un bar d’hôtel, un lancement de marque ou une réception
+              privée, nous étudions votre visuel, le format, les quantités et la
+              date souhaitée.
+            </p>
+            <a
+              className="button button-gold"
+              href={`https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Mon visuel, mes quantités, la date et le lieu : ")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Imaginons votre signature <span>↗</span>
+            </a>
+            <small>
+              Faisabilité, tarif et délai confirmés avec notre équipe.
+            </small>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {tools.map((tool, index) => (
-              <a
-                key={tool.name}
-                href={ORDER_ACCESSORIES_URL}
-                className="group p-8 glass-effect hover:gold-border transition-all duration-500"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-gradient-gold mb-1">
-                      {tool.name}
-                    </h3>
-                    <p className="text-sm text-[#f5f3ef]/75">{tool.caption}</p>
-                  </div>
-                  <span className="text-3xl font-light text-[#c9a962]">
-                    {priceFormatter.format(tool.price)} TTC
-                  </span>
-                </div>
-                <p className="text-[#f5f3ef]/70">
-                  {descriptionFor(tool.name, toolDescriptions)}
-                </p>
-
-                <div className="mt-6 flex items-center gap-2 text-[#c9a962] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-sm tracking-wider uppercase">
-                    Commander
-                  </span>
-                  <svg
-                    className="w-4 h-4 group-hover:translate-x-2 transition-transform"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="relative bg-[#151515] py-28">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="text-center">
-            <span className="text-xs uppercase tracking-[0.3em] text-[#c9a962]">
-              Questions fréquentes
-            </span>
-            <h2 className="mt-5 text-4xl font-light md:text-5xl">
-              Tout savoir avant de commander
+        </section>
+        <section id="accessoires" className="accessory-strip ice-section">
+          <div>
+            <p className="eyebrow">LE SENS DU GESTE</p>
+            <h2>
+              Les outils <em>du rituel.</em>
             </h2>
           </div>
-          <div className="mt-12 divide-y divide-[#f5f3ef]/10 border-y border-[#f5f3ef]/10">
+          <p>
+            Pics, couteaux et accessoires.
+            <br />
+            L’exigence se prolonge dans le service.
+          </p>
+          <a href={ORDER_ACCESSORIES_URL} className="text-link">
+            Découvrir les accessoires ↗
+          </a>
+        </section>
+        <section className="ice-section faq-section">
+          <div>
+            <p className="eyebrow">LES RÉPONSES, EN TOUTE CLARTÉ</p>
+            <h2>
+              Avant de
+              <br />
+              <em>briser la glace.</em>
+            </h2>
+          </div>
+          <div className="faq-list">
             {homeFaq.map((item) => (
-              <details key={item.question} className="group py-6">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg text-[#f5f3ef]/85">
+              <details key={item.question}>
+                <summary>
                   {item.question}
-                  <span
-                    aria-hidden="true"
-                    className="text-2xl font-light text-[#c9a962] transition-transform group-open:rotate-45"
-                  >
-                    +
-                  </span>
+                  <span>+</span>
                 </summary>
-                <p className="max-w-3xl pt-4 leading-7 text-[#f5f3ef]/55">
-                  {item.answer}
-                </p>
+                <p>{item.answer}</p>
               </details>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0f0f0f]" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-6xl font-light mb-6">
-            Prêt à sublimer vos{" "}
-            <span className="text-gradient-gold italic">cocktails</span> ?
+        </section>
+        <section className="contact-finale ice-section">
+          <p className="eyebrow">DE LA CÔTE D’AZUR À VOTRE COMPTOIR</p>
+          <h2>
+            Le prochain verre
+            <br />
+            pourrait être <em>le vôtre.</em>
           </h2>
-          <p className="text-[#f5f3ef]/50 max-w-xl mx-auto mb-12">
-            Commandez maintenant et transformez chaque boisson en une expérience
-            visuelle et gustative exceptionnelle.
+          <div className="finale-actions">
+            <a href={ORDER_URL} className="button button-gold">
+              Composer ma commande <span>↗</span>
+            </a>
+            <a href="mailto:hello@ice4riches.com" className="text-link">
+              Parlons de votre projet ↗
+            </a>
+          </div>
+          <nav className="city-links" aria-label="Informations de livraison">
+            {[
+              { city: "Monaco", slug: "monaco" },
+              { city: "Cannes", slug: "cannes" },
+              { city: "Saint-Tropez", slug: "saint-tropez" },
+              { city: "Nice", slug: "nice" },
+              { city: "Antibes", slug: "antibes" },
+            ].map((v) => (
+              <a key={v.slug} href={`/livraison-clear-ice/${v.slug}`}>
+                {v.city} ↗
+              </a>
+            ))}
+          </nav>
+          <p className="finale-note">
+            Disponibilités et modalités de livraison confirmées avec notre
+            équipe.
+            <br />
+            Pour toute autre destination, contactez-nous.
           </p>
-
-          <a
-            href={ORDER_URL}
-            className="inline-block px-12 py-5 bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] text-[#0f0f0f] text-lg font-semibold tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_50px_rgba(201,169,98,0.5)] hover:scale-105"
-          >
-            Passer Commande
-          </a>
+        </section>
+      </main>
+      <footer className="cinema-footer">
+        <Link href="/" className="footer-wordmark">
+          ICE4RICHES<span>✳</span>
+        </Link>
+        <div className="footer-main">
+          <p>
+            CLEAR ICE. PURE DISTINCTION.
+            <br />
+            <span>Née sur la Côte d’Azur, France.</span>
+          </p>
+          <nav aria-label="Liens complémentaires">
+            {SEO_PAGES.map((p) => (
+              <a href={p.href} key={p.href}>
+                {p.label}
+              </a>
+            ))}
+          </nav>
+          <div>
+            <a href="mailto:hello@ice4riches.com">hello@ice4riches.com</a>
+            <a
+              href="https://www.instagram.com/ice4riches/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram ↗
+            </a>
+            <a
+              href="https://wa.me/377640622956"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp ↗
+            </a>
+          </div>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer id="contact" className="py-16 border-t border-[#f5f3ef]/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 relative">
-                  <Image
-                    src="/logo.svg"
-                    alt="Ice4Riches"
-                    fill
-                    sizes="40px"
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-lg font-semibold tracking-wider text-gradient-gold">
-                  ICE4RICHES
-                </span>
-              </div>
-              <p className="text-sm text-[#f5f3ef]/40 leading-relaxed">
-                Née sur la Côte d’Azur, notre glace cristalline premium est
-                livrée dans le monde entier.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-[#c9a962] font-semibold tracking-wider uppercase text-sm mb-4">
-                Navigation
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#produits"
-                    className="text-sm text-[#f5f3ef]/50 hover:text-[#c9a962] transition-colors"
-                  >
-                    Nos Produits
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#outils"
-                    className="text-sm text-[#f5f3ef]/50 hover:text-[#c9a962] transition-colors"
-                  >
-                    Nos Outils
-                  </a>
-                </li>
-                {SEO_PAGES.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      className="text-sm text-[#f5f3ef]/50 hover:text-[#c9a962] transition-colors"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-                <li>
-                  <a
-                    href={ORDER_URL}
-                    className="text-sm text-[#f5f3ef]/50 hover:text-[#c9a962] transition-colors"
-                  >
-                    Commander
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[#c9a962] font-semibold tracking-wider uppercase text-sm mb-4">
-                Origine & livraison
-              </h4>
-              <div className="text-sm text-[#f5f3ef]/50 space-y-2">
-                <p className="font-medium text-[#f5f3ef]/70">ICE4RICHES</p>
-                <p>Née sur la Côte d’Azur, France</p>
-                <p>Livraison dans le monde entier</p>
-                <p>
-                  <a
-                    href="mailto:hello@ice4riches.com"
-                    className="hover:text-[#c9a962]"
-                  >
-                    hello@ice4riches.com
-                  </a>
-                </p>
-                <p>
-                  <a
-                    href="https://wa.me/377640622956"
-                    className="hover:text-[#c9a962]"
-                  >
-                    WhatsApp
-                  </a>
-                </p>
-              </div>
-
-              <div className="mt-6">
-                <a
-                  href="https://www.instagram.com/ice4riches/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-[#f5f3ef]/50 hover:text-[#c9a962] transition-colors"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                  </svg>
-                  @ice4riches
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 pt-8 border-t border-[#f5f3ef]/5 text-center">
-            <p className="text-xs text-[#f5f3ef]/30">
-              © 2026 Ice4Riches. Tous droits réservés. Premium Clear Ice
-              Solutions.
-            </p>
-          </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Ice4Riches</span>
+          <a href="#hero-title">RETOUR EN HAUT ↑</a>
+          <span>LE DÉTAIL FAIT LA DIFFÉRENCE.</span>
         </div>
       </footer>
     </div>

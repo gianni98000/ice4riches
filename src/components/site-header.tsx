@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from "react";
 
 type SiteHeaderProps = {
   productsHref?: string;
+  cinematic?: boolean;
 };
 
-export function SiteHeader({ productsHref = "/#produits" }: SiteHeaderProps) {
+export function SiteHeader({ productsHref = "/#produits", cinematic = false }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -33,10 +34,10 @@ export function SiteHeader({ productsHref = "/#produits" }: SiteHeaderProps) {
     setMenuOpen(false);
   }
 
-  const navigation = [{ href: productsHref, label: "Produits" }, ...SEO_PAGES];
+  const navigation = cinematic ? [{ href: "#produits", label: "La collection" }, { href: "#ice-lab", label: "Ice Lab" }, { href: "#personnalisation", label: "Sur mesure" }, { href: "/fondateur", label: "La maison" }] : [{ href: productsHref, label: "Produits" }, ...SEO_PAGES];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 glass-effect">
+    <header className={`fixed inset-x-0 top-0 z-50 glass-effect ${cinematic ? "cinema-header" : ""}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
         <Link
           href="/"

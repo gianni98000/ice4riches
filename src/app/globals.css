@@ -311,3 +311,6 @@
   background: var(--gold);
   color: var(--slate);
 }
+
+/* The format chosen in Ice Lab remains identifiable in the order catalogue. */
+article[data-selected="true"] { border-color: #c9a962; background: #211f18; }
