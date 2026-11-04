@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { OrderProduct } from "@/lib/order-catalog";
 import {
   checkFit,
@@ -68,7 +69,11 @@ function GlassDrawing({
   const line = fits ? "#d8e9eb" : "#e4a58b";
   return (
     <svg
-      viewBox="0 0 360 440"
+      viewBox={
+        view === "side"
+          ? `0 ${Math.max(0, top - 65)} 360 ${Math.min(440, glass.height * s + 140)}`
+          : "0 0 360 440"
+      }
       className="glass-drawing"
       role="img"
       aria-label={`${ice.title} dans un verre de ${glass.opening} millimètres d’ouverture, ${glass.base} millimètres à la base et ${glass.height} millimètres de hauteur. ${view === "top" ? "Vue du dessus." : "Vue de face."}`}
@@ -122,7 +127,7 @@ function GlassDrawing({
             fill={color}
             opacity=".65"
           />
-          <g className="ice-in-glass" key={ice.id}>
+          <g className="ice-in-glass">
             {ice.shape === "sphere" ? (
               <>
                 <circle
@@ -275,6 +280,7 @@ export function IceLab({ products }: { products: OrderProduct[] }) {
   const [selected, setSelected] = useState("cube");
   const [drink, setDrink] = useState(0);
   const [view, setView] = useState("side");
+  const [poured, setPoured] = useState(true);
   const formats = ICE_FORMATS.filter((format) =>
     products.some((p) => p.name.startsWith(format.match)),
   );
@@ -299,131 +305,166 @@ export function IceLab({ products }: { products: OrderProduct[] }) {
     setGlass((g) => ({ ...g, [key]: value }));
   }
   return (
-    <section
-      id="ice-lab"
-      className="ice-section lab-section"
-      aria-labelledby="lab-title"
-    >
-      <div className="section-heading" data-reveal>
-        <div>
-          <p className="eyebrow">
-            <span>02 /</span> L’ATELIER INTERACTIF
-          </p>
-          <h2 id="lab-title">
-            À chaque verre,
-            <br />
-            <em>sa glace.</em>
-          </h2>
-        </div>
+    <section id="ice-lab" className="lab-section" aria-labelledby="lab-title">
+      <div className="section-intro">
+        <h2 id="lab-title">
+          Le bon glaçon.
+          <br />
+          Dans votre verre.
+        </h2>
         <p>
-          Le bon accord se voit.
-          <br />
-          Choisissez un verre. Jouez avec les formats.
-          <br />
-          Trouvez l’équilibre, au millimètre près.
+          Un Rocks, un Highball, votre propre verrerie. Essayez les formats et
+          trouvez celui qui laisse toute sa place au cocktail.
         </p>
       </div>
-      <div className="ice-lab">
-        <div className="lab-settings">
-          <div className="lab-step">
-            <span>01</span> Votre verrerie
-          </div>
-          <div className="glass-presets" aria-label="Modèles de verre">
-            {presets.map((p) => (
+      <div className="ice-lab" data-ui>
+        <div className="glass-presets" aria-label="Modèles de verre">
+          {presets.map((p) => (
+            <button
+              key={p.name}
+              aria-pressed={preset === p.name}
+              onClick={() => {
+                setPreset(p.name);
+                setGlass({
+                  opening: p.opening,
+                  base: p.base,
+                  height: p.height,
+                  irregular: false,
+                });
+                setSelected(p.ice);
+                setDrink(
+                  p.name === "Highball" ? 2 : p.name === "Dégustation" ? 1 : 0,
+                );
+              }}
+            >
+              {p.name}
+            </button>
+          ))}
+        </div>
+        <div className="lab-stage">
+          <span className="stage-name">
+            {preset} · {glass.opening} × {glass.height} mm
+          </span>
+          <GlassDrawing
+            glass={glass}
+            ice={ice}
+            color={poured ? drinks[drink].color : "transparent"}
+            fits={fit.fits}
+            view={view}
+          />
+          <div className="stage-actions">
+            <div className="view-switch" aria-label="Point de vue">
               <button
-                key={p.name}
-                aria-pressed={preset === p.name}
-                onClick={() => {
-                  setPreset(p.name);
-                  setGlass({
-                    opening: p.opening,
-                    base: p.base,
-                    height: p.height,
-                    irregular: false,
-                  });
-                  setSelected(p.ice);
-                  setDrink(
-                    p.name === "Highball"
-                      ? 2
-                      : p.name === "Dégustation"
-                        ? 1
-                        : 0,
-                  );
-                }}
+                aria-pressed={view === "side"}
+                onClick={() => setView("side")}
               >
-                <svg viewBox="0 0 36 46" aria-hidden="true">
-                  <path
-                    d={
-                      p.name === "Highball"
-                        ? "M10 5 L12 41 L25 41 L27 5 Z"
-                        : p.name === "Rocks"
-                          ? "M5 17 L8 41 L28 41 L31 17 Z"
-                          : "M7 12 L10 41 L26 41 L29 12 Z"
-                    }
-                    fill="none"
-                    stroke="currentColor"
-                  />
-                  <path d="M11 30 L25 30" stroke="currentColor" opacity=".4" />
-                </svg>
-                <strong>{p.name}</strong>
-                <small>{p.detail}</small>
+                De face
               </button>
-            ))}
+              <button
+                aria-pressed={view === "top"}
+                onClick={() => setView("top")}
+              >
+                Du dessus
+              </button>
+            </div>
+            <button
+              className="pour-button"
+              aria-pressed={poured}
+              onClick={() => setPoured((p) => !p)}
+            >
+              {poured ? "Vider le verre" : "Verser le cocktail"}
+            </button>
           </div>
-          <p className="lab-hint">
-            Dimensions d’exemple. Ajustez avec les mesures intérieures de votre
-            verre.
+          <p className="stage-caption">
+            {glass.irregular
+              ? "Forme simplifiée : les courbes ne sont pas représentées."
+              : "Dimensions à l’échelle. Niveau de boisson illustratif."}
           </p>
-          <div className="measurements">
-            {(
-              [
-                {
-                  key: "opening",
-                  label: "Diamètre à l’ouverture",
-                  min: 40,
-                  max: 120,
-                },
-                { key: "base", label: "Diamètre à la base", min: 35, max: 120 },
-                { key: "height", label: "Hauteur utile", min: 50, max: 190 },
-              ] as const
-            ).map(({ key, label, min, max }) => (
-              <label key={key} className="measure-label">
-                <span>
-                  {label}
-                  <output htmlFor={`measure-${key}`}>
-                    {glass[key]} <small>mm</small>
-                  </output>
-                </span>
-                <input
-                  id={`measure-${key}`}
-                  type="range"
-                  min={min}
-                  max={max}
-                  step="1"
-                  value={glass[key]}
-                  onChange={(e) => update(key, Number(e.target.value))}
-                />
-                <span className="range-extents">
-                  <small>{min} mm</small>
-                  <small>{max} mm</small>
-                </span>
-              </label>
-            ))}
+        </div>
+        <div className="lab-controls">
+          <h3>Choisissez votre glace</h3>
+          <div className="format-options">
+            {formats.map((f) => {
+              const result = checkFit(f, glass);
+              return (
+                <button
+                  key={f.id}
+                  aria-pressed={ice.id === f.id}
+                  onClick={() => setSelected(f.id)}
+                >
+                  <Image src={f.image} alt="" width={76} height={76} />
+                  <span>
+                    {f.title}
+                    <small>{f.dimensions}</small>
+                    <small className={result.fits ? "fit-yes" : "fit-no"}>
+                      {result.fits
+                        ? "Compatible"
+                        : result.uncertain
+                          ? "À vérifier"
+                          : "Trop grand"}
+                    </small>
+                  </span>
+                </button>
+              );
+            })}
           </div>
-          <label className="irregular-check">
-            <input
-              type="checkbox"
-              checked={glass.irregular}
-              onChange={(e) =>
-                setGlass((g) => ({ ...g, irregular: e.target.checked }))
-              }
-            />{" "}
-            Mon verre a un col, des courbes ou des facettes.
-          </label>
-          <div className="lab-step second-step">
-            <span>02</span> L’esprit du cocktail
-          </div>
-          <div className="drink-options">
+          <details className="measure-panel">
+            <summary>
+              Ajuster les mesures du verre{" "}
+              <span>
+                {glass.opening} / {glass.base} / {glass.height} mm
+              </span>
+            </summary>
+            <p className="lab-hint">
+              Les modèles sont des exemples. Mesurez l’intérieur de votre verre
+              pour vérifier le passage.
+            </p>
+            <div className="measurements">
+              {(
+                [
+                  {
+                    key: "opening",
+                    label: "Diamètre à l’ouverture",
+                    min: 40,
+                    max: 120,
+                  },
+                  {
+                    key: "base",
+                    label: "Diamètre à la base",
+                    min: 35,
+                    max: 120,
+                  },
+                  { key: "height", label: "Hauteur utile", min: 50, max: 190 },
+                ] as const
+              ).map(({ key, label, min, max }) => (
+                <label key={key} className="measure-label">
+                  <span>
+                    {label}
+                    <output htmlFor={`measure-${key}`}>{glass[key]} mm</output>
+                  </span>
+                  <input
+                    id={`measure-${key}`}
+                    type="range"
+                    min={min}
+                    max={max}
+                    value={glass[key]}
+                    onChange={(e) => update(key, Number(e.target.value))}
+                  />
+                </label>
+              ))}
+            </div>
+            <label className="irregular-check">
+              <input
+                type="checkbox"
+                checked={glass.irregular}
+                onChange={(e) =>
+                  setGlass((g) => ({ ...g, irregular: e.target.checked }))
+                }
+              />
+              Verre avec un col, des courbes ou des facettes
+            </label>
+          </details>
+          <div className="drink-options" aria-label="Cocktail">
             {drinks.map((d, i) => (
               <button
                 key={d.name}
@@ -435,97 +476,27 @@ export function IceLab({ products }: { products: OrderProduct[] }) {
               </button>
             ))}
           </div>
-        </div>
-        <div className="lab-stage">
-          <div className="stage-topline">
-            <span>
-              ICE LAB <i>01</i>
-            </span>
-            <span>ÉCHELLE PROPORTIONNELLE</span>
-          </div>
-          <GlassDrawing
-            glass={glass}
-            ice={ice}
-            color={drinks[drink].color}
-            fits={fit.fits}
-            view={view}
-          />
-          <div className="view-switch" aria-label="Point de vue">
-            <button
-              aria-pressed={view === "side"}
-              onClick={() => setView("side")}
-            >
-              De face
-            </button>
-            <button
-              aria-pressed={view === "top"}
-              onClick={() => setView("top")}
-            >
-              Du dessus
-            </button>
-          </div>
-          <p className="stage-caption">
-            {glass.irregular
-              ? "Schéma simplifié — courbes non représentées"
-              : "Dimensions à l’échelle · niveau de boisson illustratif"}
-          </p>
-        </div>
-        <div className="lab-result">
-          <div className="lab-step">
-            <span>03</span> Trouvez votre accord
-          </div>
-          <div className="format-options">
-            {formats.map((f) => {
-              const result = checkFit(f, glass);
-              return (
-                <button
-                  key={f.id}
-                  aria-pressed={ice.id === f.id}
-                  onClick={() => setSelected(f.id)}
-                >
-                  <span>
-                    {f.title}
-                    <small>{f.dimensions}</small>
-                  </span>
-                  <span
-                    className={`format-status ${result.fits ? "yes" : "no"}`}
-                    aria-label={
-                      result.fits
-                        ? "Compatible"
-                        : result.uncertain
-                          ? "À vérifier"
-                          : "Non adapté"
-                    }
-                  >
-                    {result.fits ? "↗" : result.uncertain ? "?" : "—"}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
           <div
             className={`fit-feedback ${fit.fits ? "fits" : "does-not-fit"}`}
             role="status"
             aria-live="polite"
           >
-            <p className="fit-label">
-              <span />{" "}
-              {fit.fits
-                ? "COMPATIBLE SELON VOS MESURES"
-                : fit.uncertain
-                  ? "À VÉRIFIER AVEC VOTRE VERRE"
-                  : "CE FORMAT NE CONVIENT PAS"}
-            </p>
             <h3>{ice.title}</h3>
+            <p className="fit-label">
+              {fit.fits
+                ? "Compatible selon vos mesures"
+                : fit.uncertain
+                  ? "À vérifier avec votre verre"
+                  : "Ce format ne convient pas"}
+            </p>
             <p>{fit.reason}</p>
             {fit.fits && (
-              <p className="fit-advice">
+              <p>
                 {ideal?.id === ice.id
-                  ? `Notre accord pour un ${drinks[drink].name.toLowerCase()}.`
+                  ? `Notre suggestion pour un ${drinks[drink].name.toLowerCase()}.`
                   : ideal
                     ? `Pour un ${drinks[drink].name.toLowerCase()}, essayez aussi le ${ideal.title}.`
-                    : ""}{" "}
-                Le choix final dépend de votre recette et du volume servi.
+                    : ""}
               </p>
             )}
             {!fit.fits && compatible.length > 0 && (
@@ -533,28 +504,23 @@ export function IceLab({ products }: { products: OrderProduct[] }) {
                 className="text-link"
                 onClick={() => setSelected(ideal!.id)}
               >
-                Essayer le {ideal!.title} ↗
+                Essayer le {ideal!.title}
               </button>
             )}
             {!fit.fits && compatible.length === 0 && (
               <p>
                 Aucun format standard validé avec ces mesures. Notre équipe peut
-                étudier votre verrerie.
+                étudier votre verre.
               </p>
             )}
           </div>
           {fit.fits && product.available && (
-            <a
-              className="button button-gold lab-order"
-              href={orderLink(product.name)}
-            >
-              Choisir ce format <span>↗</span>
+            <a className="button lab-order" href={orderLink(product.name)}>
+              Commander ce format
             </a>
           )}
           {fit.fits && !product.available && (
-            <p className="lab-hint">
-              Référence actuellement indisponible au catalogue.
-            </p>
+            <p>Référence actuellement indisponible.</p>
           )}
           <a
             className="lab-contact"
@@ -562,25 +528,21 @@ export function IceLab({ products }: { products: OrderProduct[] }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Conseil & échantillons sur WhatsApp ↗
+            Demander conseil ou des échantillons
           </a>
         </div>
       </div>
       <details className="lab-method">
-        <summary>
-          Comment l’Ice Lab vérifie-t-il votre verre ? <span>+</span>
-        </summary>
+        <summary>Comment vérifions-nous la compatibilité ?</summary>
         <p>
-          Pour une ouverture ronde, un bloc carré doit pouvoir passer avec sa
-          diagonale : 70,7 mm pour un cube de 50 mm et 56,6 mm pour le Collins
-          de 40 mm. Nous ajoutons 4 mm au diamètre (2 mm de chaque côté) et 5 mm
-          en hauteur. La vérification, prudente, utilise le plus petit des
-          diamètres à l’ouverture et à la base, avec la glace verticale. Elle
-          s’applique à un verre circulaire droit ou régulièrement évasé. Une
-          sphère peut parfois se poser plus haut dans un verre conique : ce cas
-          est à vérifier. Les cols, courbes, facettes, tolérances de découpe et
-          irrégularités demandent un essai réel. Ce schéma n’est pas une
-          simulation de flottabilité ou de dilution.
+          Dans un verre rond, un cube de 50 mm doit passer avec sa diagonale de
+          70,7 mm ; celle du Collins mesure 56,6 mm. Nous ajoutons 4 mm au
+          diamètre et 5 mm en hauteur. Le plus petit diamètre entre l’ouverture
+          et la base doit accueillir le format vertical. Cette méthode prudente
+          convient aux verres circulaires droits ou régulièrement évasés.
+          Courbes, cols, facettes et sphères posées plus haut dans un verre
+          conique demandent un essai réel. Les proportions de la boisson sont
+          illustratives : cet outil ne simule ni la flottabilité ni la dilution.
         </p>
       </details>
     </section>

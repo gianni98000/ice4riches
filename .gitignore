@@ -35,3 +35,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local design review captures and questionnaires
+/.taste-skill/before/
+/.taste-skill/after/
+/.taste-skill/final/
+/.impeccable/review/
+/.impeccable/questions/

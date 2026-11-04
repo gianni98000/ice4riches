@@ -5,11 +5,19 @@ import { useEffect, useRef, useState } from "react";
 export function CinematicMotion() {
   useEffect(() => {
     const elements = document.querySelectorAll("[data-reveal]");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("revealed");
+            if (!reduced.matches)
+              e.target.animate(
+                [
+                  { opacity: 0.5, transform: "translateY(18px)" },
+                  { opacity: 1, transform: "translateY(0)" },
+                ],
+                { duration: 560, easing: "cubic-bezier(.23,1,.32,1)" },
+              );
             observer.unobserve(e.target);
           }
         }),
@@ -68,7 +76,7 @@ export function HeroFilm() {
         Votre navigateur ne prend pas en charge la vidéo.
       </video>
       <div className="hero-film-shade" />
-      <span className="film-note">LA MATIÈRE. À L’ÉTAT PUR.</span>
+
       <button
         className="film-control"
         onClick={() => {
@@ -87,8 +95,7 @@ export function HeroFilm() {
         }}
         aria-label={playing ? "Mettre la vidéo en pause" : "Lire la vidéo"}
       >
-        {playing ? "Ⅱ" : "▷"}
-        <span>{playing ? "PAUSE" : "LECTURE"}</span>
+        <span>{playing ? "Mettre en pause" : "Lire le film"}</span>
       </button>
     </div>
   );

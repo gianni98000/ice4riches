@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T21:40:24.689072+00:00",
+  "title": "Design System: Ice4Riches",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent",
+        "tonalRamp": [
+          "oklch(0.150 0.0371 33.97)",
+          "oklch(0.260 0.0735 33.97)",
+          "oklch(0.380 0.1033 33.97)",
+          "oklch(0.490 0.1179 33.97)",
+          "oklch(0.610 0.1179 33.97)",
+          "oklch(0.720 0.1033 33.97)",
+          "oklch(0.840 0.0735 33.97)",
+          "oklch(0.950 0.0371 33.97)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Accent Hover",
+        "tonalRamp": [
+          "oklch(0.150 0.0371 34.24)",
+          "oklch(0.260 0.0735 34.24)",
+          "oklch(0.380 0.1033 34.24)",
+          "oklch(0.490 0.1179 34.24)",
+          "oklch(0.610 0.1179 34.24)",
+          "oklch(0.720 0.1033 34.24)",
+          "oklch(0.840 0.0735 34.24)",
+          "oklch(0.950 0.0371 34.24)"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "tonalRamp": [
+          "oklch(0.150 0.0013 264.48)",
+          "oklch(0.260 0.0026 264.48)",
+          "oklch(0.380 0.0036 264.48)",
+          "oklch(0.490 0.0041 264.48)",
+          "oklch(0.610 0.0041 264.48)",
+          "oklch(0.720 0.0036 264.48)",
+          "oklch(0.840 0.0026 264.48)",
+          "oklch(0.950 0.0013 264.48)"
+        ]
+      },
+      "raised-graphite": {
+        "role": "neutral",
+        "displayName": "Raised Graphite",
+        "tonalRamp": [
+          "oklch(0.150 0.0020 258.36)",
+          "oklch(0.260 0.0039 258.36)",
+          "oklch(0.380 0.0055 258.36)",
+          "oklch(0.490 0.0062 258.36)",
+          "oklch(0.610 0.0062 258.36)",
+          "oklch(0.720 0.0055 258.36)",
+          "oklch(0.840 0.0039 258.36)",
+          "oklch(0.950 0.0020 258.36)"
+        ]
+      },
+      "ice-white": {
+        "role": "neutral",
+        "displayName": "Ice White",
+        "tonalRamp": [
+          "oklch(0.150 0.0005 247.84)",
+          "oklch(0.260 0.0011 247.84)",
+          "oklch(0.380 0.0015 247.84)",
+          "oklch(0.490 0.0017 247.84)",
+          "oklch(0.610 0.0017 247.84)",
+          "oklch(0.720 0.0015 247.84)",
+          "oklch(0.840 0.0011 247.84)",
+          "oklch(0.950 0.0005 247.84)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(0.150 0.0019 264.53)",
+          "oklch(0.260 0.0037 264.53)",
+          "oklch(0.380 0.0052 264.53)",
+          "oklch(0.490 0.0060 264.53)",
+          "oklch(0.610 0.0060 264.53)",
+          "oklch(0.720 0.0052 264.53)",
+          "oklch(0.840 0.0037 264.53)",
+          "oklch(0.950 0.0019 264.53)"
+        ]
+      },
+      "film-black": {
+        "role": "neutral",
+        "displayName": "Film Black",
+        "tonalRamp": [
+          "oklch(0.150 0.0019 196.32)",
+          "oklch(0.260 0.0037 196.32)",
+          "oklch(0.380 0.0052 196.32)",
+          "oklch(0.490 0.0059 196.32)",
+          "oklch(0.610 0.0059 196.32)",
+          "oklch(0.720 0.0052 196.32)",
+          "oklch(0.840 0.0037 196.32)",
+          "oklch(0.950 0.0019 196.32)"
+        ]
+      },
+      "header-black": {
+        "role": "neutral",
+        "displayName": "Header Black",
+        "tonalRamp": [
+          "oklch(0.150 0.0013 227.48)",
+          "oklch(0.260 0.0026 227.48)",
+          "oklch(0.380 0.0036 227.48)",
+          "oklch(0.490 0.0041 227.48)",
+          "oklch(0.610 0.0041 227.48)",
+          "oklch(0.720 0.0036 227.48)",
+          "oklch(0.840 0.0026 227.48)",
+          "oklch(0.950 0.0013 227.48)"
+        ]
+      },
+      "control-grey": {
+        "role": "neutral",
+        "displayName": "Control Grey",
+        "tonalRamp": [
+          "oklch(0.150 0.0013 236.50)",
+          "oklch(0.260 0.0026 236.50)",
+          "oklch(0.380 0.0037 236.50)",
+          "oklch(0.490 0.0042 236.50)",
+          "oklch(0.610 0.0042 236.50)",
+          "oklch(0.720 0.0037 236.50)",
+          "oklch(0.840 0.0026 236.50)",
+          "oklch(0.950 0.0013 236.50)"
+        ]
+      },
+      "stage": {
+        "role": "neutral",
+        "displayName": "Stage",
+        "tonalRamp": [
+          "oklch(0.150 0.0033 216.85)",
+          "oklch(0.260 0.0065 216.85)",
+          "oklch(0.380 0.0091 216.85)",
+          "oklch(0.490 0.0104 216.85)",
+          "oklch(0.610 0.0104 216.85)",
+          "oklch(0.720 0.0091 216.85)",
+          "oklch(0.840 0.0065 216.85)",
+          "oklch(0.950 0.0033 216.85)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(0.150 0.0000 89.88)",
+          "oklch(0.260 0.0000 89.88)",
+          "oklch(0.380 0.0000 89.88)",
+          "oklch(0.490 0.0000 89.88)",
+          "oklch(0.610 0.0000 89.88)",
+          "oklch(0.720 0.0000 89.88)",
+          "oklch(0.840 0.0000 89.88)",
+          "oklch(0.950 0.0000 89.88)"
+        ]
+      },
+      "compatible-bg": {
+        "role": "neutral",
+        "displayName": "Compatible Bg",
+        "tonalRamp": [
+          "oklch(0.150 0.0034 158.83)",
+          "oklch(0.260 0.0066 158.83)",
+          "oklch(0.380 0.0093 158.83)",
+          "oklch(0.490 0.0107 158.83)",
+          "oklch(0.610 0.0107 158.83)",
+          "oklch(0.720 0.0093 158.83)",
+          "oklch(0.840 0.0066 158.83)",
+          "oklch(0.950 0.0034 158.83)"
+        ]
+      },
+      "incompatible-bg": {
+        "role": "neutral",
+        "displayName": "Incompatible Bg",
+        "tonalRamp": [
+          "oklch(0.150 0.0060 41.80)",
+          "oklch(0.260 0.0119 41.80)",
+          "oklch(0.380 0.0168 41.80)",
+          "oklch(0.490 0.0191 41.80)",
+          "oklch(0.610 0.0191 41.80)",
+          "oklch(0.720 0.0168 41.80)",
+          "oklch(0.840 0.0119 41.80)",
+          "oklch(0.950 0.0060 41.80)"
+        ]
+      },
+      "compatible-ink": {
+        "role": "neutral",
+        "displayName": "Compatible Ink",
+        "tonalRamp": [
+          "oklch(0.150 0.0250 160.43)",
+          "oklch(0.260 0.0495 160.43)",
+          "oklch(0.380 0.0695 160.43)",
+          "oklch(0.490 0.0793 160.43)",
+          "oklch(0.610 0.0793 160.43)",
+          "oklch(0.720 0.0695 160.43)",
+          "oklch(0.840 0.0495 160.43)",
+          "oklch(0.950 0.0250 160.43)"
+        ]
+      },
+      "incompatible-ink": {
+        "role": "neutral",
+        "displayName": "Incompatible Ink",
+        "tonalRamp": [
+          "oklch(0.150 0.0355 38.77)",
+          "oklch(0.260 0.0704 38.77)",
+          "oklch(0.380 0.0988 38.77)",
+          "oklch(0.490 0.1128 38.77)",
+          "oklch(0.610 0.1128 38.77)",
+          "oklch(0.720 0.0988 38.77)",
+          "oklch(0.840 0.0704 38.77)",
+          "oklch(0.950 0.0355 38.77)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero; responsive variants in DESIGN.md."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Product and fit headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraph copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Compact controls and supporting information."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Closing semantic wordmark beneath optical canvas."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.23,1,.32,1)",
+        "purpose": "Action, image and reveal easing."
+      },
+      {
+        "name": "action-duration",
+        "value": "140ms",
+        "purpose": "Primary control feedback."
+      },
+      {
+        "name": "preset-duration",
+        "value": "180ms",
+        "purpose": "Preset state changes."
+      },
+      {
+        "name": "format-duration",
+        "value": "160ms",
+        "purpose": "Format background and border changes."
+      },
+      {
+        "name": "image-duration",
+        "value": "500ms",
+        "purpose": "Fine-pointer image zoom."
+      },
+      {
+        "name": "reveal-duration",
+        "value": "560ms",
+        "purpose": "One-time reveal; skipped under reduced motion."
+      },
+      {
+        "name": "liquid-active-budget",
+        "value": "approximately 4000ms",
+        "purpose": "Per-mounted-mark active motion; paused offscreen/hidden and static for reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet-max",
+        "value": "1050px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "description": "Homepage calls to action.",
+      "html": "<button class=\"ds-primary\">Trouver ma glace</button>",
+      "css": ".ds-primary{font:500 16px Switzer,sans-serif;border:0;border-radius:0;cursor:pointer;min-height:54px;padding:15px 24px;background:#ff4a1f;color:#171819;transition:transform 140ms cubic-bezier(.23,1,.32,1),background 140ms ease}@media(hover:hover) and (pointer:fine){.ds-primary:hover{background:#ff6947}}.ds-primary:active{transform:scale(.97)}.ds-primary:focus-visible{outline:3px solid #ff4a1f;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Pour control",
+      "kind": "button",
+      "description": "Light action on the dark stage.",
+      "html": "<div class=\"ds-stage\"><button class=\"ds-pour\" aria-pressed=\"true\">Vider le verre</button></div>",
+      "css": ".ds-stage{background:#22292b;padding:24px}.ds-pour{font:14px Switzer,sans-serif;border:0;border-radius:0;cursor:pointer;min-height:48px;padding:10px 14px;background:#eff0f1;color:#18191b}.ds-pour:active{transform:scale(.97)}.ds-pour:focus-visible{outline:3px solid #ff4a1f;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-pour{transition:none}}",
+      "refersTo": "button-pour"
+    },
+    {
+      "name": "Glass presets",
+      "kind": "chip",
+      "description": "Static examples of selected and unselected states.",
+      "html": "<div class=\"ds-presets\"><button aria-pressed=\"true\">Rocks</button><button aria-pressed=\"false\">Highball</button></div>",
+      "css": ".ds-presets{display:flex;gap:8px;background:#eff0f1;padding:24px}.ds-presets button{font:16px Switzer,sans-serif;border:0;border-radius:0;cursor:pointer;min-height:48px;padding:13px 24px;background:#dfe2e4;color:#18191b;transition:background 180ms ease,color 180ms ease}.ds-presets button[aria-pressed=true]{background:#18191b;color:#fff}@media(hover:hover) and (pointer:fine){.ds-presets button:hover{background:#bcc2c7}.ds-presets button[aria-pressed=true]:hover{background:#18191b}}.ds-presets button:active{transform:scale(.97)}.ds-presets button:focus-visible{outline:3px solid #ff4a1f;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-presets button{transition:none}}",
+      "refersTo": "glass-preset"
+    },
+    {
+      "name": "Measurement range",
+      "kind": "input",
+      "description": "Native input; React updates the measured output in the application.",
+      "html": "<label class=\"ds-measure\"><span>Diamètre à l’ouverture <output for=\"ds-opening\">85 mm</output></span><input id=\"ds-opening\" type=\"range\" min=\"40\" max=\"120\" value=\"85\" /></label>",
+      "css": ".ds-measure{display:block;background:#dfe2e4;color:#18191b;padding:20px;font:14px Switzer,sans-serif}.ds-measure>span{display:flex;justify-content:space-between;gap:10px}.ds-measure output{font-variant-numeric:tabular-nums}.ds-measure input{width:100%;height:30px;accent-color:#18191b;cursor:ew-resize}.ds-measure input:focus-visible{outline:3px solid #ff4a1f;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-measure input{transition:none}}"
+    },
+    {
+      "name": "Section navigation",
+      "kind": "nav",
+      "description": "Dark header navigation with underlined order link.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Navigation principale\"><a href=\"#produits\">La glace</a><a href=\"#ice-lab\">Votre verre</a><a class=\"ds-order\" href=\"#commande\">Commander</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;align-items:center;gap:32px;background:#080a0b;color:#eff0f1;padding:24px 32px;font:16px Switzer,sans-serif}.ds-nav a{color:inherit;text-decoration:none}.ds-nav .ds-order{text-decoration:underline;text-underline-offset:6px}@media(hover:hover) and (pointer:fine){.ds-nav a:hover{color:#ff6947}}.ds-nav a:focus-visible{outline:3px solid #ff4a1f;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-nav a{transition:none}}"
+    },
+    {
+      "name": "FAQ disclosure",
+      "kind": "card",
+      "description": "Native disclosure in a flat panel.",
+      "html": "<details class=\"ds-faq\"><summary>Qu’est-ce que la glace cristalline ?</summary><p>Une glace transparente ou presque transparente, produite en contrôlant le sens de congélation.</p></details>",
+      "css": ".ds-faq{background:#222427;color:#eff0f1;padding:24px;font:17px/1.5 Switzer,sans-serif}.ds-faq summary{cursor:pointer}.ds-faq p{font-size:16px;line-height:1.55;color:#d9dcdf;margin-top:18px;max-width:60ch}.ds-faq summary:focus-visible{outline:3px solid #ff4a1f;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-faq summary{transition:none}}",
+      "refersTo": "faq-panel"
+    }
+  ],
+  "narrative": {
+    "northStar": "The object, large",
+    "overview": "The object, large: genuine ice photography and the existing H3 macro film carry the atmosphere. Graphite fields, cold optical lettering and generous image scale create presence; ice-white working surfaces and orange actions make choosing a format direct.\n\nThis documents the implemented homepage and Ice Lab, using the direction recorded in `.impeccable/surfaces/home.md`. Secondary routes retain their previous styling. It records implementation decisions, not an approved image comp; visual-review evidence remains separate.",
+    "keyCharacteristics": [
+      "Genuine ice imagery and cold optical wordmarks.",
+      "Switzer throughout, with compact headings and readable controls.",
+      "Flat rectangular surfaces, large alternating fields and restrained action color.",
+      "Immediate controls, bounded decorative motion and semantic fallbacks."
+    ],
+    "rules": [
+      {
+        "name": "The Action Color Rule",
+        "body": "Orange identifies actions and focus; compatibility remains a labeled status.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Controls Rule",
+        "body": "Control depth comes from contrast, selection borders and immediate state feedback, not floating shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the original product imagery and French product identity.",
+      "Do use orange for actions and visible keyboard focus.",
+      "Do distinguish compatibility with text as well as color.",
+      "Do retain semantic lettering when WebGL is unavailable.",
+      "Do respect reduced motion and explicit film playback controls."
+    ],
+    "donts": [
+      "Don’t extend homepage tokens to secondary routes without a separate migration.",
+      "Don’t substitute generic decorative ice imagery for product photographs.",
+      "Don’t turn flat controls into rounded floating cards or add decorative interface shadows.",
+      "Don’t make decorative motion continuous or delay an Ice Lab response.",
+      "Don’t present illustrative liquid levels as a physical simulation."
+    ]
+  }
+}

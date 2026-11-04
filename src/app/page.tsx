@@ -1,6 +1,5 @@
+import { LiquidMark } from "@/components/liquid-mark";
 import { JsonLd } from "@/components/json-ld";
-import { ClientMarquee } from "@/components/client-marquee";
-import { SiteHeader } from "@/components/site-header";
 import { CinematicMotion, HeroFilm } from "@/components/cinematic-motion";
 import { IceLab } from "@/components/ice-lab";
 import { getOrderProducts } from "@/lib/order-catalog";
@@ -13,6 +12,7 @@ import {
 } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
+import "./switzer.css";
 import "./cinematic.css";
 
 export const revalidate = 300;
@@ -98,7 +98,23 @@ export default async function Home() {
       <CinematicMotion />
       <JsonLd data={schema} />
       <JsonLd data={homeFaqStructuredData} />
-      <SiteHeader cinematic />
+      <header className="studio-header">
+        <Link
+          href="/"
+          className="studio-wordmark"
+          aria-label="Ice4Riches accueil"
+        >
+          ice4riches
+        </Link>
+        <nav aria-label="Navigation principale">
+          <a href="#produits">La glace</a>
+          <a href="#ice-lab">Votre verre</a>
+          <a href="#personnalisation">Sur mesure</a>
+        </nav>
+        <a href={ORDER_URL} className="header-order">
+          Commander
+        </a>
+      </header>
       <a href="#ice-lab" className="skip-link">
         Aller au sélecteur de glace
       </a>
@@ -106,283 +122,190 @@ export default async function Home() {
         <section className="cinema-hero" aria-labelledby="hero-title">
           <HeroFilm />
           <div className="hero-content">
-            <p className="eyebrow">
-              <span className="tiny-star">✳</span> CLEAR ICE · CÔTE D’AZUR
-            </p>
             <h1 id="hero-title">
-              Le détail
-              <br />
-              qui change
-              <br />
-              <em>tout.</em>
+              <LiquidMark text="Clear ice." />
+              Pure présence.
             </h1>
-            <p className="hero-description">
-              Avant la première gorgée, il y a le regard.
-              <br />
-              Une glace cristalline. Un cocktail qui se distingue.
-            </p>
-            <div className="hero-actions">
-              <a href="#ice-lab" className="button button-gold">
-                Trouvez votre glace <span>↗</span>
-              </a>
-              <a className="hero-collection-link" href="#produits">
-                Explorer la collection <span>↗</span>
-              </a>
-            </div>
-          </div>
-          <div className="hero-bottom">
-            <a href="#matiere" className="scroll-cue">
-              <span>↓</span> L’ART DU CLEAR ICE
-            </a>
             <p>
-              NÉE SUR LA RIVIERA.
+              La glace cristalline de la Côte d’Azur.
               <br />
-              <span>PENSÉE POUR L’EXCEPTION.</span>
+              Quatre formats pour donner une autre dimension à vos cocktails.
             </p>
-            <span className="hero-counter">01 — 04</span>
+            <a href="#ice-lab" className="button">
+              Trouver ma glace
+            </a>
           </div>
-        </section>
-        <div
-          className="location-ribbon"
-          aria-label="Nos destinations sur la Côte d’Azur"
-        >
-          <span>MONACO</span>
-          <i>✳</i>
-          <span>CANNES</span>
-          <i>✳</i>
-          <span>SAINT-TROPEZ</span>
-          <i>✳</i>
-          <span>NICE</span>
-          <i>✳</i>
-          <span>ANTIBES</span>
-        </div>
-        <section id="matiere" className="ice-section manifesto">
-          <p className="eyebrow" data-reveal>
-            <span>01 /</span> LA BEAUTÉ DE L’ESSENTIEL
+          <p className="hero-origin">
+            Monaco, Cannes, Saint-Tropez.
+            <br />
+            Et votre prochain service.
           </p>
-          <div className="manifesto-body" data-reveal>
-            <h2>
-              Vous composez le cocktail.
-              <br />
-              Nous sculptons <em>son écrin.</em>
-            </h2>
-            <div>
-              <p>
-                La transparence révèle les couleurs. La forme dessine le
-                service. Le grand format accompagne la dégustation.
-              </p>
-              <p>
-                Par congélation directionnelle, Ice4Riches donne à la glace une
-                clarté qui se remarque. Pour les bars, hôtels, restaurants et
-                instants qui méritent mieux que l’ordinaire.
-              </p>
-              <a href="/fondateur" className="text-link">
-                L’histoire d’Ice4Riches <span>↗</span>
-              </a>
-            </div>
-          </div>
-          <div className="editorial-detail">
-            <span>TRANSPARENCE</span>
-            <span>PRÉCISION</span>
-            <span>PRÉSENCE</span>
-            <span className="detail-sign">I4R.</span>
-          </div>
         </section>
-        <IceLab products={catalog.filter((p) => p.category === "Ice")} />
-        <section id="produits" className="ice-section collection-section">
-          <div className="section-heading" data-reveal>
-            <div>
-              <p className="eyebrow">
-                <span>03 /</span> LA COLLECTION
-              </p>
-              <h2>
-                Quatre formes.
-                <br />
-                <em>Une signature.</em>
-              </h2>
-            </div>
-            <div>
-              <p>
-                Le format juste, du premier regard
-                <br />à la dernière gorgée.
-              </p>
-              <a className="text-link" href={ORDER_URL}>
-                Tout le catalogue <span>↗</span>
-              </a>
-            </div>
+        <section id="produits" className="collection-section">
+          <div className="section-intro" data-reveal>
+            <h2>
+              La forme fait
+              <br />
+              la différence.
+            </h2>
+            <p>
+              Un bloc qui habille un verre haut. Une sphère qui accompagne un
+              spiritueux. Choisissez le format qui sert votre idée.
+            </p>
           </div>
-          <div className="ice-collection">
-            {products.map((p, i) => (
-              <article key={p.name} className="ice-product" data-reveal>
+          <div className="product-spread">
+            {products.map((p) => (
+              <article
+                className={`ice-product product-${p.format.id}`}
+                key={p.name}
+                data-reveal
+              >
                 <a
-                  href={orderLink(p.name)}
                   className="product-picture"
-                  aria-label={`Découvrir ${p.format.title}`}
+                  href={orderLink(p.name)}
+                  aria-label={`Commander ${p.format.title}`}
                 >
-                  <span className="product-number">0{i + 1}</span>
                   <Image
                     src={p.format.image}
                     alt={p.name}
                     fill
-                    sizes="(max-width: 600px) 85vw, (max-width: 1000px) 45vw, 23vw"
+                    sizes="(max-width: 700px) 100vw, 50vw"
                   />
-                  <span className="product-arrow">↗</span>
                 </a>
-                <div className="product-heading">
+                <div className="product-copy">
                   <h3>{p.format.title}</h3>
-                  <span>{p.format.dimensions}</span>
+                  <p>
+                    {p.format.dimensions} · {p.format.use}
+                  </p>
+                  <div className="product-price">
+                    <span>
+                      {p.caption} · {money.format(p.price)} TTC
+                    </span>
+                    <a href={orderLink(p.name)}>
+                      {p.available ? "Choisir" : "Voir la référence"}
+                    </a>
+                  </div>
                 </div>
-                <p>{p.format.use}</p>
-                <div className="product-price">
-                  <span>{p.caption}</span>
-                  <span>
-                    {money.format(p.price)} <small>TTC</small>
-                  </span>
-                </div>
-                {!p.available && <p>Actuellement indisponible</p>}
               </article>
             ))}
           </div>
-          <div className="collection-foot">
-            <span>Tarifs TTC · Minimum de commande : 100 € TTC</span>
-            <a href="#ice-lab">Un doute sur le format ? Essayez l’Ice Lab ↗</a>
-          </div>
+          <p className="collection-note">
+            Minimum de commande : 100 € TTC. Consultez le catalogue pour les
+            disponibilités.
+          </p>
         </section>
-        <section className="ritual-section" aria-labelledby="ritual-title">
-          <Image
-            src="/cinematic/cocktail.jpg"
-            alt="Un cocktail ambré dans la lumière d’un bar"
-            fill
-            sizes="100vw"
-          />
-          <div className="ritual-shade" />
-          <div className="ritual-copy" data-reveal>
-            <p className="eyebrow">L’ART DE RECEVOIR</p>
-            <h2 id="ritual-title">
-              Certains détails
+        <IceLab products={catalog.filter((p) => p.category === "Ice")} />
+        <section className="craft-section" id="matiere">
+          <div data-reveal>
+            <h2>
+              Transparente.
               <br />
-              ne passent jamais
-              <br />
-              <em>inaperçus.</em>
+              Tout simplement.
             </h2>
-            <a
-              href="/professionnels-evenements"
-              className="button button-outline"
-            >
-              Pensé pour votre établissement <span>↗</span>
+            <p>
+              La congélation directionnelle limite les bulles et les zones
+              troubles. Elle révèle les couleurs du cocktail et laisse la
+              lumière traverser la glace.
+            </p>
+            <p>
+              Le grand format, lui, donne sa place à la dégustation. Le résultat
+              se juge dans le verre.
+            </p>
+            <a className="text-link" href="/fondateur">
+              Rencontrer le fondateur
             </a>
           </div>
-          <span className="ritual-caption">
-            BARS · HÔTELS · YACHTS · ÉVÉNEMENTS
-          </span>
-        </section>
-        <div className="cinema-clients">
-          <ClientMarquee />
-        </div>
-        <section
-          id="personnalisation"
-          className="ice-section signature-section"
-        >
-          <div className="signature-visual" data-reveal>
+          <div className="craft-picture" data-reveal>
             <Image
-              src="/cinematic/clear-ice-poster.webp"
-              alt="La lumière traverse un bloc de clear ice"
+              src="/cinematic/old-fashioned.jpg"
+              alt="Transparence du bloc Old Fashioned Ice4Riches"
               fill
-              sizes="(max-width: 760px) 100vw, 45vw"
+              sizes="(max-width:700px) 100vw, 50vw"
             />
-            <div className="signature-visual-copy">
-              <span>VOTRE EMPREINTE.</span>
-              <strong>
-                Votre
-                <br />
-                <em>signature.</em>
-              </strong>
-              <small>GRAVURE & PERSONNALISATION</small>
-            </div>
+          </div>
+        </section>
+        <section
+          className="references-section"
+          aria-labelledby="references-title"
+        >
+          <h2 id="references-title" data-reveal>
+            À leurs comptoirs.
+          </h2>
+          <div className="reference-logos">
+            {[
+              { name: "La Chèvre d’Or", src: "chevre-dor.png" },
+              { name: "Amazónico Monte-Carlo", src: "amazonico.svg" },
+              { name: "Twiga Monte-Carlo", src: "twiga-monte-carlo.svg" },
+              { name: "Le Bar Américain Monaco", src: "bar-americain.webp" },
+              { name: "COYA Monte-Carlo", src: "coya-monte-carlo.webp" },
+              { name: "The Maybourne Riviera", src: "maybourne-riviera.webp" },
+            ].map((c) => (
+              <div key={c.name}>
+                <Image
+                  src={`/clients/${c.src}`}
+                  alt={c.name}
+                  width={180}
+                  height={80}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+        <section id="personnalisation" className="signature-section">
+          <div className="signature-photo" data-reveal>
+            <Image
+              src="/cinematic/cube.jpg"
+              alt="Cube de clear ice Ice4Riches avant personnalisation"
+              fill
+              sizes="(max-width:700px) 100vw, 50vw"
+            />
           </div>
           <div className="signature-copy" data-reveal>
-            <p className="eyebrow">
-              <span>04 /</span> L’ATTENTION SUR MESURE
-            </p>
             <h2>
-              Votre identité.
+              Votre marque.
               <br />
-              <em>Dans chaque verre.</em>
+              Dans la glace.
             </h2>
             <p>
-              Un logo. Des initiales. Un motif. Prolongez l’univers de votre
-              maison jusque dans la glace.
+              Un logo, des initiales, un motif. La gravure prolonge l’identité
+              de votre maison jusque dans le verre.
             </p>
             <p>
-              Pour un bar d’hôtel, un lancement de marque ou une réception
-              privée, nous étudions votre visuel, le format, les quantités et la
-              date souhaitée.
+              Partagez votre visuel, vos quantités, votre date et votre lieu.
+              Nous étudions le format, la faisabilité et le devis avec vous.
             </p>
             <a
-              className="button button-gold"
-              href={`https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Mon visuel, mes quantités, la date et le lieu : ")}`}
+              className="button"
+              href={`https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Visuel, quantités, date et lieu : ")}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Imaginons votre signature <span>↗</span>
+              Créer ma signature
             </a>
-            <small>
-              Faisabilité, tarif et délai confirmés avec notre équipe.
-            </small>
+            <a className="text-link" href={ORDER_ACCESSORIES_URL}>
+              Voir les outils de service
+            </a>
           </div>
         </section>
-        <section id="accessoires" className="accessory-strip ice-section">
+        <section className="faq-section">
+          <h2>En toute clarté.</h2>
           <div>
-            <p className="eyebrow">LE SENS DU GESTE</p>
-            <h2>
-              Les outils <em>du rituel.</em>
-            </h2>
-          </div>
-          <p>
-            Pics, couteaux et accessoires.
-            <br />
-            L’exigence se prolonge dans le service.
-          </p>
-          <a href={ORDER_ACCESSORIES_URL} className="text-link">
-            Découvrir les accessoires ↗
-          </a>
-        </section>
-        <section className="ice-section faq-section">
-          <div>
-            <p className="eyebrow">LES RÉPONSES, EN TOUTE CLARTÉ</p>
-            <h2>
-              Avant de
-              <br />
-              <em>briser la glace.</em>
-            </h2>
-          </div>
-          <div className="faq-list">
-            {homeFaq.map((item) => (
-              <details key={item.question}>
-                <summary>
-                  {item.question}
-                  <span>+</span>
-                </summary>
-                <p>{item.answer}</p>
+            {homeFaq.map((q) => (
+              <details key={q.question}>
+                <summary>{q.question}</summary>
+                <p>{q.answer}</p>
               </details>
             ))}
           </div>
         </section>
-        <section className="contact-finale ice-section">
-          <p className="eyebrow">DE LA CÔTE D’AZUR À VOTRE COMPTOIR</p>
-          <h2>
-            Le prochain verre
-            <br />
-            pourrait être <em>le vôtre.</em>
-          </h2>
-          <div className="finale-actions">
-            <a href={ORDER_URL} className="button button-gold">
-              Composer ma commande <span>↗</span>
-            </a>
-            <a href="mailto:hello@ice4riches.com" className="text-link">
-              Parlons de votre projet ↗
-            </a>
-          </div>
+        <section className="contact-finale">
+          <h2>À vous de servir.</h2>
+          <a className="button" href={ORDER_URL}>
+            Composer ma commande
+          </a>
+          <a className="text-link" href="mailto:hello@ice4riches.com">
+            Parlons de votre établissement
+          </a>
           <nav className="city-links" aria-label="Informations de livraison">
             {[
               { city: "Monaco", slug: "monaco" },
@@ -391,30 +314,27 @@ export default async function Home() {
               { city: "Nice", slug: "nice" },
               { city: "Antibes", slug: "antibes" },
             ].map((v) => (
-              <a key={v.slug} href={`/livraison-clear-ice/${v.slug}`}>
-                {v.city} ↗
+              <a href={`/livraison-clear-ice/${v.slug}`} key={v.slug}>
+                {v.city}
               </a>
             ))}
           </nav>
-          <p className="finale-note">
+          <p>
             Disponibilités et modalités de livraison confirmées avec notre
             équipe.
-            <br />
-            Pour toute autre destination, contactez-nous.
           </p>
         </section>
       </main>
       <footer className="cinema-footer">
-        <Link href="/" className="footer-wordmark">
-          ICE4RICHES<span>✳</span>
+        <Link className="footer-wordmark" href="/">
+          <LiquidMark text="ice4riches" />
         </Link>
-        <div className="footer-main">
+        <div className="footer-links">
           <p>
-            CLEAR ICE. PURE DISTINCTION.
-            <br />
-            <span>Née sur la Côte d’Azur, France.</span>
+            Clear ice, Côte d’Azur.
+            <br />© {new Date().getFullYear()} Ice4Riches
           </p>
-          <nav aria-label="Liens complémentaires">
+          <nav aria-label="Informations">
             {SEO_PAGES.map((p) => (
               <a href={p.href} key={p.href}>
                 {p.label}
@@ -428,21 +348,19 @@ export default async function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Instagram ↗
+              Instagram
+            </a>
+            <a href="/licenses/liquid-logo.txt">
+              Effet Liquid Logo · Paper Design
             </a>
             <a
               href="https://wa.me/377640622956"
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp ↗
+              WhatsApp
             </a>
           </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Ice4Riches</span>
-          <a href="#hero-title">RETOUR EN HAUT ↑</a>
-          <span>LE DÉTAIL FAIT LA DIFFÉRENCE.</span>
         </div>
       </footer>
     </div>

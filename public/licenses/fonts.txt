@@ -1,0 +1,4 @@
+Switzer by Indian Type Foundry, distributed through Fontshare.
+Source: https://www.fontshare.com/fonts/switzer
+Fontshare license information: https://www.fontshare.com/licenses
+Self-hosted WOFF2 files: regular (400), medium (500), semibold (600).
