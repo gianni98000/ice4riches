@@ -1,6 +1,7 @@
 import { LiquidMark } from "@/components/liquid-mark";
 import { JsonLd } from "@/components/json-ld";
-import { CinematicMotion, HeroFilm } from "@/components/cinematic-motion";
+import { CinematicMotion } from "@/components/cinematic-motion";
+import { CinematicStage } from "@/components/cinematic-stage";
 import { IceLab } from "@/components/ice-lab";
 import { getOrderProducts } from "@/lib/order-catalog";
 import { ICE_FORMATS, orderLink } from "@/lib/ice-fit";
@@ -119,28 +120,11 @@ export default async function Home() {
         Aller au sélecteur de glace
       </a>
       <main>
-        <section className="cinema-hero" aria-labelledby="hero-title">
-          <HeroFilm />
-          <div className="hero-content">
-            <h1 id="hero-title">
-              <LiquidMark text="Clear ice." />
-              Pure présence.
-            </h1>
-            <p>
-              La glace cristalline de la Côte d’Azur.
-              <br />
-              Quatre formats pour donner une autre dimension à vos cocktails.
-            </p>
-            <a href="#ice-lab" className="button">
-              Trouver ma glace
-            </a>
-          </div>
-          <p className="hero-origin">
-            Monaco, Cannes, Saint-Tropez.
-            <br />
-            Et votre prochain service.
-          </p>
-        </section>
+        <CinematicStage
+          videoSrc="/cinematic/ice4riches-hero-2k.mp4"
+          posterSrc="/cinematic/ice4riches-hero-poster.webp"
+        />
+        <IceLab products={catalog.filter((p) => p.category === "Ice")} />
         <section id="produits" className="collection-section">
           <div className="section-intro" data-reveal>
             <h2>
@@ -194,7 +178,6 @@ export default async function Home() {
             disponibilités.
           </p>
         </section>
-        <IceLab products={catalog.filter((p) => p.category === "Ice")} />
         <section className="craft-section" id="matiere">
           <div data-reveal>
             <h2>
