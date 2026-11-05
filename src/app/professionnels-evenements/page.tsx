@@ -107,6 +107,11 @@ export default function ProfessionnelsEvenementsPage() {
       faq={faq}
       relatedLinks={[
         {
+          href: "/gravure-clear-ice-personnalisee",
+          title: "Gravure et personnalisation de Clear Ice",
+          description: "Logo, initiales ou motif : préparez votre projet sur devis avec notre équipe.",
+        },
+        {
           href: "/glacons-pour-cocktails",
           title: "Guide des formats de glaçons",
           description:

@@ -36,6 +36,7 @@ type SeoLandingPageProps = {
   faq: FaqItem[];
   relatedLinks: RelatedLink[];
   areaServed?: string[];
+  quoteOnly?: boolean;
 };
 
 export function SeoLandingPage({
@@ -49,7 +50,9 @@ export function SeoLandingPage({
   faq,
   relatedLinks,
   areaServed,
+  quoteOnly = false,
 }: SeoLandingPageProps) {
+  const quoteUrl = `https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Visuel, quantités, date et lieu : ")}`;
   const pageUrl = `${SITE_URL}${path}`;
   const structuredData = {
     "@context": "https://schema.org",
@@ -59,6 +62,7 @@ export function SeoLandingPage({
         "@id": `${pageUrl}#service`,
         name: serviceName,
         url: pageUrl,
+        description: intro,
         provider: {
           "@id": `${SITE_URL}/#organization`,
         },
@@ -102,7 +106,7 @@ export function SeoLandingPage({
     <div className="min-h-screen overflow-hidden bg-[#0f0f0f]">
       <JsonLd data={structuredData} />
 
-      <SiteHeader />
+      <SiteHeader contactHref={quoteOnly ? quoteUrl : undefined} />
 
       <main>
         <section className="relative overflow-hidden px-6 pb-24 pt-36 md:pb-32 md:pt-44">
@@ -132,16 +136,16 @@ export function SeoLandingPage({
             </p>
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <a
-                href={ORDER_URL}
+                href={quoteOnly ? quoteUrl : ORDER_URL}
                 className="bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f]"
               >
-                Voir le catalogue
+                {quoteOnly ? "Demander un devis" : "Voir le catalogue"}
               </a>
               <Link
-                href="/#produits"
+                href={quoteOnly ? "mailto:hello@ice4riches.com?subject=Devis%20gravure%20clear%20ice" : "/#produits"}
                 className="border border-[#c9a962]/50 px-8 py-4 text-sm font-semibold uppercase tracking-wider text-[#c9a962] transition-colors hover:bg-[#c9a962]/10"
               >
-                Découvrir les produits
+                {quoteOnly ? "Écrire à notre équipe" : "Découvrir les produits"}
               </Link>
             </div>
           </div>
@@ -206,7 +210,7 @@ export function SeoLandingPage({
               Questions fréquentes
             </p>
             <h2 className="mt-4 text-center text-4xl font-light md:text-5xl">
-              L’essentiel avant de commander
+              {quoteOnly ? "Vos questions sur la personnalisation" : "L’essentiel avant de commander"}
             </h2>
             <div className="mt-12 divide-y divide-[#f5f3ef]/10 border-y border-[#f5f3ef]/10">
               {faq.map((item) => (
@@ -258,17 +262,18 @@ export function SeoLandingPage({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,169,98,0.12),transparent_55%)]" />
           <div className="relative mx-auto max-w-3xl">
             <h2 className="text-4xl font-light md:text-5xl">
-              Un format de glace pour chaque service
+              {quoteOnly ? "Votre projet, sur devis" : "Un format de glace pour chaque service"}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl leading-7 text-[#f5f3ef]/55">
-              Consultez les formats disponibles, composez votre demande et
-              envoyez-la directement à Ice4Riches via WhatsApp.
+              {quoteOnly
+                ? "Envoyez votre logo ou motif, les quantités souhaitées, la date et le lieu. Notre équipe confirme la faisabilité, le tarif et le délai directement avec vous."
+                : "Consultez les formats disponibles, composez votre demande et envoyez-la directement à Ice4Riches via WhatsApp."}
             </p>
             <a
-              href={ORDER_URL}
+              href={quoteOnly ? quoteUrl : ORDER_URL}
               className="mt-9 inline-block bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-10 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f]"
             >
-              Commander
+              {quoteOnly ? "Parlons de votre personnalisation" : "Commander"}
             </a>
           </div>
         </section>

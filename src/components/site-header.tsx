@@ -8,9 +8,10 @@ import { useEffect, useRef, useState } from "react";
 type SiteHeaderProps = {
   productsHref?: string;
   cinematic?: boolean;
+  contactHref?: string;
 };
 
-export function SiteHeader({ productsHref = "/#produits", cinematic = false }: SiteHeaderProps) {
+export function SiteHeader({ productsHref = "/#produits", cinematic = false, contactHref }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -90,11 +91,11 @@ export function SiteHeader({ productsHref = "/#produits", cinematic = false }: S
           </button>
 
           <Link
-            href={ORDER_URL}
+            href={contactHref ?? ORDER_URL}
             onClick={closeMenu}
             className="bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#0f0f0f] transition-shadow hover:shadow-[0_0_30px_rgba(201,169,98,0.4)] sm:px-6 sm:text-sm"
           >
-            Commander
+            {contactHref ? "Devis" : "Commander"}
           </Link>
         </div>
       </div>

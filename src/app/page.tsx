@@ -282,6 +282,9 @@ export default async function Home() {
             >
               Créer ma signature
             </a>
+            <Link className="text-link" href="/gravure-clear-ice-personnalisee">
+              Découvrir la gravure et la personnalisation
+            </Link>
             <a className="text-link" href={ORDER_ACCESSORIES_URL}>
               Voir les outils de service
             </a>
