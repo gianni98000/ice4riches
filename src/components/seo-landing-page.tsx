@@ -1,3 +1,5 @@
+import { DiscoveryLinks } from "@/components/discovery-links";
+import type { ReactNode } from "react";
 import { JsonLd } from "@/components/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { BRAND_LOCATION, ORDER_URL, SEO_PAGES, SITE_URL } from "@/lib/site";
@@ -37,6 +39,9 @@ type SeoLandingPageProps = {
   relatedLinks: RelatedLink[];
   areaServed?: string[];
   quoteOnly?: boolean;
+  children?: ReactNode;
+  entityType?: "Service" | "Article" | "Product";
+  entityProperties?: Record<string, unknown>;
 };
 
 export function SeoLandingPage({
@@ -51,6 +56,9 @@ export function SeoLandingPage({
   relatedLinks,
   areaServed,
   quoteOnly = false,
+  children,
+  entityType = "Service",
+  entityProperties = {},
 }: SeoLandingPageProps) {
   const quoteUrl = `https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Visuel, quantités, date et lieu : ")}`;
   const pageUrl = `${SITE_URL}${path}`;
@@ -58,21 +66,36 @@ export function SeoLandingPage({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Service",
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: title,
+        description: intro,
+        inLanguage: "fr-FR",
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        mainEntity: { "@id": `${pageUrl}#service` },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+      },
+      {
+        "@type": entityType,
         "@id": `${pageUrl}#service`,
         name: serviceName,
         url: pageUrl,
         description: intro,
-        provider: {
+        ...(entityType === "Service" ? { provider: {
           "@id": `${SITE_URL}/#organization`,
         },
         areaServed: areaServed?.map((name) => ({
           "@type": "City",
           name,
-        })) ?? "Worldwide",
+        })) ?? "Worldwide" } : {}),
+        ...(entityType === "Article" ? { headline: title, inLanguage: "fr-FR", author: { "@id": `${SITE_URL}/#organization` } } : {}),
+        ...entityProperties,
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
         itemListElement: [
           {
             "@type": "ListItem",
@@ -168,6 +191,8 @@ export function SeoLandingPage({
             ))}
           </div>
         </section>
+
+        {children}
 
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
           {sections.map((section, index) => (
@@ -278,6 +303,8 @@ export function SeoLandingPage({
           </div>
         </section>
       </main>
+
+      <DiscoveryLinks currentPath={path} />
 
       <footer className="border-t border-[#f5f3ef]/10 px-6 py-14">
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-3">

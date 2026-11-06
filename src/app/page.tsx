@@ -1,3 +1,4 @@
+import { DiscoveryLinks } from "@/components/discovery-links";
 import { LiquidMark } from "@/components/liquid-mark";
 import { JsonLd } from "@/components/json-ld";
 import { CinematicMotion } from "@/components/cinematic-motion";
@@ -23,6 +24,10 @@ const money = new Intl.NumberFormat("fr-FR", {
 });
 const homeFaq = [
   {
+    question: "Où acheter de la clear ice sur la Côte d’Azur ?",
+    answer: "Ice4Riches propose des glaçons transparents pour les bars, hôtels, restaurants, yachts et événements à Monaco, Nice, Cannes, Antibes et Saint-Tropez. Choisissez les formats au catalogue et transmettez votre demande par WhatsApp. La disponibilité et la livraison sont confirmées directement avec l’équipe.",
+  },
+  {
     question: "Peut-on personnaliser ou faire graver sa Clear Ice ?",
     answer:
       "Oui. Ice4Riches propose la gravure et la personnalisation de Clear Ice avec un logo, des initiales ou un motif pour les bars, hôtels, marques et événements privés. Envoyez votre visuel, les quantités, la date et le lieu par WhatsApp ou par e-mail pour un devis. Le format, la faisabilité, le tarif et le délai sont confirmés selon le projet. Cette prestation se demande directement auprès de notre équipe.",
@@ -45,7 +50,7 @@ const homeFaq = [
   {
     question: "Comment commander chez Ice4Riches ?",
     answer:
-      "Le bouton Commander ouvre le catalogue en ligne. Après avoir choisi les références pour un minimum de 100 € TTC et renseigné les coordonnées de livraison, le récapitulatif est envoyé directement à Ice4Riches par WhatsApp.",
+      "Le bouton Commander ouvre le catalogue en ligne. Après avoir choisi les références pour un minimum de 100 € TTC et renseigné les coordonnées de livraison, le récapitulatif est préparé dans WhatsApp pour que vous puissiez le vérifier et l’envoyer à Ice4Riches.",
   },
 ];
 
@@ -97,6 +102,7 @@ export default async function Home() {
   return (
     <div className="cinematic-site">
       <CinematicMotion />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", "@id": `${SITE_URL}/#webpage`, url: SITE_URL, name: "Ice4Riches — Clear ice et gravure sur mesure", inLanguage: "fr-FR", isPartOf: { "@id": `${SITE_URL}/#website` }, about: { "@id": `${SITE_URL}/#organization` } }} />
       <JsonLd data={schema} />
       <JsonLd data={homeFaqStructuredData} />
       <header className="studio-header">
@@ -124,6 +130,12 @@ export default async function Home() {
           videoSrc="/cinematic/ice4riches-hero-2k.mp4"
           posterSrc="/cinematic/ice4riches-hero-poster.webp"
         />
+        <section className="clear-ice-intro" aria-labelledby="clear-ice-offer">
+          <h2 id="clear-ice-offer">Clear ice et gravure sur mesure.</h2>
+          <p>Ice4Riches fournit des glaçons transparents pour les cocktails des bars, hôtels, restaurants, yachts et événements. Cube, Old Fashioned, Collins ou sphère : choisissez votre format pour Monaco, Nice, Cannes, Antibes et Saint-Tropez. Les demandes pour Paris et l’international sont étudiées avec notre équipe.</p>
+          <p>Pour signer un cocktail, la gravure de clear ice avec logo, initiales ou motif se demande exclusivement sur devis.</p>
+          <div><Link href="/clear-ice">Comprendre et choisir la clear ice →</Link><Link href="/gravure-clear-ice-personnalisee">Découvrir la gravure →</Link></div>
+        </section>
         <IceLab products={catalog.filter((p) => p.category === "Ice")} />
         <section id="produits" className="collection-section">
           <div className="section-intro" data-reveal>
@@ -157,7 +169,7 @@ export default async function Home() {
                   />
                 </a>
                 <div className="product-copy">
-                  <h3>{p.format.title}</h3>
+                  <h3><Link href={`/clear-ice/${p.format.id}`}>{p.format.title}</Link></h3>
                   <p>
                     {p.format.dimensions} · {p.format.use}
                   </p>
@@ -311,6 +323,7 @@ export default async function Home() {
           </p>
         </section>
       </main>
+      <DiscoveryLinks currentPath="/" />
       <footer className="cinema-footer">
         <Link className="footer-wordmark" href="/">
           <LiquidMark text="ice4riches" />

@@ -4,9 +4,9 @@ import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 
 const siteUrl = SITE_URL;
-const siteTitle = "Ice4Riches | Clear Ice premium sur la Côte d’Azur";
+const siteTitle = "Ice4Riches | Clear Ice & gravure sur mesure";
 const siteDescription =
-  "Clear Ice et glaçons transparents premium pour bars, restaurants, hôtels, yachts et événements de Monaco à Saint-Tropez sur la Côte d’Azur.";
+  "Clear ice pour cocktails et gravure de glaçons sur devis. Cube, Collins, Old Fashioned et sphère : Monaco, Nice, Cannes, Antibes, Saint-Tropez.";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -111,6 +111,8 @@ const structuredData = {
         "Glaçons transparents",
         "Glaçons pour cocktails",
         "Clear ice",
+        "Gravure de clear ice",
+        "Glaçons personnalisés",
       ],
       sameAs: ["https://www.instagram.com/ice4riches/"],
     },

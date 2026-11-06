@@ -1,17 +1,21 @@
+import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/site";
+import { DiscoveryLinks } from "@/components/discovery-links";
+import { createPageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/fondateur",
   title: "Gianni Angelini, fondateur d’Ice4Riches",
-  description:
-    "Découvrez Gianni Angelini, entrepreneur basé à Monaco et fondateur d’Ice4Riches, la glace cristalline pensée pour les cocktails et l’hospitalité.",
-  alternates: { canonical: "/fondateur" },
-};
+  description: "Gianni Angelini, fondateur d’Ice4Riches : clear ice pour cocktails, formats de glaçons transparents et gravure personnalisée sur devis.",
+});
 
 export default function FondateurPage() {
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "AboutPage", "@id": `${SITE_URL}/fondateur#webpage`, url: `${SITE_URL}/fondateur`, name: "Gianni Angelini, fondateur d’Ice4Riches", inLanguage: "fr-FR", isPartOf: { "@id": `${SITE_URL}/#website` }, mainEntity: { "@id": `${SITE_URL}/fondateur/#gianni-angelini` } }} />
       <SiteHeader />
       <main id="main-content" className="min-h-screen bg-[#0f0f0f] px-5 pb-24 pt-36 text-[#f5f3ef] sm:px-8 md:pt-44">
         <article className="mx-auto max-w-4xl border-t border-[#c9a962]/45 pt-10">
@@ -37,6 +41,7 @@ export default function FondateurPage() {
           </div>
         </article>
       </main>
+      <DiscoveryLinks currentPath="/fondateur" />
     </>
   );
 }

@@ -1,12 +1,16 @@
+import { ICE_FORMATS } from "@/lib/ice-fit";
 import { SITE_URL } from "@/lib/site";
 import { LOCAL_PAGES } from "@/lib/local-pages";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-09-14T00:00:00.000Z");
+  // Last content/navigation update; do not replace this with the build time.
+  const lastModified = new Date("2026-11-06T00:00:00.000Z");
 
   const pages = [
     { path: "", priority: 1 },
+    { path: "/clear-ice", priority: 0.9 },
+    ...ICE_FORMATS.map((format) => ({ path: `/clear-ice/${format.id}`, priority: 0.8 })),
     { path: "/livraison-glacons-cote-d-azur", priority: 0.9 },
     { path: "/livraison-glacons-paris", priority: 0.9 },
     { path: "/glace-cristalline-paris", priority: 0.9 },
@@ -20,11 +24,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  const updatedPaths = new Set(["", "/professionnels-evenements", "/gravure-clear-ice-personnalisee", ...LOCAL_PAGES.map((page) => `/livraison-clear-ice/${page.slug}`)]);
-
   return pages.map(({ path, priority }) => ({
     url: `${SITE_URL}${path}`,
-    lastModified: updatedPaths.has(path) ? new Date("2026-11-05T00:00:00.000Z") : lastModified,
+    lastModified,
     changeFrequency: "monthly" as const,
     priority,
   }));

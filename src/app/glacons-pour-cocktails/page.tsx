@@ -44,6 +44,7 @@ export default function GlaconsPourCocktailsPage() {
     <SeoLandingPage
       path="/glacons-pour-cocktails"
       serviceName="Glaçons transparents pour cocktails"
+      entityType="Article"
       eyebrow="Guide cocktails"
       title="Quel glaçon transparent choisir pour chaque cocktail ?"
       intro="Le bon format équilibre le verre, la température, la dilution et la mise en scène du cocktail. Voici comment choisir entre Collins, Old Fashioned, grand cube et sphère."
