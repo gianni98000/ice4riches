@@ -234,6 +234,12 @@ export default async function Home() {
               { name: "Le Bar Américain Monaco", src: "bar-americain.webp" },
               { name: "COYA Monte-Carlo", src: "coya-monte-carlo.webp" },
               { name: "The Maybourne Riviera", src: "maybourne-riviera.webp" },
+              { name: "Gustave — Hôtel Hermitage Monte-Carlo", src: "gustave.webp" },
+              { name: "Buddha-Bar Monte-Carlo", src: "buddha-bar.webp" },
+              { name: "Maison Albar Hotels", src: "maison-albar.svg" },
+              { name: "Mirazur", src: "mirazur.svg" },
+              { name: "Groupe Mauro Colagreco", src: "groupe-mauro-colagreco.jpg" },
+              { name: "MAMO Michelangelo", src: "mamo-michelangelo.png" },
             ].map((c) => (
               <div key={c.name}>
                 <Image
@@ -241,6 +247,7 @@ export default async function Home() {
                   alt={c.name}
                   width={180}
                   height={80}
+                  className={c.src.endsWith(".jpg") ? "reference-logo-photo" : undefined}
                 />
               </div>
             ))}
