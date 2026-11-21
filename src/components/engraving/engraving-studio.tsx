@@ -234,11 +234,12 @@ export function EngravingStudio() {
                 <label>Date souhaitée<input type="date" name="date-souhaitee" required onFocus={(event) => { event.currentTarget.min = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()); }} /></label>
               </div>
               <label>Adresse de livraison<input name="adresse" required maxLength={250} autoComplete="street-address" placeholder="Rue, code postal et ville" /></label>
-              <label>Livraison<select value={delivery} name="livraison" onChange={(event) => setDelivery(event.target.value as Delivery)}>
+              <label htmlFor="engraving-delivery">Livraison</label>
+              <select id="engraving-delivery" value={delivery} name="livraison" onChange={(event) => setDelivery(event.target.value as Delivery)}>
                 <option value="other">Autre ville · tarif sur confirmation</option>
                 <option value="cannes-1">Cannes · 1 tournée</option>
                 <option value="cannes-2">Cannes · 2 tournées</option>
-              </select></label>
+              </select>
               <details className={styles.details}>
                 <summary>Détail du prix · {price.quantity.toLocaleString("fr-FR")} glaçons</summary>
                 <dl className={styles.breakdown}>

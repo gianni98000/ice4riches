@@ -33,7 +33,7 @@ const faq = [
       "Le délai et les quantités acceptées sont confirmés directement pour chaque projet. Indiquez votre date et votre volume souhaités dès la première demande. La disponibilité n’est pas garantie avant confirmation par Ice4Riches.",
   },
   {
-    question: "Comment transmettre mon logo pour obtenir un devis ?",
+    question: "Comment envoyer mon logo pour la gravure ?",
     answer:
       "Déposez votre fichier PNG, JPG, WebP ou SVG dans l’atelier. Le diagnostic en ligne aide à repérer les détails fins ou les aplats. Le fichier et le motif sélectionné sont transmis avec votre commande pour validation.",
   },
@@ -78,7 +78,7 @@ export default function GravureClearIcePage() {
         {
           title: "Comment préparer votre commande ?",
           paragraphs: [
-            "Adressez votre visuel à hello@ice4riches.com ou sur WhatsApp au +377 6 40 62 29 56. Précisez le nombre de pièces souhaité, la date, la ville et le lieu de service. Les dimensions des verres et le type de cocktail aideront à étudier le format adapté.",
+            "Essayez votre logo sur un Deluxe Cube ou un Old Fashioned. Sélectionnez le nombre de cartons de 60 glaçons gravés sur le dessus, puis indiquez la date et l’adresse de livraison avant d’envoyer la commande.",
             "Après réception de votre commande, notre équipe confirme la faisabilité, le tarif et la livraison. Pour un autre format ou un emplacement différent, écrivez à hello@ice4riches.com.",
           ],
           bullets: ["Logo, initiales ou motif", "Quantités souhaitées", "Date et lieu de service", "Verres et format envisagé"],
