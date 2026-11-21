@@ -20,7 +20,7 @@ export const SEO_PAGES = [
   },
   {
     href: "/gravure-clear-ice-personnalisee",
-    label: "Gravure",
+    label: "Atelier gravure",
   },
   {
     href: "/clear-ice",

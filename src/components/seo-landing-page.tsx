@@ -38,8 +38,8 @@ type SeoLandingPageProps = {
   faq: FaqItem[];
   relatedLinks: RelatedLink[];
   areaServed?: string[];
-  quoteOnly?: boolean;
   children?: ReactNode;
+  studio?: ReactNode;
   entityType?: "Service" | "Article" | "Product";
   entityProperties?: Record<string, unknown>;
 };
@@ -55,12 +55,11 @@ export function SeoLandingPage({
   faq,
   relatedLinks,
   areaServed,
-  quoteOnly = false,
   children,
+  studio,
   entityType = "Service",
   entityProperties = {},
 }: SeoLandingPageProps) {
-  const quoteUrl = `https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Visuel, quantités, date et lieu : ")}`;
   const pageUrl = `${SITE_URL}${path}`;
   const structuredData = {
     "@context": "https://schema.org",
@@ -129,13 +128,13 @@ export function SeoLandingPage({
     <div className="min-h-screen overflow-hidden bg-[#0f0f0f]">
       <JsonLd data={structuredData} />
 
-      <SiteHeader contactHref={quoteOnly ? quoteUrl : undefined} />
+      <SiteHeader action={studio ? { href: "#atelier", label: "Créer mon glaçon" } : undefined} />
 
       <main>
-        <section className="relative overflow-hidden px-6 pb-24 pt-36 md:pb-32 md:pt-44">
+        <section className={studio ? "relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 md:pt-32" : "relative overflow-hidden px-6 pb-24 pt-36 md:pb-32 md:pt-44"}>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(201,169,98,0.16),transparent_48%)]" />
-          <div className="relative mx-auto max-w-5xl text-center">
-            <nav
+          <div className={studio ? "relative mx-auto max-w-6xl text-center" : "relative mx-auto max-w-5xl text-center"}>
+            {!studio && <nav
               aria-label="Fil d’Ariane"
               className="mb-8 text-xs uppercase tracking-[0.22em] text-[#f5f3ef]/40"
             >
@@ -146,7 +145,7 @@ export function SeoLandingPage({
                 /
               </span>
               <span className="text-[#c9a962]">{eyebrow}</span>
-            </nav>
+            </nav>}
 
             <p className="mb-6 text-xs uppercase tracking-[0.3em] text-[#c9a962]">
               {eyebrow}
@@ -154,23 +153,23 @@ export function SeoLandingPage({
             <h1 className="mx-auto max-w-4xl text-5xl font-light leading-tight md:text-7xl">
               {title}
             </h1>
-            <p className="mx-auto mt-8 max-w-3xl text-lg font-light leading-8 text-[#f5f3ef]/65 md:text-xl">
+            <p className={studio ? "mx-auto mt-3 max-w-2xl text-base leading-7 text-[#f5f3ef]/75 md:text-lg" : "mx-auto mt-8 max-w-3xl text-lg font-light leading-8 text-[#f5f3ef]/65 md:text-xl"}>
               {intro}
             </p>
-            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            {studio ?? <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <a
-                href={quoteOnly ? quoteUrl : ORDER_URL}
+                href={ORDER_URL}
                 className="bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f]"
               >
-                {quoteOnly ? "Demander un devis" : "Voir le catalogue"}
+                Voir le catalogue
               </a>
               <Link
-                href={quoteOnly ? "mailto:hello@ice4riches.com?subject=Devis%20gravure%20clear%20ice" : "/#produits"}
+                href="/#produits"
                 className="border border-[#c9a962]/50 px-8 py-4 text-sm font-semibold uppercase tracking-wider text-[#c9a962] transition-colors hover:bg-[#c9a962]/10"
               >
-                {quoteOnly ? "Écrire à notre équipe" : "Découvrir les produits"}
+                Découvrir les produits
               </Link>
-            </div>
+            </div>}
           </div>
         </section>
 
@@ -235,7 +234,7 @@ export function SeoLandingPage({
               Questions fréquentes
             </p>
             <h2 className="mt-4 text-center text-4xl font-light md:text-5xl">
-              {quoteOnly ? "Vos questions sur la personnalisation" : "L’essentiel avant de commander"}
+              {studio ? "Vos questions sur la personnalisation" : "L’essentiel avant de commander"}
             </h2>
             <div className="mt-12 divide-y divide-[#f5f3ef]/10 border-y border-[#f5f3ef]/10">
               {faq.map((item) => (
@@ -283,25 +282,23 @@ export function SeoLandingPage({
           </div>
         </section>
 
-        <section className="relative border-t border-[#f5f3ef]/10 px-6 py-24 text-center">
+        {!studio && <section className="relative border-t border-[#f5f3ef]/10 px-6 py-24 text-center">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,169,98,0.12),transparent_55%)]" />
           <div className="relative mx-auto max-w-3xl">
             <h2 className="text-4xl font-light md:text-5xl">
-              {quoteOnly ? "Votre projet, sur devis" : "Un format de glace pour chaque service"}
+              Un format de glace pour chaque service
             </h2>
             <p className="mx-auto mt-5 max-w-2xl leading-7 text-[#f5f3ef]/55">
-              {quoteOnly
-                ? "Envoyez votre logo ou motif, les quantités souhaitées, la date et le lieu. Notre équipe confirme la faisabilité, le tarif et le délai directement avec vous."
-                : "Consultez les formats disponibles, composez votre demande et envoyez-la directement à Ice4Riches via WhatsApp."}
+              Consultez les formats disponibles, composez votre demande et envoyez-la directement à Ice4Riches via WhatsApp.
             </p>
             <a
-              href={quoteOnly ? quoteUrl : ORDER_URL}
+              href={ORDER_URL}
               className="mt-9 inline-block bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-10 py-4 text-sm font-semibold uppercase tracking-wider text-[#0f0f0f]"
             >
-              {quoteOnly ? "Parlons de votre personnalisation" : "Commander"}
+              Commander
             </a>
           </div>
-        </section>
+        </section>}
       </main>
 
       <DiscoveryLinks currentPath={path} />

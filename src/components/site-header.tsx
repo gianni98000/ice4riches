@@ -8,10 +8,10 @@ import { useEffect, useRef, useState } from "react";
 type SiteHeaderProps = {
   productsHref?: string;
   cinematic?: boolean;
-  contactHref?: string;
+  action?: { href: string; label: string };
 };
 
-export function SiteHeader({ productsHref = "/#produits", cinematic = false, contactHref }: SiteHeaderProps) {
+export function SiteHeader({ productsHref = "/#produits", cinematic = false, action }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -35,7 +35,7 @@ export function SiteHeader({ productsHref = "/#produits", cinematic = false, con
     setMenuOpen(false);
   }
 
-  const navigation = cinematic ? [{ href: "#produits", label: "La collection" }, { href: "#ice-lab", label: "Ice Lab" }, { href: "#personnalisation", label: "Sur mesure" }, { href: "/fondateur", label: "La maison" }] : [{ href: productsHref, label: "Produits" }, ...SEO_PAGES];
+  const navigation = cinematic ? [{ href: "#produits", label: "La collection" }, { href: "#ice-lab", label: "Ice Lab" }, { href: "/gravure-clear-ice-personnalisee", label: "Atelier gravure" }, { href: "/fondateur", label: "La maison" }] : [{ href: productsHref, label: "Produits" }, ...SEO_PAGES];
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 glass-effect ${cinematic ? "cinema-header" : ""}`}>
@@ -91,11 +91,11 @@ export function SiteHeader({ productsHref = "/#produits", cinematic = false, con
           </button>
 
           <Link
-            href={contactHref ?? ORDER_URL}
+            href={action?.href ?? ORDER_URL}
             onClick={closeMenu}
             className="bg-gradient-to-r from-[#9a7b3e] via-[#c9a962] to-[#9a7b3e] px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#0f0f0f] transition-shadow hover:shadow-[0_0_30px_rgba(201,169,98,0.4)] sm:px-6 sm:text-sm"
           >
-            {contactHref ? "Devis" : "Commander"}
+            {action?.label ?? "Commander"}
           </Link>
         </div>
       </div>

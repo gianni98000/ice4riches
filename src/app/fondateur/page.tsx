@@ -9,7 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = createPageMetadata({
   path: "/fondateur",
   title: "Gianni Angelini, fondateur d’Ice4Riches",
-  description: "Gianni Angelini, fondateur d’Ice4Riches : clear ice pour cocktails, formats de glaçons transparents et gravure personnalisée sur devis.",
+  description: "Gianni Angelini, fondateur d’Ice4Riches : clear ice pour cocktails, formats de glaçons transparents et atelier de gravure personnalisée.",
 });
 
 export default function FondateurPage() {

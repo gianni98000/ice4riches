@@ -1,19 +1,21 @@
+import { EngravingStudio } from "@/components/engraving/engraving-studio";
+import { ENGRAVING_PATH } from "@/lib/engraving";
 import { SeoLandingPage } from "@/components/seo-landing-page";
 import { LOCAL_PAGES } from "@/lib/local-pages";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  path: "/gravure-clear-ice-personnalisee",
+  path: ENGRAVING_PATH,
   title: "Gravure de clear ice et glaçons personnalisés",
   description:
-    "Clear ice gravée avec logo, initiales ou motif. Personnalisation sur devis à Monaco, Nice, Cannes, Antibes et Saint-Tropez pour bars, hôtels et événements.",
+    "Testez votre logo sur un glaçon de clear ice en 3D, calculez le prix et envoyez votre commande en ligne. Atelier Ice4Riches sur la Côte d’Azur.",
 });
 
 const faq = [
   {
     question: "Où demander des glaçons personnalisés avec un logo sur la Côte d’Azur ?",
     answer:
-      "Ice4Riches propose la gravure et la personnalisation de clear ice sur devis pour Monaco, Nice, Cannes, Antibes et Saint-Tropez. Contactez hello@ice4riches.com ou WhatsApp au +377 6 40 62 29 56 avec votre visuel, les quantités, la date et le lieu. Les modalités de livraison sont confirmées selon le projet.",
+      "Importez votre logo dans l’atelier Ice4Riches, choisissez le format et la quantité puis indiquez votre date et adresse. L’équipe confirme les modalités de livraison à Monaco, Nice, Cannes, Antibes et Saint-Tropez.",
   },
   {
     question: "Peut-on graver un logo, des initiales ou un motif dans un glaçon ?",
@@ -23,7 +25,7 @@ const faq = [
   {
     question: "Quel est le prix des glaçons gravés ?",
     answer:
-      "La gravure est proposée sur devis. Le tarif est confirmé après étude du visuel, du format, des quantités et du lieu de livraison. Les prix du catalogue standard ne constituent pas un tarif de personnalisation.",
+      "L’atelier calcule le prix estimatif des glaçons, de la gravure, du calibrage et de la TVA. Le coût de livraison est calculé pour les tournées à Cannes et confirmé par l’équipe pour les autres destinations.",
   },
   {
     question: "Quel délai et quelle quantité minimum prévoir pour une personnalisation ?",
@@ -33,28 +35,28 @@ const faq = [
   {
     question: "Comment transmettre mon logo pour obtenir un devis ?",
     answer:
-      "Envoyez votre visuel par e-mail à hello@ice4riches.com ou sur WhatsApp au +377 6 40 62 29 56. Ajoutez les quantités, la date, la ville, le lieu et, si possible, les dimensions des verres. L’équipe vous indiquera les éléments complémentaires nécessaires à l’étude.",
+      "Déposez votre fichier PNG, JPG, WebP ou SVG dans l’atelier. Le diagnostic en ligne aide à repérer les détails fins ou les aplats. Le fichier et le motif sélectionné sont transmis avec votre commande pour validation.",
   },
   {
-    question: "La personnalisation se commande-t-elle dans la boutique en ligne ?",
+    question: "Comment commander des glaçons personnalisés ?",
     answer:
-      "Non. La gravure et la personnalisation sont traitées uniquement sur devis, par contact direct avec Ice4Riches. Elles ne sont pas proposées comme option dans les commandes en ligne.",
+      "Vous pouvez envoyer votre commande directement depuis l’atelier. Ice4Riches vous contacte pour confirmer le logo, le tarif et la livraison, puis le paiement intégral se fait par virement avant production.",
   },
 ];
 
 export default function GravureClearIcePage() {
   return (
     <SeoLandingPage
-      path="/gravure-clear-ice-personnalisee"
-      serviceName="Gravure et personnalisation de clear ice sur devis"
-      eyebrow="Clear Ice sur mesure"
-      title="Gravure de clear ice et glaçons personnalisés"
-      intro="Ice4Riches personnalise la clear ice avec un logo, des initiales ou un motif pour les bars, hôtels, marques et événements privés. Cette prestation est proposée sur devis à Monaco, Nice, Cannes, Antibes et Saint-Tropez, avec étude du visuel et confirmation des modalités pour chaque projet."
-      quoteOnly
+      path={ENGRAVING_PATH}
+      serviceName="Atelier de gravure et personnalisation de clear ice"
+      eyebrow="Gravure sur mesure"
+      title="Atelier de gravure Clear Ice"
+      intro="Essayez votre logo sur la glace, affinez le rendu et commandez vos glaçons gravés."
+      studio={<EngravingStudio />}
       areaServed={LOCAL_PAGES.map((page) => page.city)}
       highlights={[
         { value: "Logo, initiales, motif", label: "Une signature adaptée à votre projet" },
-        { value: "Sur devis", label: "Contact direct par WhatsApp ou e-mail" },
+        { value: "Estimation en direct", label: "Glace, gravure et calibrage" },
         { value: "Côte d’Azur", label: "De Monaco à Saint-Tropez, modalités à confirmer" },
       ]}
       sections={[
@@ -74,10 +76,10 @@ export default function GravureClearIcePage() {
           bullets: ["Bars et hôtels", "Mariages et réceptions privées", "Événements de marque", "Yachts et conciergeries"],
         },
         {
-          title: "Comment préparer votre demande de devis ?",
+          title: "Comment préparer votre commande ?",
           paragraphs: [
             "Adressez votre visuel à hello@ice4riches.com ou sur WhatsApp au +377 6 40 62 29 56. Précisez le nombre de pièces souhaité, la date, la ville et le lieu de service. Les dimensions des verres et le type de cocktail aideront à étudier le format adapté.",
-            "Notre équipe étudie votre demande et confirme le format, la faisabilité, le tarif, le délai et les modalités de livraison. La gravure et la personnalisation se traitent par contact direct, exclusivement sur devis.",
+            "Après réception de votre commande, notre équipe confirme la faisabilité, le tarif et la livraison. Pour un autre format ou un emplacement différent, écrivez à hello@ice4riches.com.",
           ],
           bullets: ["Logo, initiales ou motif", "Quantités souhaitées", "Date et lieu de service", "Verres et format envisagé"],
         },

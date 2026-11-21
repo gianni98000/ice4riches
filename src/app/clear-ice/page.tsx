@@ -6,7 +6,7 @@ import { ICE_FORMATS } from "@/lib/ice-fit";
 export const metadata = createPageMetadata({
   path: "/clear-ice",
   title: "Clear ice : glaçons transparents, formats et gravure",
-  description: "Qu’est-ce que la clear ice ? Comparez les formats Ice4Riches, choisissez votre verre et préparez une livraison ou une gravure personnalisée sur devis.",
+  description: "Qu’est-ce que la clear ice ? Comparez les formats Ice4Riches, choisissez votre verre et préparez une livraison ou une gravure personnalisée dans l’atelier.",
 });
 
 export default function ClearIcePage() {
@@ -18,7 +18,7 @@ export default function ClearIcePage() {
       highlights={[
         { value: "4 formats", label: "Cube, Old Fashioned, Collins et sphère" },
         { value: "Le bon verre", label: "Dimensions et usages à comparer avant la commande" },
-        { value: "Gravure sur devis", label: "Logo, initiales ou motif selon faisabilité" },
+        { value: "Atelier de gravure", label: "Logo, initiales ou motif selon faisabilité" },
       ]}
       sections={[
         { title: "Qu’est-ce que la clear ice ?", paragraphs: [
@@ -34,18 +34,18 @@ export default function ClearIcePage() {
           "Le catalogue affiche les références, conditionnements et prix TTC. Après avoir choisi les quantités, transmettez votre demande par WhatsApp avec la date et l’adresse. Les disponibilités, délais et conditions de livraison sont confirmés avant le service.",
         ] },
         { title: "Comment demander une gravure de clear ice ?", paragraphs: [
-          "Pour des glaçons personnalisés avec un logo, des initiales ou un motif, envoyez votre visuel, les quantités, la date et le lieu à hello@ice4riches.com ou par WhatsApp au +377 6 40 62 29 56.",
-          "La gravure est exclusivement sur devis. L’équipe étudie le format, l’emplacement du motif, la faisabilité, le tarif et le délai. Cette prestation ne se commande pas comme une option dans le panier en ligne.",
+          "Pour des glaçons personnalisés avec un logo, des initiales ou un motif, importez votre visuel dans l’atelier de gravure Ice4Riches.",
+          "L’atelier propose un aperçu sur deux formats, une estimation et l’envoi de la commande en ligne. L’équipe valide le visuel et les modalités avant production.",
         ] },
       ]}
       faq={[
         { question: "Clear ice et glaçons transparents désignent-ils le même produit ?", answer: "Oui. Clear ice est l’expression anglaise utilisée pour la glace transparente, également appelée glace cristalline. Il faut ensuite préciser le format, les dimensions et les quantités recherchés." },
         { question: "Ice4Riches propose-t-il de la clear ice aux professionnels ?", answer: "Oui. Ice4Riches s’adresse aux bars, hôtels, restaurants, traiteurs, yachts et organisateurs d’événements. Les besoins récurrents et les réceptions ponctuelles sont étudiés en fonction des formats, volumes, dates et lieux de service." },
-        { question: "La clear ice peut-elle porter mon logo ?", answer: "Ice4Riches propose une prestation de gravure et personnalisation avec logo, initiales ou motif, exclusivement sur devis. La faisabilité et le rendu sont étudiés selon le visuel et le format envisagé." },
+        { question: "La clear ice peut-elle porter mon logo ?", answer: "Ice4Riches propose une prestation de gravure et personnalisation avec logo, initiales ou motif dans l’atelier de gravure. La faisabilité et le rendu sont étudiés selon le visuel et le format envisagé." },
         { question: "La clear ice fond-elle toujours moins vite ?", answer: "Non. La transparence ne garantit pas une durée de fonte. La taille, la forme, la masse de glace, les températures et le mouvement dans le verre influencent le refroidissement et la dilution." },
       ]}
       relatedLinks={[
-        { href: "/gravure-clear-ice-personnalisee", title: "Gravure et glaçons personnalisés", description: "Les informations à transmettre pour votre devis de personnalisation." },
+        { href: "/gravure-clear-ice-personnalisee", title: "Gravure et glaçons personnalisés", description: "Testez votre logo, calculez le prix et commandez vos glaçons gravés." },
         { href: "/glacons-pour-cocktails", title: "Le guide des cocktails", description: "Comparez les formats selon les verres, recettes et conditions de service." },
         { href: "/livraison-glacons-cote-d-azur", title: "Livraison sur la Côte d’Azur", description: "Préparez votre demande de Monaco à Saint-Tropez." },
       ]}

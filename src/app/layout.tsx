@@ -6,7 +6,7 @@ import "./globals.css";
 const siteUrl = SITE_URL;
 const siteTitle = "Ice4Riches | Clear Ice & gravure sur mesure";
 const siteDescription =
-  "Clear ice pour cocktails et gravure de glaçons sur devis. Cube, Collins, Old Fashioned et sphère : Monaco, Nice, Cannes, Antibes, Saint-Tropez.";
+  "Clear ice pour cocktails et atelier de gravure de glaçons. Cube, Collins, Old Fashioned et sphère : Monaco, Nice, Cannes, Antibes, Saint-Tropez.";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],

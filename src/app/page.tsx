@@ -1,3 +1,4 @@
+import { ENGRAVING_PATH } from "@/lib/engraving";
 import { DiscoveryLinks } from "@/components/discovery-links";
 import { LiquidMark } from "@/components/liquid-mark";
 import { JsonLd } from "@/components/json-ld";
@@ -30,7 +31,7 @@ const homeFaq = [
   {
     question: "Peut-on personnaliser ou faire graver sa Clear Ice ?",
     answer:
-      "Oui. Ice4Riches propose la gravure et la personnalisation de Clear Ice avec un logo, des initiales ou un motif pour les bars, hôtels, marques et événements privés. Envoyez votre visuel, les quantités, la date et le lieu par WhatsApp ou par e-mail pour un devis. Le format, la faisabilité, le tarif et le délai sont confirmés selon le projet. Cette prestation se demande directement auprès de notre équipe.",
+      "Oui. Ice4Riches propose la gravure et la personnalisation de Clear Ice avec un logo, des initiales ou un motif pour les bars, hôtels, marques et événements privés. Importez votre visuel dans l’atelier, essayez-le en 3D et calculez votre prix. Vous pouvez ensuite envoyer votre commande en ligne. Le motif et la livraison sont validés par l’équipe.",
   },
   {
     question: "Qu’est-ce que la glace cristalline ?",
@@ -133,8 +134,8 @@ export default async function Home() {
         <section className="clear-ice-intro" aria-labelledby="clear-ice-offer">
           <h2 id="clear-ice-offer">Clear ice et gravure sur mesure.</h2>
           <p>Ice4Riches fournit des glaçons transparents pour les cocktails des bars, hôtels, restaurants, yachts et événements. Cube, Old Fashioned, Collins ou sphère : choisissez votre format pour Monaco, Nice, Cannes, Antibes et Saint-Tropez. Les demandes pour Paris et l’international sont étudiées avec notre équipe.</p>
-          <p>Pour signer un cocktail, la gravure de clear ice avec logo, initiales ou motif se demande exclusivement sur devis.</p>
-          <div><Link href="/clear-ice">Comprendre et choisir la clear ice →</Link><Link href="/gravure-clear-ice-personnalisee">Découvrir la gravure →</Link></div>
+          <p>Importez votre logo dans notre atelier de gravure pour le voir sur la glace, calculer le prix et commander.</p>
+          <div><Link href="/clear-ice">Comprendre et choisir la clear ice →</Link><Link href={ENGRAVING_PATH}>Essayer l’atelier de gravure</Link></div>
         </section>
         <IceLab products={catalog.filter((p) => p.category === "Ice")} />
         <section id="produits" className="collection-section">
@@ -273,19 +274,11 @@ export default async function Home() {
               de votre maison jusque dans le verre.
             </p>
             <p>
-              Partagez votre visuel, vos quantités, votre date et votre lieu.
-              Nous étudions le format, la faisabilité et le devis avec vous.
+              Testez votre logo sur un glaçon en 3D, choisissez votre format et
+              commandez directement dans l’atelier.
             </p>
-            <a
-              className="button"
-              href={`https://wa.me/377640622956?text=${encodeURIComponent("Bonjour Ice4Riches, je souhaite un devis pour une gravure de clear ice. Visuel, quantités, date et lieu : ")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link className="button" href={ENGRAVING_PATH}>
               Créer ma signature
-            </a>
-            <Link className="text-link" href="/gravure-clear-ice-personnalisee">
-              Découvrir la gravure et la personnalisation
             </Link>
             <a className="text-link" href={ORDER_ACCESSORIES_URL}>
               Voir les outils de service

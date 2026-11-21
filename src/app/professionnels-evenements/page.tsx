@@ -66,7 +66,7 @@ export default function ProfessionnelsEvenementsPage() {
           title: "Gravure et personnalisation de Clear Ice",
           paragraphs: [
             "Ice4Riches propose des glaçons personnalisés : logo d’un hôtel ou d’une marque, initiales pour un mariage, motif pour une réception ou un lancement. La gravure apporte une signature visuelle à vos cocktails, dans les bars, sur les yachts et lors de vos événements.",
-            "Cette prestation sur mesure est proposée sur devis, par contact direct avec notre équipe. Envoyez votre visuel, les quantités, la date et le lieu à hello@ice4riches.com ou sur WhatsApp au +377 6 40 62 29 56. Le format de glace, l’emplacement du motif, la faisabilité, le tarif et le délai sont confirmés selon le projet.",
+            "Depuis l’atelier de gravure, importez votre visuel, simulez le rendu et le prix, puis envoyez votre commande avec la date et le lieu de livraison. Le format de glace, l’emplacement du motif, la faisabilité, le tarif et le délai sont confirmés selon le projet.",
           ],
         },
         {
@@ -109,7 +109,7 @@ export default function ProfessionnelsEvenementsPage() {
         {
           href: "/gravure-clear-ice-personnalisee",
           title: "Gravure et personnalisation de Clear Ice",
-          description: "Logo, initiales ou motif : préparez votre projet sur devis avec notre équipe.",
+          description: "Testez votre logo, calculez un prix et commandez vos glaçons gravés.",
         },
         {
           href: "/glacons-pour-cocktails",

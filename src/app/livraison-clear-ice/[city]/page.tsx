@@ -83,7 +83,7 @@ export default async function LocalClearIcePage({ params }: PageProps) {
       faq={[
         {
           question: `Peut-on demander des glaçons gravés à ${page.city} ?`,
-          answer: `Oui. Ice4Riches propose la gravure et la personnalisation de Clear Ice sur devis pour vos projets à ${page.city}. Envoyez votre logo, vos initiales ou votre motif, les quantités, la date et le lieu à hello@ice4riches.com ou par WhatsApp au +377 6 40 62 29 56. La faisabilité, le tarif et le délai sont confirmés directement. Cette prestation ne se commande pas dans le catalogue en ligne.`,
+          answer: `Oui. L’atelier en ligne permet de visualiser votre logo, d’estimer le prix et de commander de la clear ice gravée pour vos projets à ${page.city}. Importez votre logo, vos initiales ou votre motif et indiquez les quantités, la date et le lieu à hello@ice4riches.com ou par WhatsApp au +377 6 40 62 29 56. La faisabilité, le tarif et le délai sont confirmés directement. Cette prestation ne se commande pas dans le catalogue en ligne.`,
         },
         {
           question: `Ice4Riches livre-t-il la Clear Ice à ${page.city} ?`,
@@ -114,7 +114,7 @@ export default async function LocalClearIcePage({ params }: PageProps) {
         {
           href: "/gravure-clear-ice-personnalisee",
           title: `Gravure de Clear Ice à ${page.city}`,
-          description: "Découvrez la personnalisation avec logo, initiales ou motif, exclusivement sur devis.",
+          description: "Testez votre logo sur la glace et envoyez votre commande en ligne.",
         },
         {
           href: "/livraison-glacons-cote-d-azur",

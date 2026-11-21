@@ -57,6 +57,8 @@ for url in urls:
                     assert normalize(item['acceptedAnswer']['text']) in visible, (path,'answer mismatch')
     if path=='/gravure-clear-ice-personnalisee':
         assert not any(href.startswith('/order') for href in p.links)
+        assert '#atelier' in p.links and 'Importer mon logo' in visible
+        assert 'Envoyer ma commande' in visible
     if path.startswith('/clear-ice/'):
         product=[node for script in p.scripts for node in script.get('@graph',[]) if node.get('@type')=='Product'][0]
         assert product['width']['unitCode']=='MMT' and 'offers' not in product
@@ -66,4 +68,4 @@ assert any('noindex' in r for r in order.robots)
 robots=(ROOT/'robots.txt.body').read_text()
 assert 'User-Agent: *' in robots and 'Allow: /' in robots and 'Disallow: /' not in robots
 assert SITE+'/sitemap.xml' in robots
-print('PASS: 18 indexable pages, internal links, matching visible/schema FAQs, quote-only engraving, order excluded, crawl allowed')
+print('PASS: 18 indexable pages, internal links, matching visible/schema FAQs, engraving studio, order excluded, crawl allowed')

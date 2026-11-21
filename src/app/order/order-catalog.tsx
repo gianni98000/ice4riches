@@ -3,6 +3,7 @@
 import type { OrderProduct } from "@/lib/order-catalog";
 import Image from "next/image";
 import Link from "next/link";
+import { ENGRAVING_PATH } from "@/lib/engraving";
 import type { FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -364,6 +365,9 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
               Vous choisissez si vos coordonnées doivent être mémorisées dans
               votre navigateur.
             </p>
+            <Link href={ENGRAVING_PATH} className="mt-5 inline-block text-[#e4d5a8] underline underline-offset-4">
+              Commander des glaçons avec mon logo
+            </Link>
             <div className="mt-7 flex flex-wrap gap-3 text-sm text-[#f5f3ef]/60">
               <span className="border border-[#f5f3ef]/10 px-4 py-2">
                 Livraison

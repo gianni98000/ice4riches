@@ -50,7 +50,7 @@ export default async function ClearIceFormatPage({ params }: Props) {
           "Notre équipe confirme les modalités pour Monaco, Nice, Cannes, Antibes, Saint-Tropez, Paris ou une autre destination. Un panier préparé ne constitue pas une confirmation de livraison.",
         ] },
         { title: "Vous souhaitez une gravure ?", paragraphs: [
-          "La personnalisation avec logo, initiales ou motif est une prestation distincte, exclusivement sur devis. Envoyez votre visuel, le format envisagé, les quantités, la date et le lieu à hello@ice4riches.com. La faisabilité sur ce format est étudiée avant confirmation ; aucune option de gravure n’est ajoutée au panier en ligne.",
+          "L’atelier en ligne permet d’essayer votre logo sur le Deluxe Cube ou l’Old Fashioned, de calculer un prix et de commander. Pour un autre format ou un emplacement différent, contactez hello@ice4riches.com.",
         ] },
       ]}
       faq={[
@@ -61,7 +61,7 @@ export default async function ClearIceFormatPage({ params }: Props) {
       relatedLinks={[
         { href: "/#ice-lab", title: "Vérifier votre verre dans Ice Lab", description: "Comparez vos mesures aux dimensions de la glace avec nos marges de service." },
         { href: "/glacons-pour-cocktails", title: "Comparer les formats", description: "Associez cube, Collins, Old Fashioned et sphère à votre cocktail." },
-        { href: "/gravure-clear-ice-personnalisee", title: "Gravure de clear ice", description: "Préparez votre demande de personnalisation sur devis." },
+        { href: "/gravure-clear-ice-personnalisee", title: "Gravure de clear ice", description: "Essayez votre logo dans l’atelier de gravure." },
       ]}
     >
       <figure className="mx-auto max-w-3xl px-6 pt-16">
