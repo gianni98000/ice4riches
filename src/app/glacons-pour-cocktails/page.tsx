@@ -92,10 +92,10 @@ export default function GlaconsPourCocktailsPage() {
       faq={faq}
       relatedLinks={[
         {
-          href: "/#contact",
-          title: "De la Côte d’Azur au monde",
+          href: "/livraison-glacons-france",
+          title: "Livraison partout en France",
           description:
-            "Découvrez l’origine Ice4Riches et notre service de livraison internationale.",
+            "Préparez la livraison de vos glaçons pour votre établissement ou votre événement partout en France.",
         },
         {
           href: "/professionnels-evenements",

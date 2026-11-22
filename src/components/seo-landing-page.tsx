@@ -86,7 +86,7 @@ export function SeoLandingPage({
           "@id": `${SITE_URL}/#organization`,
         },
         areaServed: areaServed?.map((name) => ({
-          "@type": "City",
+          "@type": name === "France" ? "Country" : "City",
           name,
         })) ?? "Worldwide" } : {}),
         ...(entityType === "Article" ? { headline: title, inLanguage: "fr-FR", author: { "@id": `${SITE_URL}/#organization` } } : {}),
@@ -313,8 +313,8 @@ export function SeoLandingPage({
               ICE4RICHES
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-[#f5f3ef]/40">
-              Glace cristalline premium née sur la Côte d’Azur et livrée dans le
-              monde entier.
+              Glace cristalline premium née sur la Côte d’Azur, livrée partout en
+              France et à Monaco. À l’international, contactez notre équipe.
             </p>
           </div>
           <div>

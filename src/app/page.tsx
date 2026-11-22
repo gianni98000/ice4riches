@@ -25,8 +25,8 @@ const money = new Intl.NumberFormat("fr-FR", {
 });
 const homeFaq = [
   {
-    question: "Où acheter de la clear ice sur la Côte d’Azur ?",
-    answer: "Ice4Riches propose des glaçons transparents pour les bars, hôtels, restaurants, yachts et événements à Monaco, Nice, Cannes, Antibes et Saint-Tropez. Choisissez les formats au catalogue et transmettez votre demande par WhatsApp. La disponibilité et la livraison sont confirmées directement avec l’équipe.",
+    question: "Livrez-vous de la clear ice partout en France ?",
+    answer: "Oui. Ice4Riches livre ses glaçons transparents partout en France, ainsi qu’à Monaco, pour les bars, hôtels, restaurants, yachts et événements. Choisissez les formats au catalogue et transmettez votre demande par WhatsApp. L’équipe confirme les disponibilités, les frais et le créneau de livraison selon votre adresse et vos quantités.",
   },
   {
     question: "Peut-on personnaliser ou faire graver sa Clear Ice ?",
@@ -133,7 +133,7 @@ export default async function Home() {
         />
         <section className="clear-ice-intro" aria-labelledby="clear-ice-offer">
           <h2 id="clear-ice-offer">Clear ice et gravure sur mesure.</h2>
-          <p>Ice4Riches fournit des glaçons transparents pour les cocktails des bars, hôtels, restaurants, yachts et événements. Cube, Old Fashioned, Collins ou sphère : choisissez votre format pour Monaco, Nice, Cannes, Antibes et Saint-Tropez. Les demandes pour Paris et l’international sont étudiées avec notre équipe.</p>
+          <p>Ice4Riches fournit des glaçons transparents pour les cocktails des bars, hôtels, restaurants, yachts et événements. Cube, Old Fashioned, Collins ou sphère : choisissez votre format, avec livraison partout en France et à Monaco. Pour l’international, contactez notre équipe.</p>
           <p>Importez votre logo dans notre atelier de gravure pour le voir sur la glace, calculer le prix et commander.</p>
           <div><Link href="/clear-ice">Comprendre et choisir la clear ice →</Link><Link href={ENGRAVING_PATH}>Essayer l’atelier de gravure</Link></div>
         </section>
@@ -305,6 +305,7 @@ export default async function Home() {
             Parlons de votre établissement
           </a>
           <nav className="city-links" aria-label="Informations de livraison">
+            <Link href="/livraison-glacons-france">Toute la France</Link>
             {[
               { city: "Monaco", slug: "monaco" },
               { city: "Cannes", slug: "cannes" },
@@ -318,8 +319,8 @@ export default async function Home() {
             ))}
           </nav>
           <p>
-            Disponibilités et modalités de livraison confirmées avec notre
-            équipe.
+            Livraison partout en France et à Monaco. Disponibilités, frais et
+            créneaux confirmés avec notre équipe.
           </p>
         </section>
       </main>
@@ -330,7 +331,7 @@ export default async function Home() {
         </Link>
         <div className="footer-links">
           <p>
-            Clear ice, Côte d’Azur.
+            Clear ice, livraison partout en France.
             <br />© {new Date().getFullYear()} Ice4Riches
           </p>
           <nav aria-label="Informations">

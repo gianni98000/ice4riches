@@ -22,7 +22,7 @@ const faq = [
   {
     question: "Quelles villes peut-on indiquer dans une demande ?",
     answer:
-      "Vous pouvez notamment indiquer Nice, Cannes, Antibes, Monaco, Saint-Tropez ou une autre destination. Ice4Riches étudie les demandes en France et à l’international, puis confirme les possibilités selon le lieu, la date et les quantités.",
+      "Ice4Riches livre partout en France et à Monaco, notamment à Nice, Cannes, Antibes et Saint-Tropez. Indiquez votre adresse, la date et les quantités pour confirmer les frais et le créneau. Les demandes internationales sont étudiées avec notre équipe.",
   },
   {
     question: "Quel est le minimum de commande ?",

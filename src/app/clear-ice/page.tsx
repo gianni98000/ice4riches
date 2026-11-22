@@ -30,7 +30,7 @@ export default function ClearIcePage() {
           "Mesurez l’ouverture, la hauteur utile et le passage intérieur du verre. Pour un bloc carré dans un verre rond, vérifiez la diagonale de la section, pas seulement sa largeur. Ice Lab vous aide à comparer les mesures avec une marge de service.",
         ] },
         { title: "Où acheter de la clear ice ?", paragraphs: [
-          "Ice4Riches fournit de la clear ice pour les établissements et événements sur la Côte d’Azur : Monaco, Nice, Cannes, Antibes et Saint-Tropez. Les demandes pour Paris et les autres destinations sont étudiées directement avec l’équipe.",
+          "Ice4Riches livre de la clear ice partout en France et à Monaco pour les établissements et événements. Paris, Lyon, Bordeaux, Lille ou la Côte d’Azur : indiquez votre adresse pour préparer votre livraison. Pour l’international, contactez notre équipe.",
           "Le catalogue affiche les références, conditionnements et prix TTC. Après avoir choisi les quantités, transmettez votre demande par WhatsApp avec la date et l’adresse. Les disponibilités, délais et conditions de livraison sont confirmés avant le service.",
         ] },
         { title: "Comment demander une gravure de clear ice ?", paragraphs: [
@@ -47,7 +47,7 @@ export default function ClearIcePage() {
       relatedLinks={[
         { href: "/gravure-clear-ice-personnalisee", title: "Gravure et glaçons personnalisés", description: "Testez votre logo, calculez le prix et commandez vos glaçons gravés." },
         { href: "/glacons-pour-cocktails", title: "Le guide des cocktails", description: "Comparez les formats selon les verres, recettes et conditions de service." },
-        { href: "/livraison-glacons-cote-d-azur", title: "Livraison sur la Côte d’Azur", description: "Préparez votre demande de Monaco à Saint-Tropez." },
+        { href: "/livraison-glacons-france", title: "Livraison partout en France", description: "Choisissez vos formats et préparez votre livraison, quelle que soit votre ville." },
       ]}
     >
       <section className="mx-auto max-w-5xl px-6 pt-16" aria-labelledby="formats-table">

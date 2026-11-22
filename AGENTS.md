@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Faire connaître ICE4riches et générer des demandes qualifiées pour la livraison de clear ice à Monaco, Cannes, Saint-Tropez, Nice et Antibes, sans jamais inventer de disponibilité, de prix, de délai, d'adresse d'accueil ou de référence client.
+Faire connaître ICE4riches et générer des demandes qualifiées pour la livraison de clear ice partout en France et à Monaco, sans jamais inventer de disponibilité, de prix, de délai, d'adresse d'accueil ou de référence client.
 
 ## Réseau social officiel
 
@@ -15,7 +15,7 @@ Faire connaître ICE4riches et générer des demandes qualifiées pour la livrai
 
 - Écrire principalement en français, avec un ton premium, précis et sobre.
 - Mettre en avant la clarté, la lenteur de dilution, le service professionnel et les usages cocktails, hôtellerie, restauration et événements.
-- Employer naturellement les zones stratégiques : Monaco, Cannes, Saint-Tropez, Nice et Antibes.
+- Présenter clairement la livraison partout en France et à Monaco. La Côte d’Azur est l’origine de la marque, pas une limite de livraison. Les pages locales peuvent conserver leur ancrage géographique. Les frais et créneaux restent à confirmer pour chaque commande ; les demandes internationales sont étudiées avec l’équipe.
 - Ne pas surcharger les textes de mots-clés ou de hashtags.
 - Ne jamais publier de données personnelles, de secrets, de jetons, de captures d'écran internes ou d'informations logistiques non publiques.
 - Ne jamais présenter une entreprise comme cliente sans preuve et autorisation.

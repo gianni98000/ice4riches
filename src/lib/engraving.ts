@@ -29,5 +29,5 @@ export function engravingPrice(format: Format, boxes: number, delivery: Delivery
 export const DELIVERY_LABELS: Record<Delivery, string> = {
   "cannes-1": "Cannes · 1 tournée",
   "cannes-2": "Cannes · 2 tournées",
-  other: "Autre ville · livraison à confirmer",
+  other: "Toute la France et Monaco · tarif sur confirmation",
 };

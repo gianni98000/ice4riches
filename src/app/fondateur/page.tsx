@@ -28,7 +28,7 @@ export default function FondateurPage() {
               Entrepreneur basé à Monaco, Gianni Angelini a fondé Ice4Riches avec une idée simple : faire de la glace un élément à part entière de l’expérience du cocktail.
             </p>
             <p>
-              La marque développe une glace cristalline premium destinée aux bars, restaurants, hôtels et événements. Le travail porte autant sur la transparence et le format des glaçons que sur leur intégration dans un service exigeant, de la Côte d’Azur à l’international.
+              La marque développe une glace cristalline premium destinée aux bars, restaurants, hôtels et événements. Le travail porte autant sur la transparence et le format des glaçons que sur leur intégration dans un service exigeant, partout en France, à Monaco et, sur demande, à l’international.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-4 font-[family-name:var(--font-outfit)] text-sm uppercase tracking-wider">

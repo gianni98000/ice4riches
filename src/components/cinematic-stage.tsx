@@ -113,7 +113,7 @@ export function CinematicStage({
     <section ref={stageRef} className={styles.stage} aria-labelledby="cinematic-stage-title">
       <div className={styles.intro}>
         <h1 id="cinematic-stage-title">La <span className={styles.iceWord}><LiquidMark text="glace" /></span> change le verre.</h1>
-        <p>La clear ice de la Côte d’Azur, pensée pour le service.</p>
+        <p>La clear ice pensée pour le service, livrée partout en France.</p>
       </div>
       <div className={styles.frame}>
         {/* Decorative media: the surrounding text carries the meaning. */}

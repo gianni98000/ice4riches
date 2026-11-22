@@ -6,7 +6,7 @@ import "./globals.css";
 const siteUrl = SITE_URL;
 const siteTitle = "Ice4Riches | Clear Ice & gravure sur mesure";
 const siteDescription =
-  "Clear ice pour cocktails et atelier de gravure de glaçons. Cube, Collins, Old Fashioned et sphère : Monaco, Nice, Cannes, Antibes, Saint-Tropez.";
+  "Clear ice et glaçons personnalisés livrés partout en France et à Monaco. Cube, Collins, Old Fashioned et sphère pour vos cocktails et événements.";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Ice4Riches, glace cristalline née sur la Côte d’Azur",
+        alt: "Ice4Riches, clear ice livrée partout en France",
       },
     ],
   },
@@ -99,6 +99,7 @@ const structuredData = {
         name: "Côte d’Azur, France",
       },
       areaServed: [
+        "France",
         "Côte d’Azur",
         "Monaco",
         "Nice",

@@ -22,6 +22,7 @@ export const DISCOVERY_GROUPS = [
   {
     title: "Préparer une livraison",
     links: [
+      { href: "/livraison-glacons-france", label: "Partout en France" },
       { href: "/livraison-glacons-cote-d-azur", label: "Côte d’Azur" },
       ...LOCAL_PAGES.map((page) => ({ href: `/livraison-clear-ice/${page.slug}`, label: page.city })),
       { href: "/livraison-glacons-paris", label: "Livraison à Paris" },

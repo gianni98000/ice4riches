@@ -5,10 +5,10 @@ export const metadata = createPageMetadata({
   path: "/professionnels-evenements",
   title: "Glaçons premium pour professionnels et événements",
   description:
-    "Nés sur la Côte d’Azur et livrés dans le monde entier, les glaçons cristallins Ice4Riches subliment bars, hôtels, restaurants et événements.",
+    "Nés sur la Côte d’Azur et livrés partout en France et à Monaco, les glaçons cristallins Ice4Riches subliment bars, hôtels, restaurants et événements.",
   socialTitle: "Glaçons premium pour professionnels et événements",
   socialDescription:
-    "Une collection née sur la Côte d’Azur, livrée dans le monde entier pour sublimer cocktails, spiritueux et réceptions.",
+    "Une collection née sur la Côte d’Azur, livrée partout en France et à Monaco pour sublimer cocktails, spiritueux et réceptions.",
 });
 
 const faq = [
@@ -46,7 +46,7 @@ export default function ProfessionnelsEvenementsPage() {
       serviceName="Glaçons premium pour professionnels et événements"
       eyebrow="Offre professionnelle"
       title="Glaçons premium pour bars, hôtels et événements"
-      intro="Née sur la Côte d’Azur et livrée dans le monde entier, la collection Ice4Riches aide les professionnels à construire un service visuel cohérent, du highball au verre Old Fashioned."
+      intro="Née sur la Côte d’Azur et livrée partout en France et à Monaco, la collection Ice4Riches aide les professionnels à construire un service visuel cohérent, du highball au verre Old Fashioned."
       highlights={[
         {
           value: "25 à 60 pièces",
@@ -118,8 +118,8 @@ export default function ProfessionnelsEvenementsPage() {
             "Associez Collins, cube, Old Fashioned et sphère aux bons cocktails.",
         },
         {
-          href: "/#contact",
-          title: "Livraison dans le monde entier",
+          href: "/livraison-glacons-france",
+          title: "Livraison partout en France",
           description:
             "Présentez votre destination et votre besoin à l’équipe Ice4Riches.",
         },

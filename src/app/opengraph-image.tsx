@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Ice4Riches, glace cristalline née sur la Côte d’Azur";
+export const alt = "Ice4Riches, clear ice livrée partout en France";
 export const size = {
   width: 1200,
   height: 630,
@@ -53,7 +53,7 @@ export default function OpenGraphImage() {
           marginTop: 42,
         }}
       >
-        Côte d&apos;Azur · Livraison mondiale
+        Livraison partout en France
       </div>
     </div>,
     size,

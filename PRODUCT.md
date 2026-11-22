@@ -3,7 +3,7 @@
 ## Platform
 web
 ## Users
-Bartenders, bars, hôtels, restaurants, yachts et organisateurs d’événements, notamment sur la Côte d’Azur.
+Bartenders, bars, hôtels, restaurants, yachts et organisateurs d’événements, partout en France et à Monaco. La Côte d’Azur reste l’origine de la marque, pas la limite de livraison.
 ## Product Purpose
 Présenter la clear ice Ice4Riches et aider les professionnels à choisir un format adapté à leur verrerie, puis préparer une commande ou une demande de conseil.
 ## Stack

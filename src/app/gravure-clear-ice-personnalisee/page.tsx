@@ -8,14 +8,14 @@ export const metadata = createPageMetadata({
   path: ENGRAVING_PATH,
   title: "Gravure de clear ice et glaçons personnalisés",
   description:
-    "Testez votre logo sur un glaçon de clear ice en 3D, calculez le prix et envoyez votre commande en ligne. Atelier Ice4Riches sur la Côte d’Azur.",
+    "Testez votre logo sur un glaçon de clear ice en 3D, calculez le prix et envoyez votre commande en ligne. Livraison partout en France et à Monaco.",
 });
 
 const faq = [
   {
-    question: "Où demander des glaçons personnalisés avec un logo sur la Côte d’Azur ?",
+    question: "Peut-on faire livrer des glaçons personnalisés partout en France ?",
     answer:
-      "Importez votre logo dans l’atelier Ice4Riches, choisissez le format et la quantité puis indiquez votre date et adresse. L’équipe confirme les modalités de livraison à Monaco, Nice, Cannes, Antibes et Saint-Tropez.",
+      "Oui. Ice4Riches livre ses glaçons personnalisés partout en France et à Monaco. Importez votre logo dans l’atelier, choisissez le format et la quantité puis indiquez votre date et votre adresse. L’équipe confirme les frais et le créneau de livraison.",
   },
   {
     question: "Peut-on graver un logo, des initiales ou un motif dans un glaçon ?",
@@ -53,11 +53,11 @@ export default function GravureClearIcePage() {
       title="Atelier de gravure Clear Ice"
       intro="Essayez votre logo sur la glace, affinez le rendu et commandez vos glaçons gravés."
       studio={<EngravingStudio />}
-      areaServed={LOCAL_PAGES.map((page) => page.city)}
+      areaServed={["France", "Monaco"]}
       highlights={[
         { value: "Logo, initiales, motif", label: "Une signature adaptée à votre projet" },
         { value: "Estimation en direct", label: "Glace, gravure et calibrage" },
-        { value: "Côte d’Azur", label: "De Monaco à Saint-Tropez, modalités à confirmer" },
+        { value: "Toute la France", label: "Et Monaco · frais et créneau à confirmer" },
       ]}
       sections={[
         {
@@ -84,15 +84,16 @@ export default function GravureClearIcePage() {
           bullets: ["Logo, initiales ou motif", "Quantités souhaitées", "Date et lieu de service", "Verres et format envisagé"],
         },
         {
-          title: "Votre projet de Monaco à Saint-Tropez",
+          title: "Votre projet partout en France",
           paragraphs: [
-            "Ice4Riches étudie les demandes de clear ice personnalisée à Monaco, Nice, Cannes, Antibes et Saint-Tropez. Consultez la page de votre ville ci-dessous pour découvrir l’offre locale de clear ice.",
+            "Ice4Riches livre sa clear ice personnalisée partout en France et à Monaco, pour vos établissements et événements. De Paris à Marseille, de Lyon à Bordeaux, préparez votre projet avec notre atelier en ligne.",
             "Pour un hôtel, une villa, un lieu de réception ou un yacht, indiquez l’adresse et les contraintes d’accès dans votre demande. Le lieu et la date permettent de confirmer les modalités adaptées à votre projet.",
           ],
         },
       ]}
       faq={faq}
       relatedLinks={[
+        { href: "/livraison-glacons-france", title: "Livraison partout en France", description: "Préparez la livraison de vos glaçons, où que vous soyez en France." },
         ...LOCAL_PAGES.map((page) => ({
           href: `/livraison-clear-ice/${page.slug}`,
           title: `Clear Ice à ${page.city}`,

@@ -35,7 +35,7 @@ const faq = [
   {
     question: "Ice4Riches livre-t-il à Paris ?",
     answer:
-      "Oui. Née sur la Côte d’Azur, la marque étudie les demandes de livraison à Paris comme dans le monde entier. Les disponibilités et modalités sont confirmées après l’envoi de la demande.",
+      "Oui. Ice4Riches livre à Paris comme partout en France, ainsi qu’à Monaco. Les disponibilités, frais et créneaux sont confirmés avec notre équipe après l’envoi de la demande.",
   },
 ];
 

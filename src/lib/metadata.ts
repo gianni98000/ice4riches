@@ -33,7 +33,7 @@ export function createPageMetadata({
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "Ice4Riches, glace cristalline née sur la Côte d’Azur",
+          alt: "Ice4Riches, clear ice livrée partout en France",
         },
       ],
     },

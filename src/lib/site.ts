@@ -6,10 +6,14 @@ export const ORDER_ACCESSORIES_URL = "/order#D%C3%A9riv%C3%A9e";
 
 export const BRAND_LOCATION = {
   origin: "Côte d’Azur, France",
-  delivery: "Livraison dans le monde entier",
+  delivery: "Livraison partout en France et à Monaco",
 };
 
 export const SEO_PAGES = [
+  {
+    href: "/livraison-glacons-france",
+    label: "Livraison en France",
+  },
   {
     href: "/fondateur",
     label: "Fondateur",

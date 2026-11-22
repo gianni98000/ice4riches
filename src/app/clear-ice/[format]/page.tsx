@@ -47,7 +47,7 @@ export default async function ClearIceFormatPage({ params }: Props) {
         ] },
         { title: "Préparer votre demande de clear ice", paragraphs: [
           "Consultez le catalogue pour les prix, conditionnements et disponibilités affichés. Indiquez les quantités, la date, le lieu et les contraintes d’accès avant de transmettre votre demande par WhatsApp à Ice4Riches.",
-          "Notre équipe confirme les modalités pour Monaco, Nice, Cannes, Antibes, Saint-Tropez, Paris ou une autre destination. Un panier préparé ne constitue pas une confirmation de livraison.",
+          "Ice4Riches livre partout en France et à Monaco. Notre équipe confirme les frais et le créneau selon votre adresse et vos quantités. Un panier préparé ne constitue pas une confirmation de livraison.",
         ] },
         { title: "Vous souhaitez une gravure ?", paragraphs: [
           "L’atelier en ligne permet d’essayer votre logo sur le Deluxe Cube ou l’Old Fashioned, de calculer un prix et de commander. Pour un autre format ou un emplacement différent, contactez hello@ice4riches.com.",

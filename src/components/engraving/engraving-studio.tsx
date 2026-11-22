@@ -236,7 +236,7 @@ export function EngravingStudio() {
               <label>Adresse de livraison<input name="adresse" required maxLength={250} autoComplete="street-address" placeholder="Rue, code postal et ville" /></label>
               <label htmlFor="engraving-delivery">Livraison</label>
               <select id="engraving-delivery" value={delivery} name="livraison" onChange={(event) => setDelivery(event.target.value as Delivery)}>
-                <option value="other">Autre ville · tarif sur confirmation</option>
+                <option value="other">Toute la France et Monaco · tarif sur confirmation</option>
                 <option value="cannes-1">Cannes · 1 tournée</option>
                 <option value="cannes-2">Cannes · 2 tournées</option>
               </select>

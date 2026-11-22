@@ -370,7 +370,7 @@ export function OrderCatalog({ products }: OrderCatalogProps) {
             </Link>
             <div className="mt-7 flex flex-wrap gap-3 text-sm text-[#f5f3ef]/60">
               <span className="border border-[#f5f3ef]/10 px-4 py-2">
-                Livraison
+                Livraison partout en France
               </span>
               <span className="border border-[#f5f3ef]/10 px-4 py-2">
                 Minimum {formatCents(MINIMUM_ORDER_CENTS)} TTC
